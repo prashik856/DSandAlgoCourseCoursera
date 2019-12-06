@@ -1,0 +1,23 @@
+Algorithm Design is Hard.
+Algorithms solve many different problems.
+No unified technique.
+No Generic procedure to create an algorithms.
+Finding Algorithm often requires unique insights.
+
+What can we teach you?
+    -> Practive desighning algorithms
+    -> Common tools used in algorithm design.
+    -> Greedy Algorithm
+    -> Divide and Conquer
+    -> Dynamic Programming
+
+Levels of Design:
+Naive Algorithm: Definition to algorithm (slow)
+Algorithm by way of standard Tools: (standard techniques)
+Optimized Algorithm: Improve existing algorithm
+Magic Algorithm: Unique insight
+
+The Rest of the Course:
+Each Unit covers a technique
+Exercise help build intuition.
+

@@ -8,3 +8,90 @@ After that, we are assigning values to our array (0 and 1).
 After that, we have a for loop. We have increment, comparison and branch.
 Inside for loop, we have lookup, assignment, addition of big integers.
 After for loop, we are returning the value.
+
+Computing Runtime:
+To figure our how long this simple progeam would actually take to run on a real computer, we would also need to know things like:
+Speed of computer, 
+The system architecture (memory, io)
+The compiler being used.
+Memory hierarchy (lookups into ram(slow), or cache(fast), or lookup into harddisks(slowest))
+
+Problem:
+Figuring out accurate runtime is a huge mess
+In practice, you might not even know some of these details.
+We want to measure runtime without knowing these details.
+
+2) Asymptotic Notation (When a becomes very large):
+Computing runtimes is hard.
+depends on fine details of program and details of computer.
+
+Idea:
+All these issues can multiply runtimes by a large constant.
+So measure runtime in a way that ignores constant multiples.
+Unfortunately, 1 sec, 1 hour, 1 year only differ by a constant multiple.
+
+Solution:
+Consider asymptotic runtimes. How does runtime scales with input size.
+Approximate runtimes:
+e.g. n, nlogn, n^(2), 2^(n). Time increases a lot.
+log(n) < n^(1/2) < n < nlogn < n^(2) < 2^(n)
+We just care what happens when our input increases a lot.
+
+3) Big O Notation (2)
+Specific asymptotic notation.
+Def:
+f(n) = O(g(n)), here f is Big-O of g, or f<=g, if there exists constant N and c so that for all n>=N, f(n)<=c.g(n)
+F is bounded above by some constant multiple of g.
+e.g. 3n^2 + 5n + 2 = O(n^2) since n>=1
+3n^2 + 5n + 2 <= 3n^2 + 5n^2 + 2n^2 = 10n^2
+
+We will use big-O notation to get out Runtime.
+Can also used to get the scale of our Algorithm.
+
+It also cleans up Notation.
+O(n^2) vs 3n^2 + 5n + 2
+O(n) vs n+log(base(2))(n) + sin(n)
+O(nlog(n)) vs 4nlog(base(2))(n) + 7
+We don't specify the base of log when writing the big O notation.
+We can now just ignore complicated details.
+
+Warning:
+Using Big-O loses important information about constant multiples.
+Big-O is only asymptotic (really really really (more than you can store in our pc) big inputs in our algo. Doesn't really tell you how long it will take. Problem comes when we want to improve the algorithm.)
+
+4) Using Big-O
+Manipulate expression involving Big-O
+
+Common Rules:
+1) Multiplicative constants can be omitted:
+7n^3 = O(n^3), n^3/3 = O(n^2)
+n^a < n^b for 0<a<b; n = O(n^2), n^(1/2) = O(n)
+n^a < b^n (a>0, b>1); n^5 = O((2^(1/2))^n), n^100 = O((1.1)^n)
+(log(n))^a < n^b (a,b>0); (log(n))^3 = O(n^(1/2)), nlogn = O(n^2)
+Smaller tems can be omitted: n^2 + n = O(n^2); n^9 + n^2 = O(n^9)
+
+Recall Algorithm FibList(n) (The faster one)
+=> O(n)
+
+Big-O in practice
+Operation                                   Runtime
+create an array F[0,1,....,n]               O(n)
+F[0] <- 0                                   O(1)
+for i from 2 to n:                          Loop O(n) times
+F[i] <- F[i-1] + F[i-2]                     O(n)
+return F[n]                                 O(1)
+O(n) + O(1) + O(1) + O(n).O(n) + O(1) = O(n^2)
+
+2) Other Notation
+For functions f,g: N->R+, we say that:
+f(n) = h(g(n)) or f>= g if for some c, f(n) >= c.g(n) (f grows no slower than g).
+f(n) = J(g(n)) or f == g if f=O(g) and f=h(g) (f grows at the same rate as g).
+f(n) = o(g(n)) or f<g, if f(n)/g(n) -> o, as n->inf (f grows slower than g).
+
+Asymptotic Notation:
+Let us ignore messy details in analysis.
+Produces clean answers.
+Throws away a lot of practically useful information.
+
+Questions:
+log(n) < n^(0.5) < n^1 < nlog(n) < n^2 < n^2.5 < 3^n < 4^n
