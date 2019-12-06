@@ -1,0 +1,10 @@
+Heads UP:
+1) Fibonacci Numbers
+2) Greatest Common Divisors
+
+they have Straightforward Agorithm.
+Problem Statement => Algorithm
+
+They take too Long. (normal algos)
+
+Slightly more complicated algorithms!

@@ -1,0 +1,5 @@
+Focus on algorithms problems.
+1) Clearly formulated.
+2) Hard to do efficiently.
+
+

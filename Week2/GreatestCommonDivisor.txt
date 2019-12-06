@@ -1,0 +1,54 @@
+What are GCDs:
+Put fration a/b in simplest form.
+What we do is, Divide numerator and denominator by d, to get (a/d)/(b/d)
+For this, we need d to divide both a and b.
+Want d to be as large as possible.
+
+Definition:
+For integers, a and b, their greatest common divisor or gcd(a,b) is the largest integer d such that d divides both a and b.
+
+Very important factor in Number Theory.
+Used in Cryptography.
+
+Computation:
+Input: Integers a,b >= 0
+Output: gcd(a,b)
+
+Run on large numbers like
+gcd(382131231,21332423)
+
+1) Naive Algorithm:
+Function NaiveGCD(a,b)
+best <- 0
+for d from 1 to a+b:
+    if d/a and d/b:
+        best <- d
+return best
+This algo is very inefficient.
+We need to find better algorithm.
+
+2) Efficient Algorithm:
+Euclidean Algorithm:
+Lemma: let a' be the remainder when a is divided by b, then
+gcd(a,b) = gcd(a',b) = gcd(b,a')
+
+Proof:
+if a' is the remainder,
+we must have: a = a' + bq for some q
+so, d divides a and b iff it divides a' and b
+
+Function EuclidGCD(a,b)
+if b=0:
+    return a
+a' <- the remainder when a is divided by b
+return EuclidGCD(b,a')
+By the above lemma, it will always give you the correct result.
+
+e.g. gcd(3918848, 1653264)
+
+Runtime:
+Each step reduces the size of numbers by about a factor of 2.
+Takes about log(ab) steps.
+So, GCDs of 100 digit numbers takes about 600 steps.
+Each step a single division.
+Thus, this algorithm is very very fast.

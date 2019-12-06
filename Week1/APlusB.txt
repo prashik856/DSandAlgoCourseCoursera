@@ -1,0 +1,6 @@
+1) Solving sum of two digits programming Challenge (ez pz lemon squeeze)
+If we have a cpp program, lets say APlusB.cpp, we compile it by command below:
+
+g++ -pipe -02 -std=c++11 ./APlusB.cpp -o APlusB.out
+
+python3 APlusB.py

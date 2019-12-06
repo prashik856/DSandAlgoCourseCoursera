@@ -1,0 +1,10 @@
+1) The Big O Notation:
+Understand why finding exact runtimes is a problem.
+
+RUNTIME ANALYSIS:
+Last time, for fibonacci algo, we thought we run 2n+2 lines of code.
+To initialize our array, Depends on memory management system.
+After that, we are assigning values to our array (0 and 1).
+After that, we have a for loop. We have increment, comparison and branch.
+Inside for loop, we have lookup, assignment, addition of big integers.
+After for loop, we are returning the value.
