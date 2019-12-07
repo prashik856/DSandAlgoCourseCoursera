@@ -1,0 +1,28 @@
+1) Main Ingredients:
+Safe Move
+Prove safety
+Solve subproblem
+Estimate running time.
+
+a) Safe Move:
+Put max digit first
+Find first occurrence of first character
+Cover leftmost point 
+Use item with maximum value per unit of weight.
+
+Optimization:
+Assume everthing in somehow sorted.
+Which sort order is convenient?
+Greedy move can be faster after sorting.
+
+General Strategy:
+Problem
+    Make a greedy choice
+    Prove that it is a safe move
+    Reduce to a subproblem
+    Solve the subproblem
+
+
+Quiz:
+10 capacity
+20/20(1), 10/5(2), 20/4(5). 

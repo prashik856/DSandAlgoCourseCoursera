@@ -1,0 +1,91 @@
+1) Largest Number Problem:
+Toy Problem:
+What is the largest number that consists of digits 3,9,5,9,7,1:
+997531
+
+Greedy Strategy: 
+Find max digit, append and remove from the list.
+Repeat till there are digits in the list.
+
+2) Car Fueling Problem:
+Distance with full tank = 400km.
+
+Now, Total distance = 950km,
+We have given array
+0 200 375 550 750 950. (0 is start 950 is end).
+Input: 
+A car which can travel at most L kilometers with full tank, a source point A, a destination poin B and n gas stations at distances
+x1 <= x2 <=x3 <= ... <= xn in kilometers from A along the path from A to B.
+
+Output:
+The minimum number of refills to get from A to B, besides refill at A.
+
+Greedy Strategy:
+-> Make some greedy choice
+-> Reduce to smaller Problem
+-> Iterate
+
+=> Refill at the closest gas stations
+=> Refill at the fartest reachable fas stations
+=> Go until there is no fuel.
+
+Greedy Algorithm:
+Start A:
+Refill at the fartest reachable gas station G
+make G the new A
+Get from new A to B with minimum number of refills.
+
+Thus, we have defined here a new subproblem.
+A greedy choice is called safe move if there is an optimal solution consistent with this first move.
+
+Lemma:
+To refill at the farthest reachable gas station is a safe move.
+Proof:
+Route R with the minimum number of refills
+G1 = position of first refill in R
+G2 = next stop in R (refill or B)
+G = farthest refill reachable from A
+if G is closer than G2, refill at G instead of G1.
+
+Algorithm:
+A = x0 <= x1 <= x2 <= ... <= xn <= xn+1 = B
+MinRefills(x,n,L){
+    numRefills <- 0, currentRefill <-o;
+    while currentRefill <= n:
+        lastRefill <- currentRefill
+        while(currentRefill <=n and
+            x[currentRefill+1] - x[lastRefill] <= L):
+            currentRefill <- currentRefill + 1
+        if currentRefill == lastRefill:
+            return IMPOSSIBLE
+        if currentRefill <= n:
+            numRefills <- numRefills + 1
+return numRefills
+}
+It actually runs in O(n);
+
+Lemma:
+The running time of MinRefills(x,n,L) if O(n).
+Proof:
+currentRefill changes from 0 to n+1, one by one
+numRefills changes from 0 to at most n, one by one
+Thus O(n) time.
+
+3) Main Ingrediants of Greedy Algorithm
+    a) Reduction to subproblem
+    Make a first move
+    then solve a problem of the same kind
+    smaller: fewer digits, fewer fuel station
+    this is called a "subproblem"
+
+    b) Safe move
+    a move is called safe if there is an optimal solution consistent witht this first move
+    not all first moves are safe
+    oftern greedy moves are not safe
+
+    c) General Strategy
+    Analize problem.
+    make a greedy choice
+    Prove that it is a safe move
+    Reduce to a subproblem
+    solve the subproblem

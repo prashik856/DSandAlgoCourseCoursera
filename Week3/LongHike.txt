@@ -1,0 +1,76 @@
+Fractional Knapsack
+
+"Long Hike Problem"
+Maximize the calories in our backpack.
+
+1) Fractional Knapsack Problem:
+Input:
+Weights w1, w2,....,wn and values v1,v2,...,vn of n items; capacity W.
+Output:
+The maximum total value of fractions of items that fit into a bag of capacity W.
+
+Example:
+20 -> 4     18 -> 3        14 -> 2
+
+Knapsack: 14 -> 2; 18->3; 20->2 = total 42
+Problem: capacity 7kg, 3 items. 20->4;18->3;14->2. 42 is the optimal value.
+We need a greedy algo to solve this problem.
+
+For this, we need to take a look at value per unit. i.e. 5(20/4), 6(18/3) and 10(20/2).
+Now we are looking at value per unit, we can just sort them and take the loot.
+
+Lemma:
+There exists an optimal solution that uses as much as possible of an item with maximum value per unit of weight.
+
+Proof:(Pictorial)
+
+1) Greedy Algorithm:
+While Knapsack is not full
+Choose item i with maximum vi/wi
+if item fits into Knapsack, take all of it.
+Otherwise take so much as to fill the Knapsack.
+Return total value and amounts taken.
+
+2) Pseudocode and Running time:
+W is total capacity.
+Knapsack(W,w1,v1,...,wn,vn){
+    A <- [0,0,...,0], V <- 0
+    repeat n times:
+        if W=0:
+            return (V,A)
+        select i with wi > 0 and max vi/wi
+        a <- min(wi,W)
+        V <- V + a*(vi/wi)
+        wi <- wi - a,
+        A[i] <- A[i] + a,
+        W <- W - a
+    return (V,A)
+}
+
+Lemma
+Running time of algo is O(n^2)
+
+Proof:
+Select best item on each step is O(n)
+Main loop is executed n times.
+
+1) Optimization
+First, sort items by decreasing order of vi/wi
+Now, assuming v1/w1, v2/w2, ...., vn/wn are sorted.
+Knapsack(W,w1,v1,...,wn,vn){
+    A <- [0,0,...,0], V <- 0
+    for i from 1 to n:
+        if W=0:
+            return (V,A)
+        a <- min(wi,W)
+        V <- V + a*(vi/wi)
+        wi <- wi - a,
+        A[i] <- A[i] + a,
+        W <- W - a
+    return (V,A)
+}
+
+Optimized algo works in linear time:
+Now each iteration takes O(1).
+Knapsact after sorting is O(n).
+Sort + Knapsact is O(nlog(n)).
