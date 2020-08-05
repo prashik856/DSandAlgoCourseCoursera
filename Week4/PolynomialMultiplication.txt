@@ -1,0 +1,108 @@
+Ploynomial multiplication problem:
+Taking two polynomials and multiplying them together.
+
+Use of multiplying polynomials:
+    Error-correcting codes
+    Large-integer multiplication
+    Generating functions
+    Convolution in signal processing
+
+e.g.
+A(x) = 3x^2 + 2x + 5
+B(x) = 5x^2 + x + 2
+A(x)B(x) = 15x^4 + 13x^3 + 33x^2 + 9x + 10
+
+PROBLEM STATEMENT:
+Input:
+    Two n-1 degree polynomials
+    a0 + a1x + a2x^2 + .... + a(n-1)x^(n-1)
+    b0 + b1x + b2x^2 + .... + b(n-1)x^(n-1)
+Output:
+    c0 + c1x + c2x^2 + .... + c(2n-2)x^(2n-2)
+    where:
+    c(2n-2) = a(n-1)b(n-1)
+    c(2n-3) = a(n-1)b(n-2) + a(n-2)b(n-1)
+    .
+    .
+    
+Example:
+n=3, A=(3,2,5) B=(5,1,2)
+Output : (15,13,33,9,10)
+
+1) Naive Algorithm:
+MultPloy(A,B,n){
+    product <- Array[2n-1]
+    for i from 0 to 2n-2:
+        product[i] = 0
+    for i from 0 to n-1:
+        for j from 0 to n-1:
+            product[i+j] = product[i+j] + A[i]*B[j]
+    return product
+}
+Runtime: O(n^2)
+
+2) Naive Divide and Conquer Algorithm:
+Let A(x) = D1(x)x^(n/2) + D0(x) where
+D1(x) = a(n-1)x^(n/2 -1) + a(n-2)x^(n/2 -2) + .... + a(n/2)
+D0(x) = a(n/2 -1)x^(n/2-1) + a(n/2 -2)x^(n/2 -2) + .... + a0
+Do same thing for b in E.
+
+When we multiply
+AB = (D1x^(n/2) + D0)(E1x^(n/2) + E0)
+    = (D1E1)x^(n) + (D1E0 + D0E1)x^(n/2) + D0E0
+
+Calculate: D1E1, D1E0, D0E1 and D0E0
+
+Recurrence: T(n) = 4T(n/2) + kn
+e.g.
+A = (4,3,2,1)
+B = (1,2,3,4)
+D1 = (4,3); D0 = (2,1)
+E1 = (1,2); E2 = (3,4)
+calculate D0E0, D1E1, D1E0, D0E1
+
+Actual Code:
+Mult2(A,B,n,al,bl){
+    R = array[0,...,2n-1]
+    if n=1:
+        R[0] = A[al]*B[bl]; return R
+R[0,..n-1] = Mult2(A,B,n/2,al,bl)
+R[n...2n-2] = Mult2(A,B,n/2,al+n/2, bl+n/2)
+DoE1 = Mult2(A,B,n/2,al,bl+n/2);
+D1E0 = Mult2(A,B,n/2, al+n/2, bl)
+R[n/2...n + n/2 -2] + = D1E0 + D0E1
+return R
+}
+
+Runtime:
+O(n^2) after summing everything up.
+
+
+3) Faster Divide and Conquer algorithm:
+Karatsuba approach:
+A(x) = a1x + a0
+B(x) = b1x + b0
+C(x) = a1b1x^2 + (a1b0+a01)x + a0b0
+Needs 4 multiplication:
+Rather than writing the above term as it is written above, let us rewrite it as follows:
+C(x) = a1b1x^2 + a0b0 + ((a1+a0)(b1+b0) - a1b1 - a0b0)x
+This means that we only need to do 3 calculations there.
+
+Example:
+A(x) = 4x^3 + 3x^2 + 2x + 1
+B(x) = x^3 + 2x^2 + 3x + 4
+D1(x) = 4x + 3
+D0(x) = 2x + 1
+E1(x) = x + 2
+E0(x) = 3x + 4
+Now, D1E1 = 4x^2 + 11x + 6
+D0E0 = 6x^2 + 11x + 4
+(D1 + D0)(E1 + E0) = (6x + 4)(4x + 6)
+                    = 24x^2 + 52x + 24
+AB = (4x^2 + 11x + 6)x^4 + (24x^2 + 52x + 24 - (4x^2 + 11x + 6) - (6x^2 + 11x + 4))x^2  +
+        6x^2 + 11x + 4
+    = 4x^6 + 11x^5 + 20x^4 + 30x^3 + 20x^2 + 11x + 4
+
+Runtime now:
+O(n^1.58)
+Initially, we had O(n^2)

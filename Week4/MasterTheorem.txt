@@ -1,0 +1,24 @@
+Master Theorem:
+What is the Master Theorem?
+
+We had:
+T(n) = T(n/2) + O(1)
+
+Theorem:
+T(n) = aT(ceiling(n/b)) + O(n^d)
+for a>0, b>1, d>=0
+
+T(n) = {
+    O(n^d) if d>log(a)/lob(b)
+    O(n^d * log(n)) if d=lob(a)/log(b)
+    O(n^(lob(a)/log(b))) if d<log(a)/log(b)
+}
+
+
+Master Theorem Example 1:
+T(n) = 4T(n/2) + O(n)
+a = 4, b=2, d=1
+d<log(a)/log(b), T(n) = O(n^(log(a)/log(b))) = O(n^2)
+
+
+2) Proof

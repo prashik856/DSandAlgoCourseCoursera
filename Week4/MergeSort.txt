@@ -1,0 +1,39 @@
+Merge Sort:
+Based on Divide and conquer Algo:
+
+Example: Merge Sort:
+
+[7 2 5 3 7 13 1 6]
+
+split array into two halves
+[7 2 5 3] [7 13 1 6]
+
+Sort halves recursively
+[2 3 5 7] [1 6 7 13]
+
+Merge these two arrays:
+[1 2 3 5 6 7 7 13]
+
+
+Pseudo Code of MergeSort(A[1....n])
+if n = 1:
+    return A
+m -> [n/2]
+B <- MergeSort(A[1...m])
+C <- MergeSort(A[m+1...n])
+A' <- Merge(B,C)
+return A'
+
+Pseudo Code of Merge(B[1...p], C[1...q]):
+{B and C are sorted}
+D <- empty array of size p+q
+while B and C are both non-empty:
+    b <- the first element of B
+    c <- the first element of C
+    if b<=c:
+        move b from B to the end of D
+    else:
+        move c from C to the end of D
+move the rest of B and C to the end of D
+return D
+

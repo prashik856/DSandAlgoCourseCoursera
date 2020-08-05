@@ -8,15 +8,19 @@ using namespace std;
 void StressTest(){
     int n = rand() % 100000;
     vector<int> numbers(n);
-    for(int i=0; i<n; i++){
-        numbers[i] = rand()%100000;
+    for(int i=0; i<n; ){
+        int val = rand()%1000000;
+        numbers[i] = val;
+        i++;
     }
 }
 
 void SetInput(vector<int>* numbers){
     int n = (*numbers).size();
-    for(int i=0; i<n; i++){
-        (*numbers)[i]=rand()%100000;
+    for(int i=0; i<n; ){
+        int val = rand()%1000000;
+        (*numbers)[i] = val;
+        i++;
     }
 }
 
@@ -76,6 +80,7 @@ void InsertionSort(vector<int>* numbers){
     }
 }
 
+//Part of Merger Sort
 void MergeArray(vector<int>* numbers, int left, int mid, int right){
 
     vector<int> leftArray;
@@ -122,6 +127,7 @@ void MergeArray(vector<int>* numbers, int left, int mid, int right){
     }
 }
 
+//Part of Merger Sort
 void DivideArrayMergeSort(vector<int>* numbers, int left, int right){
     if(left < right){
         int mid = (left + right)/2;
@@ -129,19 +135,90 @@ void DivideArrayMergeSort(vector<int>* numbers, int left, int right){
         DivideArrayMergeSort(&(* numbers), mid+1, right);
         MergeArray(&(*numbers), left, mid, right);
     }
-    cout << "Array received: " ;
-    for(int i=left; i<=right; i++){
-        cout << (*numbers)[i] << " ";
-    }
-    cout << endl;
 }
 
+//Part of Merge sort.
 void MergeSort(vector<int>* numbers){
     int size = (*numbers).size();
     int left = 0;
     int right = size - 1;
     DivideArrayMergeSort(&(*numbers), left, right);
 }
+
+//Part of Bucket Sort
+void PrintBucket(vector< vector<int> >& bucket){
+    for(int i=0; i<bucket.size();i++){
+        cout << "Bucket " << i << " ";
+        for(int j=0; j<bucket[i].size();j++){
+            cout << bucket[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+//Mainly used when the input is bound or concentrated between some numbers
+// e.g. The input is only between 100000 to 999999
+// we need to sort the bucket here.
+void BucketSort(vector<int>* numbers){
+    vector< vector<int> > bucket(10);
+    int divider = 100000;
+    int remover = 1000000;
+    int size = (*numbers).size();
+    for(int i=0; i<size; i++){
+        int val = (*numbers)[i] % remover;
+        val = val / divider;
+        bucket[val].push_back((*numbers)[i]);
+    }
+
+    int index = 0;
+    for(int i=0; i<bucket.size(); i++){
+        MergeSort(&bucket[i]);
+        for(int j=0; j<bucket[i].size(); j++){
+            (*numbers)[index] = bucket[i][j];
+            index++;
+        }
+    }
+}
+
+
+//Radix Sort
+//When elements are in the range of 1 to n^2
+void RadixSort(vector<int>* numbers){
+    vector< vector<int> > bucket(10);
+    long long divisor = 10;
+    long long remover = 1;
+    int size = (*numbers).size();
+    while(bucket[0].size() != size){
+        for(int i=0; i<bucket.size(); i++){
+            bucket[i].clear();
+        }
+        //Fill the bucket
+        for(int i=0; i<size; i++){
+            int val = (*numbers)[i];
+            val = val % divisor;
+            val = val / remover;
+            bucket[val].push_back((*numbers)[i]);
+        }
+        int index = 0;
+        for(int i=0; i<bucket.size(); i++){
+            for(int j=0; j<bucket[i].size(); j++){
+                (*numbers)[index] = bucket[i][j];
+                index++;
+            }
+        }
+        divisor = divisor * 10;
+        remover = remover * 10;
+    }
+}
+
+//Counting Sort
+//Based on key between a specific range
+// if numbers are only between 0 to 9
+//Linear in time.
+void CountingSort(vector<int>* numbers){
+    
+}
+
 
 int main(){
     //StressTest();
@@ -152,7 +229,10 @@ int main(){
     //SelectionSort(&numbers);
     //BubbleSort(&numbers);
     //InsertionSort(&numbers);
-    MergeSort(&numbers);
+    //MergeSort(&numbers);
+    //BucketSort(&numbers);
+    //RadixSort(&numbers);
+    //CountingSort(&numbers);
     PrintArray(&numbers);
     return 0;
 }

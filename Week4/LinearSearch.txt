@@ -1,0 +1,63 @@
+Linear Search:
+Searching in an unsorted arrary.
+
+eg. a string of name(unsorted.)
+Search one by one.
+
+Real life example.
+Data stored in 5 parallel arrays:
+5 arrays are: english, french, italian, german, spanish.
+
+Problem statement:
+Input: An array A with n elements:
+    A key k.
+
+Output: An index i, where A[i] = k.
+        If there is no such i, then NOT_FOUND.
+
+There may be duplicates in the array.
+
+Naive solution:
+Linear solution
+
+LinearSearch(A, low, high, key){
+    // A= array
+    // low = lower bound
+    // high = higher bound
+    // key = search element
+    if high < low:
+        return NOT_FOUND
+    if A[low] = key:
+        return low
+    return LinearSearch(A, low+1, high, key)
+}
+Here, we are dividing array and then using the smaller array to find the solution.
+
+
+Recurrence Relation:
+A recurrence relation is an equation recursively defining a sequence of values.
+e.g.
+FIBONACCI RECURRENCE RELATION:
+F(n) = 0 if n=0
+        1 if n=1
+        F(n-1) + F(n-2) if n>1
+
+Recurrence defining worst-case time:
+T(n) = T(n-1) + C 
+T(0) = C
+
+Runtime of Linear Search:
+We have constant amount of work C:
+
+
+ITERATIVE VERSION:
+LinearSearchIt(A, low, high, key):
+for i from low to high:
+    if A[i] = key:
+        return i
+return NOT_FOUND
+
+SUMMARY:
+1) Create a recursive solution
+2) Define a corresponding recurrence relation, T
+3) Determine T(n): worst case runtime.

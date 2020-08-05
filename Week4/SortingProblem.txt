@@ -1,0 +1,8 @@
+Overview:
+Input is sequence of elements: A[1,2,....,n]
+Output: Need the sequence in non-decreasing order: Permutation A'[1,2,...,n] of A[1...n] in non decreasing order.
+
+Why Sorting?
+-> Sorting data is an important step of many efficient algorithms.
+-> Sorted data allows more efficient queries.
+

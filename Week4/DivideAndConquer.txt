@@ -1,0 +1,14 @@
+1) Main Idea:
+Deal with smaller group than one large group.
+
+A problem to solve:
+-> Break into non-overlapping subproblems of the same type as the original.
+-> Divide and solver each subproblem.
+-> Combine the result into original subproblem.
+-> Since each subproblem is of same type, we can solve each problem recursively.
+-> We can also write using iteration using recurtion.
+
+Summary: 
+Break into non-overlapping subproblems of the same type
+Solve subproblems
+Combine results
