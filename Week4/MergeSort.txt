@@ -8,7 +8,16 @@ Example: Merge Sort:
 split array into two halves
 [7 2 5 3] [7 13 1 6]
 
-Sort halves recursively
+Split array:
+[7 2] [5 3] [7 13] [1 6]
+
+split array:
+[7] [2] [5] [3] [7] [13] [1] [6]
+
+Merge:
+[2 7] [3 5] [7 13] [1 6]
+
+Merge
 [2 3 5 7] [1 6 7 13]
 
 Merge these two arrays:
@@ -37,3 +46,21 @@ while B and C are both non-empty:
 move the rest of B and C to the end of D
 return D
 
+
+Lemma:
+The running time of MergeSort(A[1...n]) is O(nlogn).
+
+Proof:
+The running time of merging B and C is O(n)
+-> Hence the running time of
+MergeSort(A[1...n]) satisfies a recurrence T(n) <= 2T(n/2) + O(n)
+
+Now, by using our recursion tree:
+n                                   |
+n/2 n/2                             | cn
+n/4 n/4 n/4 n/4                     | 2cn/2  = cn
+.                                   | 4*c*n/4 = cn   log(n)/log2
+.                                   |
+.                                   |
+.                                   |
+1 1 1 1 .... 1                      |
