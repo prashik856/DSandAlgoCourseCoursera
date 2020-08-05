@@ -1,0 +1,50 @@
+Non Comparison Based Sorting Algorithm.
+
+When our input consists of small integers.
+
+Consider the following array:
+  1 2 3 4 5 6 7 8 9 10 11 12
+A[2 3 2 1 3 2 2 3 2  2  2  1]
+
+Since we have repeating 1,2 and 3 values, we just count the accurance of 1,2 and 3, just by scanning the array.
+      1 2 3
+Count[2 7 3]
+
+Now, we fill in the resulting array, A'
+A' = [1 1 2 2 2 2 2 2 2 3 3 3]
+
+You can see that we have actually sorted the array without actually comparing them.
+We just counted the number of occurances.
+
+This is called Counting sort.
+Ideas:
+-> Assuming that all elements of A[1...n] are integers from 1 to M.
+-> By a single scan of the array A,count the number of occurances of each 1 <= k <= M in the array A and store it in Count[k].
+-> Use this information, fill in the sorted array A'.
+
+
+Pseudo code of counting sort.
+Count[1...M] <- [0....0]
+for i from 1 to n:
+    Count[A[i]] <- Count[A[i]] + 1
+{k appears Count[k] times in A}
+Pos[1...M] <- [0...0]
+Pos[1] <- 1
+for j from 2 to M:
+    Pos[j] <- Pos[j-1] + count[j-1]
+    {k will occupy range [Pos[k]...Pos[k+1] -1}
+for i from 1 to n:
+    A'[Pos[A[i]]] <- A[i]
+    Pos[A[i]] <- Pos[A[i]] + 1
+
+
+Lemma:
+Provided that all elements of A[1...n] are integers from 1 to M, CountSourt(A) sorts A in time O(n+M)
+
+Remark:
+if M=O(n), then the running time is O(n).
+
+Summary:
+-> Merge sort uses the divide-and-conquer strategy to sort an n-element array in time O(nlogn)
+-> No comparison based algorithm can do this (asymptotically) faster.
+-> One can do fater if something is known about the input array in advance (e.g., it contains small integers.)

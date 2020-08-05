@@ -1,0 +1,35 @@
+Lower Bound for Comparison Based Sorting:
+
+Definition:
+A Comparison based sorting algorithm sorts objects by comparing pairs of them.
+
+Example:
+Selection sort and merge sort are comparison based.
+
+Lemma:
+Any comparison based sorting algorithm performs O(nlogn) comparisons in the worst case to sort n objects.
+
+In other words:
+For any comparison based sorting algorithm, there exists an array A[1....n] such that the algorithm performs at least O(nlogn) comparisons to sort A.
+
+Decision Tree:
+Our algorithm can be shown on a decision tree.
+
+Estimating the Tree Depth:
+-> The number of leaves l in the treee must be at least n! (the total number of permutations).
+-> The worst case running time of the algorithm (the number of comparisons made) is at least the depth d.
+-> d >= log(l)/log(2) (or equivalently 2^d >=l )
+-> Thus, the running time is at least:
+    log(n!)/log2 = O(nlogn)
+
+Lemma:
+log(n!)/log2 = O(nlogn)
+
+
+Proof:
+log(n!)/log2 = log(1.2.3...n)/log2
+            = log1/log2 + log2/log2 + .... + logn/log2
+            >= logn/2/log2 + ... logn/log2 [Just consider all elements after value of n/2]
+            >= n/2log(n/2)/log2 = O(nlogn) [Now, we conclude that all elements after n/2 value are actually less than n/2. So we can say this.]
+            This guy (n/2)log(n/2)/log2 grows like nlogn.
+            So we can say the above lemma.
