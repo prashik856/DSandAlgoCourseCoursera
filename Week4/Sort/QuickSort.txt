@@ -1,0 +1,170 @@
+QuickSort
+
+Overview:
+-> Comparisoin based algorithm
+-> Running time: O(nlogn) (on average)
+-> efficient in practice.
+
+Quick Sort Toy example:
+[6 4 8 2 9 3 9 4 7 6 1]
+Select 6, now we want all elements <= 6, to be before 6, and all elements >= 6 to be after 6.
+We rearrange the array that way now.
+
+Partition with respect to x = A[1]
+in particular, x is in it's final position.
+
+[1 4 2 3 4 6| 6 9 7 8 9]
+    <=6           >6
+Now, 6 is not in it's final position.
+Now what we need to do is to sort all the elements before 6, and all the elements after 6.
+Now, we do this by the same recursive call to quick sort algorithm.
+
+sort the two parts recursively.
+[1 2 3 4 4 6 6 7 8 9 9]
+
+
+
+Algorithm:
+QuickSort(A,l,r)
+if l>r:
+    return
+m <- Partition(A,l,r)
+{A[m] is in the final position}
+QuickSort(A,l, m-1)
+QuickSort(A,m+1, r)
+
+
+Now:
+  l                r
+A[                 ]
+
+    m <- Partition(A,l,r)
+
+A[       <=x       |x|        >x       ]
+  QuickSort(A,l,m-1)  QuickSort(A,m+1,r)
+
+A[        |x|        ]
+Sorted.
+
+
+Partitioning: example:
+The pivot is x = A[l]
+move i from l+1 to r, maintaining the following invariant.
+    -> A[k] <= x for all l+1 <= k <= j
+    -> A[k] > x for all j+1 <= k <= i
+
+Let's see an example for this:
+l                    r
+[6 4 2 3 9 8 9 4 7 6 1]
+   j i
+Now, start with i,
+Now, 2 < 6, so we need to increase the value of j, as well as i.
+
+l                    r
+[6 4 2 3 9 8 9 4 7 6 1]
+     j i
+Now, Again, 3<6, so we need to increase j region. Incerease j as well as i.
+
+l                    r
+[6 4 2 3 9 8 9 4 7 6 1]
+       j i
+Now is interesting case, 9>6. So we need to increase the i region.
+
+l                    r
+[6 4 2 3 9 8 9 4 7 6 1]
+       j   i
+Now, 8>6, again increase the i region.
+
+l                    r
+[6 4 2 3 9 8 9 4 7 6 1]
+       j     i
+9>6, increase i region.
+
+l                    r
+[6 4 2 3 9 8 9 4 7 6 1]
+       j       i
+Now, interesting case. 4<6, so we need to incease j region. we need to increase value of j, and then swap value of j and i, then increase the value of i.
+
+l                    r
+[6 4 2 3 4 8 9 9 7 6 1]
+         j       i
+Now, 7>6, increase value of i.
+
+l                    r
+[6 4 2 3 4 8 9 9 7 6 1]
+         j         i
+6<=6, so we again increase value of j, swap value of j and i, then increase value of i.
+
+l                    r
+[6 4 2 3 4 6 9 9 7 8 1]
+           j         i
+Now, 1<6, repeat the above process.
+
+l                    r
+[6 4 2 3 4 6 1 9 7 8 9]
+             j        i
+Now, since value of i>r, we now want to place the pivot in it's final place.
+i.e. Place A[l] in final place.
+Now, swap A[l] with A[j].
+
+l                    r
+[1 4 2 3 4 6 |6| 9 7 8 9]
+This is the final array after one complete cycle.
+
+
+Partition(A,l,r)
+x <- A[l] {pivot}
+j <- l
+for i from l+1 to r:
+    if A[i] <= x:
+        j <- j + 1
+        swap A[j] and A[i]
+        {A[l+1...j] <= x, A[j+1....i] > x}
+swap A[l] and A[j]
+return j
+
+
+
+Random Pivet:
+Unbalanced Partitions:
+T(n) = n + T(n-1)
+We can expand T(n-1) = n-1 + T(n-2)
+T(n) = n + (n-1) + (n-2) + ... = O(n^2)
+
+Now different case:
+T(n) = n + T(n-5) + T(4)
+T(n) >= n + (n-5) + (n-10) + .... = O(n^2)
+
+
+Balanced Partitoins:
+T(n) = 2T(n/2) + n
+Then T(n) = O(nlogn), we know this recurrance already.
+
+Differenct case:
+T(n) = T(n/10) + T(9n/10) + n;
+    T(n) = O(nlogn)
+
+
+Random Pivot Pusedo code.
+RandomizedQuickSort(A,l,r):
+if l >= r:
+    return
+k <- random number between l and r
+swap A[l] and A[k]
+m <- Partition(A,l,r)
+{A[m] is in the final position}
+RandomizedQuickSort(A,l,m-1)
+RandomizedQuickSort(A,m+1,r)
+
+
+Why Random?
+Half of the elements of A guarantees a balanced partition:
+
+
+Theorem:
+Assume that all elements of A[1....n] are pairwise different. 
+Then the average running time of RandomizedQuickSort(A) is O(nlogn) while the worst case running time is O(n^2).
+
+Remark:
+Averaging is over random numbers used by the algorithm, but not over the inputs.
+
