@@ -1,0 +1,85 @@
+Knapsack problem (Already discussed in Greedy Algorithm):
+
+TV Commercial placement
+Select a set of TV commercials (each commercial has duration and cost) so that the total revenue is maximal while the total length does not exceed
+the length of the available time slot.
+
+Optimizing data center performance:
+Purchase computers for a data center to acheive the maximal performance under limited budget.
+
+Knapsack Problem:
+(knapsack is another word for backpack)
+Goal:
+Maximize value ($) while limiting total weight (kg).
+
+
+Problem Varaitions:
+    Fractional Knapsack : can take fractions of items
+    Discrete Knapsack: each item is either taken or not
+
+    Discrete knapsack:
+        With repetitions: unlimited quantities
+        Without repetitions: one of each item
+
+Fractional Knapsack can already solved by greedy algorithm.
+
+Greedy does not work for discrete knapsack!
+We will need to design a dynamic Programming Solution.
+
+Example:
+Capacity : 10
+And Weight = [6  3  4  2]
+    Value =  [30 14 16 9]
+    W/o repeats = 6 + 4: Total: 46
+    w repeats = 6 + 2 + 2: Total: 48
+    fractional = 6 + 3  + 1(half of 2): 48.5
+
+Why does greedy fail for the discrete knapsack?
+
+Now, value per unit weight is:
+v/w (Value per unit) = [5  4.66 4 4.5]
+Now solution = [6 3 ||] : 1 weight is not included!!
+So, greedy way is not working here.
+So Value per unit weight is not actually working.
+
+Taking an element of maximum value per unit weight is not safe!
+
+
+
+1) Knapsack with repetitions:
+With repetitions, we have given unlimited quantities.
+
+Formal Defenitions:
+Knapsack with repetitions problem
+Input: Weights w(1),...., w(n) and values v(1),...,v(n) of n items;
+        total weight W (v(i)'s, w(i)'s and W are non negative integers).
+Output: the maximum value of items whose weight does not exceed W. Each item can be used any number of times.
+
+Consider an optimal solution and an item in it:
+W [.... w(i).....]
+If we take this item out then we get an optimal solution for a knapsack of total weight W-w(i).
+
+Subproblems:
+Let value(w) be the maximum value of knapsack of weight w.
+value(w) = max {value(w-w(i)) + v(i)} where i:w(i)<=w
+
+Pseudo Code:
+knapsack(W)
+value(0) <- 0
+for w from 1 to W:
+    value(w) <- 0
+    for i from 1 to n:
+        if w(i) <= w:
+            val <- value(w-w(i)) + v(i)
+            if val > value(w):
+                value(w) <- val
+return value(W)
+Now, it's running time is O(n*W).
+
+
+Example: W=10
+Weight = [6  3  4  2]
+Value =  [30 14 16 9]
+
+ 0  1  2  3  4  5  6  7  8  9  10
+[0  0  9  14 18 23 30 32 39 44 48]

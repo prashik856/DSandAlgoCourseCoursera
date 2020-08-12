@@ -6,3 +6,12 @@ Why Sorting?
 -> Sorting data is an important step of many efficient algorithms.
 -> Sorted data allows more efficient queries.
 
+All Sorting algorithms are:
+Insertion
+Selection
+Bubble
+Shell
+Merge
+Heap
+Quick
+Quick3

@@ -1,0 +1,71 @@
+Computing Edit Distance:
+Given strings A[1...n] and B[1...m], what is an optimal alignment (an alignment that results in minimum edit distance) of an i-prefix A[1...i]
+of the first string and a j-prefix B[1....j] of the second string?
+
+The last column of an optima alignment is either:
+an insertion (+1)
+a deletion (+1)
+a mismatch (+1)
+a match
+What is left (after the removal of the last column) is an optimal alignment of the corresponding two prefixes.
+
+Let D(i,j) be the edit distance of an i-prefix A[1....i] and a j-prefix B[1....j]
+Now,
+D(i,j) = min{
+    D(i,j-1) + 1 //insertion
+    D(i-1, j) + 1 //deletion
+    D(i-1, j-1) + 1, if A[i] != B[j] //mismatch
+    D(i-1, j-1) if A[i] = B[j] //match
+}
+
+Now, comparing A[1...n] = EDITING
+and B[1....m] = DISTANCE
+We have D[n][m] matrix:
+We now need to fill this up:
+
+Now, D[0][1] = 1, D[0][2] = 2, ... D[0][7] = 7.
+Similarly, D[1][0] = 1, D[2][0] = 2, .... D[8][0] = 8
+Now,
+D(1,1) = min{D(1,0)+1. D(0,1) + 1, D(0,0) + 1, or D(0,0) iff A[i] == B[j], but since D!=E, we will not consider this.}
+D(1,1) = min{2,2,1} = 1
+In a similar way we fill in the whole matrix.
+
+Pseudo Code for EditDistance
+EditDistance(A[1...n], B[1...n]):
+D(i,0) <- i and D(0,j) <- j for all i,j
+for j from 1 to m:
+    for i from 1 to n:
+        insertion <- D(i,j-1) + 1
+        deletion <- D(i-1, 1) + 1
+        match <- D(i-1, j-1) 
+        mismatch <- D(i-1, j-1) + 1
+        if A[i] = B[j]
+            D(i,j) <- min(insertion, deletion, match)
+        else:
+        D(i,j) <- min(insertion, deletion, mismatch)
+return D(n,m)
+
+
+
+Reconstruction an Optimal Alignment:
+Optimal Alignment:
+-> We have computed the edit distance, but how can we find an optimal alignment?
+-> The backtracking pointers that we stored will help us to reconstruct an optimal alignment.
+any path from (0,0) to (i,j) spells an alignment of prefixes A[1....i] and B[1...j]
+
+We need an optimal edit distance, for that, we will use the backtracking pointer.
+There exists an optimal alignment whose last column is a mismatch and an optimal aligment whose last column is an insertion.
+Let's consider a mismatch:
+
+OptimalAlignment(i,j):
+if i=0 and j=0:
+    return
+
+if i>0 and D(i,j) = D(i-1,j) + 1:
+    OutputAlignment(i-1, j)
+
+else if j>0 and D(i,j) = D(i,j-1) + 1:
+    OutputAlignment(i,j-1)
+
+else:
+    OutputAlignment(i-1, j-1)

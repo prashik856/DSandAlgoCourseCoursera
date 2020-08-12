@@ -168,3 +168,106 @@ Then the average running time of RandomizedQuickSort(A) is O(nlogn) while the wo
 Remark:
 Averaging is over random numbers used by the algorithm, but not over the inputs.
 
+
+
+Running time:
+
+Proof Ideas: Comparisons
+-> The running time is proportional to the number of comparisons made.
+-> Balanced partition are better since they reduce the number of comparisons needed:
+
+Proof Ideas: Probability
+A [5 1 8 9 2 4 7 3 6]
+A' [1 2 3 4 5 6 7 8 9]
+Prob(1 and 9 are compared) = 2/9 [depends on how close they are in the sorted array]
+Prob(3 and 4 are compared) = 1
+
+Proof:
+let, for i<j
+X[ij] = {
+    1 if A'[i] and A'[j] are compared.
+    0 otherwise
+}
+
+For all i<j, A'[i] and A'[j] are eihter compared exactly once or not compared at all (as we compare with a pivot)
+This, in particular, implies that the worst cae running time is O(n^2)
+
+crucial observation: X[ij] = 1 iff the first selected pivot in A'[i....j] is A'[i] or A'[j]
+
+Then Prob(X[ij]) = 2/(j-i+1) and 
+E(X[ij]) = 2/(j-i+1)
+Since X[ij] is eihter 0 or 1, E(X[ij]) = 0*(Prob(0)) + 1*Prob(1)
+                                        = 2/(j-1+1)
+Then(then expeted value of) the running time
+E(X[ij]) where i=1 to n, j=i+1 to n
+                = sum of all i,j E(X[ij])
+                = sum of all i<j (2/(j-i+1))
+                <= 2n.(1/2 + 1/3 + ... + 1/n) [We have a harmonic series here.]
+                = O(nlogn)
+
+
+
+Equal Elements:
+What if all the elements of the given array are equal to each other?
+Quick sort is not so fast when it comes to equal elements.
+the array is always split in two parts of size 0 and n-1.
+T(n) = n + T(n-1) + T(0)
+and hence
+T(n) = O(n^2)
+
+
+
+Overcome Equal elements, we replace the following:
+m <- Partition(A,l,r)
+with the line
+(m1,m2) <- Partition3(A,l,r)
+We do three way partition
+such that:
+-> For all l <= k <= m1 -1 , A[k] < x
+-> For all m1 <= k <= m2, A[k]=X
+-> For all m1+1 <= k <= r, A[k]>x
+l                           r
+[                           ]
+
+l                           r
+[   <x  |      =x      |     >x    ]
+       m1              m2
+
+RandomizedQuikcSort(A,l,r)
+if l>r:
+    return
+k <- random number between l and r
+swap A[l] and A[k]
+(m1,m2) <- Partitions3(A,l,r)
+{A[m1....m2] is in final position}
+RandomizedQuickSort(A,l,m1-1)
+RandomizedQuickSort(A,m2+1,r)
+
+
+
+Final Remarks:
+Tail Recursion Elimination
+QuickSort(A,l,r)
+while l<r:
+    m <- Partition(A,l,r)
+    if (m-l) < (r-m)
+        QuickSort(A,l,m-1)
+        l <- m+1
+    else:
+        QuickSort(A,m+1,r)
+        r <- m-1
+
+
+
+Intro Sort:
+-> Run quick sort with a simple deterministic pivot selection heuristic
+-> say, median of the first, middle, and last element.
+-> if the recursion depth exceeds a certion threshold clogn, the algorithm switches to heap sort.
+-> The running time is O(nlogn) in the worst case.
+
+
+Conclusion:
+-> Quick sort is a comparison based algorithm.
+-> Running time: O(nlogn) on average, O(n*2) in the worst case.
+-> Efficient in practice.
+

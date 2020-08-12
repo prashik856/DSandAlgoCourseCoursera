@@ -1,0 +1,56 @@
+1) The Alignment Game:
+    A T G T T A T A
+    A T C G T C C
+-> Remove all symbols from two strings in such a way that the number of points is maximized.
+Remove the 1st symbol from both strings:
+    1 point if the symbols match,
+    0 points if they don't match.
+Remove the 1st symbol from one of the strings:
+    0 points.
+
+Sequence Alignment:
+Alignment of two strings is a two-row matrix:
+1st row: symbols of the 1st string (in order) interspersed by "-"
+2nd row: symbols of the 2nd string (in order) interspersed by "-"
+
+Now, we need to identify matches, insertions, deletions, mismatches.
+
+Alignment Score:
+premium for every match(+),, and penalty for every mismatch(-u), indel(-s)
+
+In our example:
+u=0, s=1:
+    A  T  -  G  T  T  A  T  A
+    A  T  C  G  T  -  C  -  C
+    1  1 -1  1  1 -1  0 -1  0 = 1
+Optimal alignment:
+Input: Two strings, mismatch penalty u, and indel penalty s.
+Output: An alignment of the strings maximizing the score.
+
+Matches in an alignment of two strings (ATGT) form their common subsequence.
+
+
+Longest Common subsequence:
+Input : Two strings
+Output: A longest common subsequence of these strings.
+
+Maximizing the length of a common subsequence corresponds to maximizing the
+score of an alignment with u=s=0.
+
+
+Another Classical Problem:
+Edit distance:
+Input: Two strings
+Output: The minimum number of operations (insertions, deletions, and substitutions of symbols) to transform one string into another.
+
+The minimum number of insertions, deletions, and mismatches in an alignment of two strings (among all possible alignments)
+Example
+    E  D  I  -  T  I  N  G  -
+    -  D  I  S  T  A  N  C  E
+    d  m  m  i  m  u  m  u  i  (d: deletion, m: matches, i: insertions, u: mismatches)
+, there two given strings are editing and distance.
+we need to find matches, mismatches, and insertions.
+
+The total number of symbols in two strings = 2m + 2mm + 1i + 1d = [2m -i -i] + [2mm + 2i + 2d]
+                                                                (AlignmentScore, u=0, s=1/2) + EditDistance.
+Thus, minimizing edit distance = maximizing alignment score.

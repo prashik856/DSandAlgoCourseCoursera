@@ -1,0 +1,88 @@
+Dynamic Programming: Change Problem
+
+1. Greedy Change
+Change Problem-> Find the minimum number of coins needed to make change.
+
+Formally:
+Input: An integer money and positive integers coin[1], ...., coin[d].
+Output: The minimum number of coins with denominations coin[1],...., coin[d] that changes money.
+
+
+Greedy way:
+GreedyChange(money)
+Change <- empty collection of coins
+while money>0:
+    coin <- largest denomination that does not exceed money
+    add coin to Change
+    money <- money - coin
+return Change
+coins = [5,10,25]
+So, 40 = 25 + 10 + 5
+
+coins=[10,20]
+If we have 20 cents coin, We can have 40 = 20 + 20
+
+
+
+Recursive Change:
+Given the denominations 6,5, and 1, what is the minimum number of coins needed to change 9 cents?
+
+MinNumCoins(9) = min{
+    MinNumCoins(9-6) + 1
+    MinNumCoins(9-5) + 1
+    MinNumCoins(9-1) + 1
+}
+So, Recurrence for Change Problem would be:
+MinNumCoins(money) = min{
+    MinNumCoins(money-coin[1]) + 1
+    MinNumCoins(money-coin[2]) + 1
+    .
+    .
+    .
+    MinNumCoins(money-coin[d]) + 1
+}
+
+The Pseudo Code actually looks like this:
+RecursiveChange(money, coins):
+if money=0:
+    return 0
+MinNumCoins <- INF
+for i from 1 to |coins|:
+    if money >= coin[i]:
+        NumCoins <- RecursiveChange(money-coin[i], coins)
+        if NumCoins + 1 < MinNumCoins:
+            MinNumCoins <- NumCoins + 1
+return MinNumCoins
+
+But, how fast if Recursive Change?
+The optimal coin combinatino for 70cents is computed at lest three times in the first three branches of tree itself!
+The optimal coin combination for 30 cents is computed trillions of times.
+
+Hint:
+Wouldn't it be nice to know all the answers for changing money - coin[i] by the time we need to compute an optimal way of changing money?
+So, Instead of the time-consuming calls to
+RecursiveChange(money-coin[i], coins)
+we would simply look up these values.
+
+
+
+Dynamic Programming Approach:
+What is the minimum number of coins needed to change 0 cents for denominations 6,5 and 1?
+
+money       0 1 2 3 4 5 6 7 8 9
+MinNumCoins 0 1 2 3 4 1 1 2 3 4
+
+DPChange(money, coins)
+MinNumCoins(0) <- 0
+for m from 1 to money:
+    MinNumCoins(m) <- INF
+    for i from 1 to |coins|:
+        if m >= coin[i]:
+            NumCoins <- MinNumCoins(m-coin[i]) + 1
+            if NumCoins < MinNumCoins(m):
+                MinNumCoins(m) <- NumCoins
+return MinNumCoins(money)
+
+
+
+"Programming" in "Dynamic Programming" has nothing to do with Programming.
