@@ -1,0 +1,56 @@
+Arrays:
+e.g. of declarations of arrays in differenct languages.:
+long arr[] = new long[5];
+long arr[5];
+arr = [None]*5
+
+Definition:
+Array: Contiguous area of memory consisting of equal size elements indexed by contiguous integers.
+Usually 0 based indexing (1 in Matlab)
+
+[ |  |  |  ]
+ 1  2  3  4
+
+
+What's so Special about Arrays?
+Constant-time access:
+We can figure out the address of the array.
+array_addr + elem_size x (index - first_index) [If we are doing 0 based indexing, first_index is not necessary.]
+
+
+Multi-Dimensional Arrays:
+How do we find the constant-time access here:
+[              ]
+[              ]
+[    (3,4)     ]
+Now, first skip the rows, let elem_size = 6
+The address of 4th element in the 3rd row becomes
+row_address + 6 * (4 - 1)
+How to get row address:
+Now, we skipped (row_index-1)*num_of_coloumns*elem_size of
+So, the address in multidementional array is:
+Note: These calculations are all for 1 based index.
+
+array_addr + (row_index-1)*num_of_coloumns*elem_size + elem_size*(column_index-1)
+= array_addr + elem_size*{num_of_columns*[row_index -1 ] + [column_index -1]}
+
+Now, this is called Row-major ordering or Row-major indexing.
+So, column index is changing most rapidly.
+(1,1), (1,2), (1,3), (2,1), (2,2), (2,3). here, the first element is row.
+
+Some compilers also do column-major ordering/indexing.
+(1,1), (2,1), (3,1), (1,2), (2,2), (3,2). Here, the first element is column.
+
+
+Times for Common Operations:
+            Add     Remove
+Beginning   O(n)    O(n)
+End         O(1)    O(1)
+Middle      O(n)    O(n)
+
+
+Summary:
+-> Array: Contiguous area of memory consisting of equal-size elements indexed by contiguous integers.
+-> Constant-time access to any element.
+-> Constant time to add/remove at the end
+-> Linear time to add/remove at an arbitrary location.

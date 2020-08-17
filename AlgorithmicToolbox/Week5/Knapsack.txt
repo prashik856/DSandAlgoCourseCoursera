@@ -1,0 +1,196 @@
+Knapsack problem (Already discussed in Greedy Algorithm):
+
+TV Commercial placement
+Select a set of TV commercials (each commercial has duration and cost) so that the total revenue is maximal while the total length does not exceed
+the length of the available time slot.
+
+Optimizing data center performance:
+Purchase computers for a data center to acheive the maximal performance under limited budget.
+
+Knapsack Problem:
+(knapsack is another word for backpack)
+Goal:
+Maximize value ($) while limiting total weight (kg).
+
+
+Problem Varaitions:
+    Fractional Knapsack : can take fractions of items
+    Discrete Knapsack: each item is either taken or not
+
+    Discrete knapsack:
+        With repetitions: unlimited quantities
+        Without repetitions: one of each item
+
+Fractional Knapsack can already solved by greedy algorithm.
+
+Greedy does not work for discrete knapsack!
+We will need to design a dynamic Programming Solution.
+
+Example:
+Capacity : 10
+And Weight = [6  3  4  2]
+    Value =  [30 14 16 9]
+    W/o repeats = 6 + 4: Total: 46
+    w repeats = 6 + 2 + 2: Total: 48
+    fractional = 6 + 3  + 1(half of 2): 48.5
+
+Why does greedy fail for the discrete knapsack?
+
+Now, value per unit weight is:
+v/w (Value per unit) = [5  4.66 4 4.5]
+Now solution = [6 3 ||] : 1 weight is not included!!
+So, greedy way is not working here.
+So Value per unit weight is not actually working.
+
+Taking an element of maximum value per unit weight is not safe!
+
+
+
+1) Knapsack with repetitions:
+With repetitions, we have given unlimited quantities.
+
+Formal Defenitions:
+Knapsack with repetitions problem
+Input: Weights w(1),...., w(n) and values v(1),...,v(n) of n items;
+        total weight W (v(i)'s, w(i)'s and W are non negative integers).
+Output: the maximum value of items whose weight does not exceed W. Each item can be used any number of times.
+
+Consider an optimal solution and an item in it:
+W [.... w(i).....]
+If we take this item out then we get an optimal solution for a knapsack of total weight W-w(i).
+
+Subproblems:
+Let value(w) be the maximum value of knapsack of weight w.
+value(w) = max {value(w-w(i)) + v(i)} where i:w(i)<=w
+
+Pseudo Code:
+knapsack(W)
+value(0) <- 0
+for w from 1 to W:
+    value(w) <- 0
+    for i from 1 to n:
+        if w(i) <= w:
+            val <- value(w-w(i)) + v(i)
+            if val > value(w):
+                value(w) <- val
+return value(W)
+Now, it's running time is O(n*W).
+
+
+Example: W=10
+Weight = [6  3  4  2]
+Value =  [30 14 16 9]
+
+ 0  1  2  3  4  5  6  7  8  9  10
+[0  0  9  14 18 23 30 32 39 44 48]
+
+
+
+2) Knapsack without Repetitions:
+input: Weights w(1),...,w(n) and values v(1),...,v(n) of n items, total weight W(v(i)'s, w(i)'s and W are non
+negative integers.)
+Output: The maximum value of items whose weight does not exceed W. Each item can be used at most once.
+
+Do we have same subproblems?
+No.
+[      | w(n)  |       ]W
+[               ]W- w(n) [Now, if we take w(n) out, then we get a knapsack problem of smaller weight (W - w(n)).]
+But now, we cannot have another copy of w(n) in our new knapsack problem of weight W-w(n) because no repetitions are allowed.
+
+If the n-th item is taken into an optimal solution, 
+then what is left is an optimal solution for a knapsack of total weight W-w(n) using items 1,2,...,n-1.
+
+If the n-th item is not used, then whole knapsack must be filled in optimally with items 1,2,...,n-1.
+
+Subproblems:
+For 0<=w<=W and 0<=i<=n, value(w,i) is the maximum value acheivable using knapsack of weight w and items 1,...,i.
+
+The i-th item is either used or not:
+value(w,i) is equal to:
+max{value(w-w(i), i-1) + v(i) #If i-th item is used, value(w,i-1) #If i-th item is not used.}
+
+Knapsack(W):
+initialize all value(0,j) <- 0
+initialize all value(w,0) <- 0
+for i from 1 to n:
+    for w from 1 to W:
+        value(w,i) <- value(w,i-1)
+        if w(i) <= w:
+            val <- value(w-w(i), i-1) + v(i)
+            if value(w,i) < val
+                value(w,i) <- value
+return value(W,n)
+Running time is O(n*W)
+
+Example: reconstructing a solution
+30  14  16   9
+[6   3   4   2]
+
+  0   1   2   3   4   5   6   7   8   9   10
+0 0   0   0   0   0   0   0   0   0   0    0
+1 0   0   0   0   0   0  30  30  30  30   30
+2 0   0   0  14  14  14  30  30  30  44   44
+3 0   0   0  14  16  16  30  30  30  44   46
+4 0   0   9  14  16  23  30  30  39  44   46
+
+Now, 46 is the answer to our problem.
+Now were the values computed?
+
+# Absolute value of knapsack of weight 10 that only uses first two elements i.e v(10,2).
+value(10,2)  = 44
+Reconstructing an optimal solution (As we can see above, we always construct an optimal value using some weight and some values.)!
+value(10,4) = 46
+                   1   2   3   4
+Optimal Solution: [1   0   1   0]
+We need to backtrack using the value of our current optimal solution to where it might have come.
+This is decided using this equation:
+max{value(w-w(i), i-1) + v(i), value(w,i-1)}
+e.g. 46 = max{value(10-2, 3) + 9 ,value(10,3)}
+        = max{value(8,3) + 9, value(10,3)}
+        = max{30 + 9, 46}
+        = max{39, 46}
+So, it is apparant that value(10,4) came from value(10,3) from out backtracking algo.
+Similarly we need to backtrack to get what coins we have selected.
+This is how we need to reconstruct the optimal solution.
+
+
+7) Final Remarks
+Memoization:
+Knapsack(w)
+if w is in hash table:
+    return value(w)
+value(w) <- 0
+for i from 1 to n:
+    if w(i) <= w:
+        val <- knapsack(w-w(i)) + v(i)
+        if val > value(w)
+            value(w) <- val
+insert value(w) into hash table with key w
+return value(w)
+
+What is memoization?
+Solving subproblems from smaller ones to larger ones: This is BOTTOM UP ALGORITHM
+Solving recursively which calls upon smaller subproblem from a larger subproblem: This is TOP DOWN approach.
+[This is very bad technique.]
+
+If we solve a sub-problem and store it's value. Now, when we are solving another sub-problem, we can check if we 
+already have solved it (by looking into the table). if it's stored, it is already computed, and then we can return it
+immediately.
+This is how recursive algorithm with memoization works!
+
+This is how our memoization looks like for our Knapsack algorithm.
+Basically memoization is storing the value of sub-problem to avoid recomputation.
+
+What is faster?
+-> If all subproblems must be solved then an iterative algorithm is usually faster since it has no recursion overhead.
+-> There are cases however when one does not need to solve all subproblems:
+    assume that W and all w(i)'s are multiples of 100; then value(w) is not needed if w is not divisible by 100.
+
+Running Time:
+-> The running time O(nW) is not polynomial since the input size is proportional to logW, but not W.
+-> In other words, the running time is O(n*2^(log(W)))
+-> E.g. For
+    W = 1232313132132123123123123
+    (twenty digits only!) the algorithm roughly needs 10^20 basic operations.
+
+Later, we'll learn why solving this problem in polynomial time costs $1M!
