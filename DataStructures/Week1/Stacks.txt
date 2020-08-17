@@ -1,0 +1,78 @@
+1. Stacks
+Stack: Abstrack data type with the following operations:
+Push(Key): adds key to collection.
+Key Top(): returns most recently added key
+Key Pop(): removes and returns most recently-added key.
+Boolean Empty(): are there any elements?
+
+
+Uses:
+One of the uses of Stacks is Balanced Brackets:
+Input: A string str consisting of '(',')', '[',']' characters.
+Output: Return whether or not the string's parentheses and 
+square brackets are balanced.
+
+E.g.:
+Balanced: "([]) []()",
+        : "((([([])]))())"
+Unbalanced:
+"([]])()"
+"]["
+
+Pseudo code:
+IsBalanced(str):
+Stack stack;
+for char in str:
+    if char in ['(', '[']:
+        stack.Push(char)
+    else:
+        if stack.Empty():
+            return False
+        top <- stack.Pop()
+        if (top = '[' and char != ']') or (top = '(' and char != ')'):
+            return False;
+return stack.Empty()
+
+
+This is just one use of Stack.
+Stack is also used in compilers, and other algorithms.
+
+
+Stack Implementation with Array:
+numElements:0
+[  a|  b|  d|  e|  f]
+Push(a); 
+Push(b); 
+Top();
+Push(c);
+Pop() -> c;
+Push(d)
+Push(e)
+Push(f)
+Push(g) //Error -> no more space
+Empty() [We can do all of these in O(1) using numElements]
+Now, if we keep Popping, we will reach when stack is empty
+Empty() -> Will return true when numElements is greater than zero.
+
+
+
+Stack Implementation with Linked List.
+We have head.
+Using linked list, we will possible all available space.
+
+Push(a)
+Push(b)
+Top()
+Push(c)
+Pop()
+All of these are Order 1 operation for Linked list as well.
+And there is no limit to memory nor there is any waste of 
+memory, as we are using only what is required.
+And here, we are using Pointers as well.
+Empty()
+
+
+Summary:
+-> Stacks can be implemented with either an array or a linked list.
+-> Each stack operation is O(1): Push, Pop, Top, Empty.
+-> Stacks are ocassionally known as LIFO queues (Last In First Out)

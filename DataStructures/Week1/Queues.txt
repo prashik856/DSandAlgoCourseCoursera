@@ -1,0 +1,59 @@
+Queues:
+Abstract data type with the following operations:
+
+Enqueue(Key) : adds key to collection
+Key Dequeue(): removes and returns least recently-added key.
+Boolean Empty(): are there any elements?
+
+FIFO : First In First Out.
+
+Mostly used in Servers.
+
+
+Queue Implementation with Linked List.
+We have head and tail.
+
+Enqueue(a): Input at the back of the linked list
+Enqueue(b): Again added at the end of linked list.
+Empty(): False
+Enqueue(c): Added at the last
+Dequeue(): Here, now 'a' will be removed.
+We always dequeue from the front.
+In Linked Lists terms, this will be PopFront().
+
+Now, when Empty(), head and tail will point to nil.
+
+So, Enqueue: use List.PushBack
+    Dequeue: use List.TopFront and List.PopFront
+    Empty: use List.Empty
+
+
+
+Queue Implementation with Array:
+Enqueing is easy, but dequesing will be difficult.
+We try to do this using cricular array:
+
+[  a|  |  |  |  ]
+r -> dequeue
+w -> enqueue
+
+Enqueue(a) -> r=0, w=1
+Enqueue(a) -> r=0, w=2
+Empty() -> False, because r!=w
+Enqueue(c) -> r=0, w=3
+Dequeue() -> r=1, w=3
+Dequeue() -> r=2, w=3
+Enqueue(d) -> r=2, w=4
+Enqueue(e) -> r=2, w=0
+Enqueue(f) -> r=2, w=1
+Enqueue(g) -> This won't happen!: Error, Now this would be error, 
+Since it will be hard to distinguish between empty queue and full queue.
+So, we need to keep 1 buffer element.
+Dequeue(), till we have w==r.
+Empty() -> True.
+
+Summary: 
+->Queues can be implemented with either a linked list (with tail pointer)
+or an array
+-> Each queue operation is O(1): Enqueue, Dequeue, Empty.
+
