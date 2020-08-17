@@ -1,0 +1,165 @@
+Singly-Linked List
+
+Every node contains:
+key and next pointer.
+
+Every linked list has a 'head' pointer which points to the first element.
+Links in a chain.
+
+List API.
+PushFront(Key) -> add to front.
+Key TopFront() -> return front item
+PopFront() -> remove front item
+PushBack(Key) -> add to back
+Key TopBack() -> return back item
+PopBack() -> remove back element
+Boolean Find(Key) -> is key in list?
+Erase(Key) -> remove key from list
+Boolean Empty() -> empty list?
+AddBefore(Node, Key) -> adds key before this node.
+AddAfter(Node, Key) -> adds key after this node.
+
+
+
+Times for Some Operations:
+PushFront(): O(1)
+PopFront(): O(1)
+TopFront(): O(1)
+PushBack(): [With no tail pointer] O(n): [With tail pointer] O(1)
+PopBack(): [With no tail pointer] O(n): [With tail pointer] O(n)
+
+
+PushFront(key):
+node <- new node
+node.key <- key
+node.next <- head
+head <- node
+//This means initially our linked list was empty
+if tail = nil:
+    tail <- head
+
+PopFront()
+//Empty list
+if head = nil:
+    Error: empty list
+//If not empty, update the head
+head <- head.next
+//If just one element is present in the linked list.
+if head = nil:
+    tail <- nil
+
+PushBack(key):
+node <- new node
+node.key <- key
+node.next = nil
+//Check if linked list is empty
+if tail = nil:
+    head <- tail <- node
+else:
+    tail.next <- node
+    tail <- node
+
+PopBack()
+//empty
+if head = nil:
+    Error: empty list
+// only 1 element
+if head = tail:
+    head <- tail <- nil
+else:
+    p <- head
+    while p.next.next != nil
+        p <- p.next
+    p.next <- nil;
+    tail <- p
+
+AddAfter(node,key):
+node2 <- new node
+node2.key <- key
+node2.next = node.next
+node.next = node2
+// If the node was tail, update the tail.
+if tail = node:
+    tail <- node2
+
+
+Summarize:
+Singly-linked List  | no tail | with tail | Doubly Linked List
+PushFront(key)          O(1)
+TopFront()              O(1)
+PopFront()              O(1)
+PushBack(Key)           O(n)    O(1)
+TopBack()               O(n)    O(1)
+PopBack()               O(n)                O(1)
+Find(Key)               O(n)
+Erase(Key)              O(n)
+Empty()                 O(1)
+AddBefore(Node, Key)    O(n)                O(1)
+
+
+
+
+Doubly-Linked List:
+Now, we have
+head, tail, node!
+Now, every node will have next and previous pointers.
+Node contains:
+-> Key
+-> next pointer
+-> prev pointer
+
+Now, some of the operations can be made cheap:
+PopBack() O(1)
+
+PushBack(key):
+node <- new node
+node.key <- key;
+node.next <- nil
+//If empty
+if tail = nil:
+    head <- tail <- node
+    node.prev <- nil
+else:
+    tail.next <- node
+    node.prev <- tail
+    tail <- node
+
+PopBack():
+if head = nil:
+    Error: empty list
+if head = tail:
+    head <- tail <- nil
+else:
+    tail <- tail.prev
+    tail.next <- nil
+
+AddAfter(node,key)
+node2 <- new node
+node2.key <- key
+node2.next <- node.next
+node2.prev <- node
+node.next <- node2
+//Take care of the next element's prev
+if node2.next != nil:
+    node2.next.prev <- node2
+if tail = node:
+    tail <- node2
+
+AddBefore(noe,key):
+node2 <- new node
+node2.key <- key
+node2.next <- node
+node2.prev <- node.prev
+node.prev <- node2
+if node2.prev != nill:
+    node2.prev.next <- node2
+if head = node:
+    head <- node2
+
+Summary:
+-> Constant time to insert at or remove from the front.
+-> With tail and doubly-linked, constant time to insert at or remove from the back.
+-> O(n) time to find arbitrary element.
+-> List elements need not be contiguous.
+-> With doubly-linked list, constant time to insert between nodes or remove a node.
+
