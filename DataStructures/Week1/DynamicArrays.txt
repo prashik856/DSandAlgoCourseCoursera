@@ -1,4 +1,4 @@
-Dynamic Arrays:
+1) Dynamic Arrays:
 Problem: static arrays are static!
 
 int my_array[100]
@@ -94,3 +94,159 @@ Summary:
 -> Appending a new element to a dynamic array is often constant time,
 but can take O(n)
 -> Some space is wasted.
+
+
+
+2) Amortized Analysis - Aggregate Method:
+Sometimes, looking at the individual worst-case may be too severe.
+We may want to know the total worst-case cost for sequence of operations.
+
+E.g.
+Dynamic Array:
+We only resize every so often.
+Many O(1) operations are followed by an O(n) operations.
+What is the total cost of inserting many elements?
+
+Amortized cost:
+Given a sequence of n operations, the amortized cost is:
+    Cost(n operatinos)/n
+
+Aggregate Mehthod:
+Dynamic array: n calls to PushBack
+Let c(i) = cost of i'th insertion
+
+c(i) = 1 + {
+            i-1 if i-1 is a power of 2
+            0 otherwise
+            }
+
+Total Maortized cost is  sum(i=i:n)c(i)/n= sum(c(1:n))/n
+                        = [ n + sum(j=1:floor(log(n-1)/log2))2^j ]/n
+                        = O(n)/n
+                        = O(1)
+
+
+3) Amortized Analysis - Banker's Method
+-> Charge extra for each cheap operation.
+-> Save the extra charge as tokens in our data structure (conceptually)
+-> Use the tokens to pay for expensive operations
+Like an amortizing loan
+
+
+Banker's Method
+Dynamic array: n calls to PushBack
+Charge 3 for each insertion: 1 token is the raw cost for insertion.
+    -> Resize needed: To pay for moving the elements, use the token that's 
+                    present on each element that needs to move.
+    -> Place one token on the newly-inserted element, and one token capacity/2
+        element prior.
+
+Dynamic Array Resizing
+arr[] of capacity 1 initially.
+e.g.
+PushBack(a) -> size:1 capacity:1 [a*] -> token on 'a'
+PushBack(b) -> size:2 capacity:2 [a* b*] -> We use the token first to move 'a'
+from previous array to this new array of capacity 2. Then we move 'b' into
+this new array. -> Now about tokens, we put one token on 'b', and capacity/2
+token on 'a'.
+PushBack(c) -> size:3 capacity:4 [a* b c*  ] -> Copy over 'a' to new array, 
+and pay for that using the token 
+on a. We then copy over b, using the token present on b. Then we push in c.
+Now, we put a token on 'c' and we put a token on 'a' [capacity/2 elements 
+prior, we need to put the token].
+PushBack(d) -> size:4 capacity:4 [a* b* c* d*] -> Just add d, put a token over
+it. Then put a token over b (since it is capacity/2 element prior to d.)
+Now, what we got is a full array, with required tokens to pay for all of them.
+
+PushBack(e) -> size:5 capacity:8 [a* b c d e*] -> Copy over a, b, c, and d 
+over to new array using the tokens. Add element e, add a token over it.
+Also add a token over a i.e. capacity/2 elements prior (4 here)
+O(1) amortized cost for each PushBack.
+
+
+
+4) Amortized Analysis - Physicist's Method.
+Define a potential function, 0, which maps states of the data structure to 
+integers:
+    0(h(0)) = 0
+    0(h(t)) >= 0
+Now, amortized cost for operation t is
+c(t) + [0(h(t)) - 0(h(t-1))]
+//Here, we have the change in Potential energy before and after doing the
+//operation.
+
+Choose 0 such tat:
+    -> if c(t) is small, the potential increases
+    -> if c(t) is large, the potential decreases by some scale.
+
+The cost of n operations is:
+sum(i=1:n) c(i)
+The sum of amortized costs is:
+    sum(i=1:n)[c(i) + 0(h(i)) - 0(h(i-1))]
+    = c(1) + 0(h(1)) - 0(h(0)) +
+      c(2) + 0(h(2)) - 0(h(1)) + ....
+    = 0(h(n)) - 0(h(0)) + sum(i=1:n)c(i)
+    >= sum(i=1:n) c(i)
+
+Dynamci array: n calls to PushBack
+Let 0(h) = 2*size - capacity
+O(h(0)) = 2*0 - 0 = 0
+O(h(i)) = 2*size - capacity >0
+[since size > capacity/2]
+
+Without resize, when adding element i
+Amortized cost of adding element i:
+c(i) + 0(h(i)) - 0(h(i-1))
+= 1 + 2*size(i) - cap(i) - (2*size(i-1) - cap(i-1))
+But we know, without resizing, the capacity of i and i-1 remains the same,
+so capacity cancels out.
+= 1 + 2(size(i) - size(i-1))
+Since we just added 1 element,
+= 1 + 2
+= 3
+
+
+With resize, when adding element i
+Let k = size(i-1) = cap(i-1)
+Then, 0(h(i-1)) = 2size(i-1) - cap(i-1) = 2k - k = k
+0(h(i)) = 2size(i) - cap(i) = 2(k+1) - 2k = 2
+
+Amortized cost of adding element i:
+    = c(i) + 0(h(i)) - 0(h(i-1))
+    = size(i) + 2 - k
+    = k + 1 + 2 -k
+    = 3
+
+
+
+Summary:
+Alternatives to Doubling the Array Size:
+We could use some different growth factor
+(1.5, 2.5, etc)
+Could we use a constant amount?
+
+We, cannot use constant amount.
+If we expand by 10 each time, then:
+Let c(i) = cost of i'ith insertion
+
+so, c(i) = 1  + {
+                i-1 if i-1 is a multiple of 10
+                0 otherwse
+                }
+
+Now, sum(i=1:n)C(i)/n = [n + sum(j=1:(n-1)/10)10j]/n
+                      = n + 10*sum(j=1:n-1/10)j
+                      = [n + 10*O(n^2)]/n
+                      = O(n^2)/n = O(n)
+Here, we can see, rather than getting O(1), we are getting O(n).
+So the Amortized cost increases significantly when adding constant amount
+of elements into the new array.
+
+
+-> Calculate the amortized cost of an operation in the context of a sequence
+of operations.
+-> Three ways to do analysis:
+    -> Aggregate method (brute-force sum)
+    -> Banker's method (tokens)
+    -> Physicist's method (potential function, 0)
+-> Nothing changes in the code: runtime analysis only.
