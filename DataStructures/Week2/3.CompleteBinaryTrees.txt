@@ -1,0 +1,39 @@
+Complete Binary Trees:
+
+How to Keep a Tree Shallow?
+Definition:
+A binary tree is complete if all its levels are filled except possibly
+the last one which is filled from left to right.
+
+First Advantage: Low Height
+Lemma:
+A complete binary tree with n nodes has height at most O(log(n))
+
+Proof:
+> Complete the last level to get a full binary tree of n'>n nodes and the same 
+number of levels l.
+> Note that n'<=2n
+> Then n'=2^l - 1 and hence
+l = log(n'+1)/log(2) <= log(2n+1)/log(2) = O(log(n))
+
+Second Advantage: Store as Array
+If we number the root as 1, and then all it's child from left to right,
+we start numbering them 2, 3,etc,
+For every node, we can calculate the number of it's parent, leftchild and right child as follows:
+parent(i) = floor(i/2)
+leftchild(i) = 2*i
+rightchild(i) = 2*i + 1
+
+Now, this allows us to store the whole binary tree in an array (Just by using indices)
+Because these can be computed in a fly.
+
+What do we pay for these advantages?
+> We need to keep the tree complete.
+> Which binary heap operations modify the shape of the tree?
+These are Insert() and ExtractMax()
+Sift up and Sift down, do not change the shape of the tree.
+> Only Insert and ExtractMax (Remove changes the shape by calling ExtractMax).
+> Keeping the Tree Complete
+    To insert an element, insert it as a leaf in the leftmost vacant position level and let it sift up.
+    To extract the maximum value, replace the root by the last leaf and let it sift down.
+    
