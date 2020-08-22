@@ -36,4 +36,3 @@ Sift up and Sift down, do not change the shape of the tree.
 > Keeping the Tree Complete
     To insert an element, insert it as a leaf in the leftmost vacant position level and let it sift up.
     To extract the maximum value, replace the root by the last leaf and let it sift down.
-    

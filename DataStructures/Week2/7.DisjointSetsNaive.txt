@@ -1,0 +1,70 @@
+Disjoint Sets : Naive Implementations
+
+For simplicity, we assume that our n objects are just integers 1,2,...,n.
+
+Using the Smallest Element as ID.
+> Use the smallest element of a set as its ID
+> Use array smallest[1...n]:
+    smallest[i] stores the smallest element in the set i belongs to.
+
+Example:
+{9,3,2,4,7} {5} {6,1,8}: If we have these three sets, 
+Then we create an array smallest, whose size is the sum of length of all the sets,
+and it's value is
+            1  2  3  4  5  6  7  8  9
+smallest = [1  2  2  2  5  1  2  1  2]
+
+Pseudo codes:
+MakeSet(i):
+smallest[i] <- i
+
+Find(i):
+return smallest[i]
+
+Running time: O(1)
+
+Union(i,j):
+i_id : Find(i)
+j_id : Find(j)
+if i_id = j_id:
+    return
+m <- min(i_id, j_id)
+for k from 1 to n:
+    if smallest[k] in {i_id, j_id}:
+        smallest[k] <- m
+
+Running Time: O(n)
+
+
+> Current Bottleneck: Union
+> What basic data structure allows for efficient merging?
+> Linked list!
+> Idea: represent a set as a linked list, use the list tail as id of the set
+
+Example: merging two lists
+9 - 3 - 2 - 4 - 7
+6 - 1 - 8
+How can we merge them? 
+-> Simple, use the tail of the first linked list to join the head of second 
+linked list.
+-> update the ID of as tail of the joined linked list [Actually the ID will be updated automatically (tail!)].
+
+
+> Pros:
+    - Running time of Union is O(1)
+    - Well-defined ID
+> Cons:
+    - Running time of Find is O(n) as we need to traverse the list to find its tail
+    - Union(x,y) works in time O(1) only if we get the tail fo the list of x and the head 
+    of the list of y in constant time!
+
+E.g. merging tow lists.
+9 - 3 - 2 - 4 - 7
+6 - 1 - 8
+Can we mere in a different way?
+What if we join 8 to 7?
+Now, we can still consider 7 as the id of the resulting Set, because 7 is reachable from any other element.
+Instead of a list, we get a tree, whose root is 7, and it has two branches.
+
+We'll see the representing sets as trees gives a very efficient implementation: 
+nearyly constant amortized time for all operations
