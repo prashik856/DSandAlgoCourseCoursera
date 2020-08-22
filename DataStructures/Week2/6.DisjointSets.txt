@@ -1,0 +1,50 @@
+Disjoint Sets: Naive Implementations:
+
+Consider the following example:
+Is B reachable from A?
+
+If a maze if drawn using points, and we somehow connect them using graphs,
+And given two points A and B, are they reachable (connected?).
+
+The Maze problem can be easily solved by Disjoint-sets Data Structure.
+
+Definition:
+A disjoint-set data structure supports the following operations:
+    > MakeSet(x) creates a singleton set {x}
+    > Find(x) return ID of the set containing x:
+        - if x and y lie in the same set, then Find(x) = Find(y).
+        - otherwise, Find(x) != Find(y)
+    > Union(x,y) merges two sets containing x and y.
+
+
+Preprocess(maze):
+for each cell c in maze:
+    MakeSet(c)
+for each cell c in maze:
+    For each neighbor n of c:
+        Union(c,n)
+
+isReachable(A,B):
+return Find(A) = Find(B)
+
+
+
+An example of this DS is as follows:
+Building a Network
+
+1-----------2-----------3---------4         5
+
+MakeSet(1)
+MakeSet(2)
+MakeSet(3)
+MakeSet(4)
+Initially each machine lies in the separate set.
+Now, Find(1) = Find(2) -> False.
+
+Now, Union(3,4)
+MakeSet(5)
+Union(3,2)
+Now, Find(1) = Find(2) -> False
+Now, Union(1,4)
+Find(1) = Find(2) -> True
+Now, since 1 and 2 lies in the same set which contains machine 1,2,3, and 4.

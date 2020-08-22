@@ -1,0 +1,117 @@
+Heap Sort:
+We will use Binary heap to implement Heap Sorting Algorithm.
+
+HeapSort(A[1....n]):
+create an empty priority queue
+
+//Create empty Priority Queue
+for i from 1 to n:
+    Insert(A[i])
+//Just extract max value, one by one
+for i from n downto 1:
+    A[i] <- ExtractMax()
+
+The resulting algorithm is comparison based and has running time O(nlog(n)) (hence, asymptotically optimal).
+> Natural generalization of selection sort:
+Instead of simple scanning the rest of the array to find the maximum value, use a smart data structure.
+> Not in-place: uses additional space to store the priority queue.
+
+> In-place heap sort algorithm. For this, we will first turn a given array
+into a heap by permuting its elements.
+
+Turn Array into a heap:
+BuildHeap(A[1...n]):
+size <- n
+for i from floor(n/2) downto 1:
+    SiftDown(i)
+
+
+> We repair the heap property going from bottom to top.
+> Initially, the heap property is satisfied in all the leaves (i.e., subtrees of depth 0)
+> We sthen start repairing the heap property in all subtrees of depth 1.
+> When we reach the root, the heap property is satisfied in the whole tree.
+> Running time: O(nlog(n)).
+
+In-Place HeapSort
+HeapSort(A[1....n]):
+BuildHeap(A) {size=n}
+repeat (n-1) times:
+    swap A[1] and A[size]
+    size <- size - 1
+    SiftDown(1)
+// This is an improvement of selection sort algorithm.
+// In-place is improved heapsort with no extra memory.
+// Running time is O(nlog(n)).
+
+
+Building Running Time:
+> The running time of BuildHeap is O(nlog(n)) since we call SiftDown for O(n) nods.
+> If a node is already close to the leaves, then sifting it down is fast.
+> We have many such nodes!
+> Was our estimate of the running time of BuildHeap too pessimistic?
+
+T(BuildHeap) <= n/2*1 + n/4*2 + n/8*3 + ...
+            <= n*sum[(i=1:+veInfinity) i/2^(i)] = 2n
+
+To estimate the value of sum:
+1/2 + 1/4 + 1/8 + 1/16 + ... = sum[(k=1:Infinity)1/2^(k)] = (1/2)/(1-(1/2)) = 1
+
+What about the sum we need to estimate?
+1*1/2, 2*1/4, 3*1/3...
+We prove this by using the line segment method
+
+
+Partial Sorting:
+Input: An array A[1....n], an integer 1<=k<=n.
+Output: the last k elements of a sorted version of A.
+
+Can be solved in O(n) if k=O(n/log(n))!
+
+PartialSorting(A[1...n],k):
+BuildHeap(A)
+for i from 1 to k:
+    ExtractMax()
+
+Running Time: O(n + klogn)
+if K<= n/log(n)
+The O(n + n) = O(n)
+
+Summary:
+> Heap Sort is a time and space efficient comparison based algorithm:
+has running time O(nlog(n)), uses no additional space.
+
+
+Final Remarks:
+0-based arrays:
+Parent(i)
+return floor((i-1)/2)
+
+LeftChild(i)
+return 2(i) + 1
+
+ReturnChild(i)
+return 2(i) + 2
+
+
+Binary Min-Heap Array:
+Binary min-heap is a binary tree (each node has zero, one, or two children)
+where the value of each node is at most the values of its children.
+> this can be implemented similarly.
+
+
+d-ary Heap
+> In a d-ary heap, nodes on all levels expect for possibly the last on, have exactly d children.
+> The height of such a tree is about log(n)/log(d).
+> The running time of SiftUp is O(log(n)/log(d)).
+> the running time of SiftDown is O(dlog(n)/log(d)): on each level, we find the largest
+value among d children.
+
+
+
+Summary:
+> Priority queue supports two main operations: Insert and ExtractMax
+> In an array/list implementation, one operation is very fast (O(1)) but
+other one is very slow (O(n)).
+> Binary heap gives an implementation where both operations take O(log(n))
+> Can also be made space efficient.
+
