@@ -1,0 +1,65 @@
+IP Addresses
+
+Suppose we have a Web Service:
+In such networking, we actually assign an address to each computer connected to
+our Web Service.
+This is IP.
+0-255 value: xxxx.xxxx.xxxx.xxxx
+There are 2^32 different IP Addresses. This is roughly 4Billion.
+Due to this, we have designed a new address system, 
+2^128 IPv6 addresses - number with 39 digits!
+This will be sufficient for a long time.
+
+
+Access Log File:
+Whenever some one connects to our web service, we store the IP address of
+that computer in our file system in a file called as Access log file.
+Uses Access Log, we can analyze all the activities.
+We need to use this since someone can attack our Web service with 
+mal intention, or he can send lots and lots of service to a server
+to block other from receiving any service. [Denial of Service Attack]
+
+Access Log
+It usually store these values,
+Date    Time    IPaddress
+
+IP Access List:
+Analyse the access log and quickly answer queries:
+did anybody access the service from this IP during the last hour?
+How many times?
+How many IPs were used to access the service during the last hour?
+
+
+Log Processing:
+> 1h of logs can contain millions of lines
+> Too slow to process that for each query
+> Keep count: How many times each IP apprears in the last 1h of the access log.
+> C is ome data structure to store the mapping from IPs to counters.
+> We will learn later how to implement C
+
+We will update C according too IP addresses every second.
+> Decrement counter for all the IPs where were in our Access Log 1 hour ago.
+
+MainLoop()
+log - array of log lines (time, IP)
+C - mapping from IPs to counters
+i - first unprocessed log line
+j - first line in current 1h window
+i <- 0
+j <- 0
+C <- None
+Each second
+    UpdateAccessList(log,i,j,C)
+
+UpdateAccessList(log,i,j,C):
+while log[i].time <= Now():
+    C[log[i].IP] <- C[log[i].IP] + 1
+    i <- i + 1
+while log[j].time <= Now() - 3600:
+    C[log[j].IP] <- C[log[j].IP] - 1
+    j <- j + 1
+
+AccessedLastHour(IP,C)
+return C[IP] > 0
+
+But, how to implement the mapping C?

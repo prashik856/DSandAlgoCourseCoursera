@@ -1,0 +1,43 @@
+Direct Addressing:
+> Need a data structure for C
+> There are 2^32 different IP(v4) addresses.
+> Convert IP to 32 bit integer
+> Create an integer array A of size 2^32
+> Use A[int(IP)] as C[IP]
+
+How to convert IP address to integers:
+int(IP):
+An IPv4 address (dotted-decimal notation).
+We can convert each value between dots into binary format.
+Since IP only has 3 digits, and max value is 255, we need Eight bits (1byte) to store this value.
+We have, 4 such values, so in total we need 8*4 = 32 bits = 4 bytes of memory.
+
+e.g. int(0.0.0.1) = 1
+int(172.16.254.1) = 2886794753
+int(69.171.230.68)
+
+int(IP)
+return IP[1]*2^24 + IP[2]*2^16 + IP[3]*2^8 + IP[4]
+
+This gives up 1 to 1 correspondence between IP addesses and int value.
+
+UpdateAccessList(log,i,j,A):
+while log[i].time <= Now():
+    A[int(log[i].IP)] <- A[int(log[i].IP)] + 1
+    i <- i + 1
+while log[j].time <= Now() - 3600:
+    A[ing(log[j].IP)] <- A[int(log[j].IP)] - 1
+    j <- j + 1
+
+AccessedLastHour(IP):
+return A[int(IP)] > 0
+
+Asymtotics:
+> UpdateAccessList is O(1) per log line
+> AccessedLastHour is O(1)
+> But need 2^32 memory evern for few IPs
+> IPv6: 2^128 won't fit in memory
+> In general: O(N) memory, N=|S|. S is Universe of our data source.
+i.e. the maximum value which can be required by the data source at some point
+of time.
+> So, our above method only works when our universe is fairly small.

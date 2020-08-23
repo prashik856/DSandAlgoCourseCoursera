@@ -1,0 +1,21 @@
+Hash Tables:
+
+Applications of Hashing.
+
+1. Programming Languages:
+e.g. dict in python
+    HashMap in Java
+    for, if, while, int : Identifiers for the programming language.
+    Hash tables is used fot this identification
+
+2. File Systems
+
+3. Password Verification
+Special Cryptographic Algorithms are used for storing passwords.
+Such that nobody can create the string which is actually created by the 
+hashvalue of your password.
+
+
+4. Storage Optimization
+e.g. Dropbox, Google Drive, etc
+It uses huge amount of space to save user files.

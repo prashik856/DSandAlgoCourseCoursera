@@ -1,0 +1,119 @@
+Disjoint Sets: Efficient Implementations:
+
+> Represent each set as a rooted tree.
+> ID of a set is the root of the tree
+> Use arary parent[1...n]: parent[i] is the parent of i, or i if it is the root.
+
+Example
+5       6 -> 8          2 -> 4
+          -> 1          3 ->
+                  7 ->  9 ->
+
+Here, the parent array will be
+       1  2  3  4  5  6  7  8  9
+parent[6  4  4  4  5  6  9  6  4]
+
+MadeSet(i):
+// Tree whose only element is i, and it's root is i
+parent[i] <- i
+
+Runnint time: O(1)
+
+Find(i)
+//We need to reach the root of the tree
+while i != parent[i]
+    i <- parent[i]
+return i
+
+Running time: O(tree height)
+
+How to merge two trees?
+> Hang one of the trees under the root of the other one.
+> But, which one to hand?
+> A shorter one, since we would like to keep the trees shallow! 
+[Height influences the running time of our Forest]
+
+> When merging two trees, we hand a shorter one under the root of a taller one.
+
+> To quickly find a height of a tree, we will keep the height of each subtree 
+in an arry rank[1....n]: rank[i] is the height of the subtree whose root is i.
+
+> Hanging a shorter tree under a taller one is called a "Union By Rank Heuristic"
+
+
+To keep the rank, we need to change the code as follows:
+
+MakeSet(i):
+parent[i] <- i
+rank[i] <- 0
+
+Find(i):
+while i!= parent[i]:
+    i <- parent[i]
+return i
+
+Union(i,j):
+i_id <- Find(i)
+j_id <- Find(j)
+if i_id = j_id:
+    return
+if rank[i_id] > rank[j_id]:
+    parent[j_id] <- i_id
+else:
+    parent[i_id] <- j_id
+    if rank[i_id] = rank[j_id]:
+        rank[j_id] <- rank[j_id] + 1
+
+Example:
+Query:              1   2   3   4   5   6
+
+       1 2 3 4 5 6
+parent[1 2 3 4 5 6]
+rank  [0 0 0 0 0 0]
+
+Union(2,4)
+       1 2 3 4 5 6
+parent[1 4 3 4 5 6]
+rank  [0 0 0 1 0 0]
+
+Union(5,2)
+       1 2 3 4 5 6
+parent[1 4 3 4 4 6]
+rank  [0 0 0 1 0 0] //This doesn't change any rank
+
+Union(3,1)
+       1 2 3 4 5 6
+parent[1 4 1 4 4 6]
+rank  [1 0 0 1 0 0]
+
+Union(2,3)
+       1 2 3 4 5 6
+parent[1 4 1 1 4 6]
+rank  [2 0 0 1 0 0]
+
+Union(2,6)
+       1 2 3 4 5 6
+parent[1 4 1 1 4 1]
+rank  [2 0 0 1 0 0]
+
+>Important property: For any node i, rank[i] is equal to the height of the tree
+rooted at i.
+
+
+Lemma:
+the height of any tree in the foret is at most log(n)/log(2)
+
+Follows from the following lemma:
+Any tree of height k in the forest has at least 2^k nodes.
+
+Proof:
+Induction on k:
+    - Base: Initially, a tree has height 0, and one node: 2^0=1.
+    - Step: a tree of height k results from merging two trees of height k-1.
+    By induction hypothesis, each of two trees has at least 2^(k-1) nodes, hence
+    the resulting tree contains at least 2^k nodes.
+
+
+Summary:
+The union by rank heuristic guarantees that Union and Find work in time O(nlog(n))
+

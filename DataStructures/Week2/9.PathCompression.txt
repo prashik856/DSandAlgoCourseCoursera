@@ -1,0 +1,109 @@
+Path Compression: Intuition
+
+Considering a toy example:
+If we have a tree with some 5 height, and we want to get the root of the
+leaf. To do so, we traverse from leaf to the root!.
+In doing so, we actually found out the values of parents of all the nodes which
+were in between leaf and the root.
+Let's not lose this useful info.
+
+Now, what we can do is, we can attach all these parents directly to root!
+This will save our time in the future.
+
+The resulting heuristic is called "Path Compression".
+
+
+Find(i):
+if i!=parent[i]:
+    parent[i] <- Find(parent[i])
+return parent[i]
+
+Definition:
+The iterated logarithm of n, log* n, is the number of times the logarithm 
+function needs to be applied to n before the result is less or equal to 1.
+
+Example:
+n                           log* n
+n=1                         0
+n=2                         1
+n={3,4}                     2
+n={5,6,...,16}              3
+n={17,....,65536}           4
+n={65537,.....,2^(65536)}   5
+
+So, the max value of log* n can be 5. The last value, 2^(65536) is a very huge
+number. For practical values of n.
+
+Lemma:
+Assume that initially the data structure is empty. We make a sequence of m operations
+including n calls to MakeSet. Then total running time is O(m* (log*n))
+
+In other words:
+The amortized time of a single operation is O(log*n).
+which is nearly constant!
+For practical values of n, log*n <= 5
+
+
+
+Goal:
+Prove that when both union by rank heuristic and path compression heuristic are
+used, the average running tiem of each operation is nearly constant.
+
+Height <= Rank
+When using Path compression, rank[i] is no longer equal to the height of 
+the subtree rooted at i.
+> Still, the height of the subtree rooted at i is at most rank[i]
+> And it is still true that a root node of rank k has at least 2^k nodes
+in its subtree: a root node is not affected by path compression.
+
+Important Properties:
+> There are at most n/2^k nodes of rank k.
+> For any node i,
+rank[i] < rank[parent[i]]
+> Once an internal node, always an internal node.
+
+
+T(all calls to Find) = 
+#(i -> j) = 
+#(i -> j:j is a root) + 
+#(i -> j:log*(rank[i]) < log*(rank[j])) + 
+#(i -> j:log*(rank[i]) = log*(rank[j]))
+
+
+
+Claim:
+#(i -> j: j is a root) <= O(m)
+Proof:
+There are at most m calls to Find().
+
+Claim:
+#(i -> j: log*(rank[i]) < log*(rank[j])) <= O(mlog*n)
+Proof:
+Ther are at most log*n different values of log*(rank)
+
+Claim:
+#(i -> j: log*(rank[i]) = log*(rank[j])) <= O(nlog*n)
+Proof:
+assume rank[i] = {k+1,...,2^k}
+The number of nodes with rank lying in this inteval is at most
+n/2^(k+1) + n/2^(k+2) + ... <= n/2^k
+> After a call to Find(i), the node i is adopted by a new parent 
+of strictly larger rank.
+> After at most 2^k calls to Find(i), the parent of i will have
+rank from a different interval
+> There are at most n/2^k nodes with rank in {k+1, ...., 2^k}
+> Each of them contributes at most 2^k
+> The contribution of all the nodes with nrank from this interval
+is at most O(n).
+> The number of diffrent intervals is log*n
+> Thus, the contribution of all nodes is O(nlog*n)
+
+
+Summary:
+> Represent each set as a rooted tree
+> Use the root of the set as its ID
+> Union by rank heuristic: hang a shorter tree under the root of a taller one
+> Path compression heuristic: When finding the root of a tree for a particular
+node, reattch each node from the traversed path to the root.
+> Amortized running time: O(log*n)
+(constanct for partical values of n)
