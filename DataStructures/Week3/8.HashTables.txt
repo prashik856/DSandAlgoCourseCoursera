@@ -1,0 +1,64 @@
+HASH TABLES
+
+Set
+Definition:
+Set is a data structure with methods Add(O), Remove(O), Find(O)
+
+
+Example:
+IPs accessed durint last hour
+Students on Campus
+Keywords in a programming language
+
+
+Implementing Set
+Two ways to implement a set using chaining:
+-> Set is equivalent to map from S to V = {true, false}
+-> Store just Objects O instead of pairs (O,v) in chains
+
+
+h: S -> {0,1,...m-1}
+O,O' belongs to S
+A <- array of m lists (chains) of objects O
+Find(O):
+L <- A[h(O)]
+for O' in L:
+    if O'==O:
+        return true
+return false
+
+
+Add(O):
+L <- A[h(O)]
+for O' in L:
+    if O' == O:
+        return
+L.Append(O)
+
+Remove(O):
+if not Find(O):
+    return
+L <- A[h(O)]
+L.Erase(O)
+
+
+Hash Table:
+Definition:
+An implementation of a set or a map using hashing is called a hash table.
+
+
+Programming Languages:
+Set:
+    unordered_set in C++
+    HashSet in Java
+    set in Python
+Map:
+    unordered_map in C++
+    HashMap in Java
+    dict in Python
+
+Conclusion:
+-> chaining is a technique to implement a hash table
+-> memory consumption is O(n+m)
+-> Operations work in time O(c+1)
+-> how to make both m and c small?

@@ -1,0 +1,31 @@
+CHAINING SCHEME:
+
+Let us define a Map
+Store mapping from objects to other objects:
+Filename -> file on disk
+Student ID -> student name
+Contact name -> contact phone number
+
+
+Definition
+map from S to V is a data structure with methods HasKey(O), Get(O) and Set(O,V), where O belongs to S, and v belongs to V.
+
+
+Chaining:
+let m be 8
+Let us have an array of list
+let h(173.194.71.102)=4
+let h(69.171.230.68)=1
+h(173.194.71.102)=4 => Already a key => Instead of appending, we increase the value of the counter(first get and then set).
+h(91.210.105.134)=4 : Collision: We add this new ip address to the end of this list.
+Now, at some point, some of the chains may become longer than others.
+But anyway, we can see the general structure.
+0
+1   -> 69.171.230.68|1
+2
+3
+4   ->  173.194.71.102|2 -> 91.210.105.134|1
+5
+6
+7
+

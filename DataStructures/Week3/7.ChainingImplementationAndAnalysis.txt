@@ -1,0 +1,48 @@
+CHAINING IMPLEMENTATION AND ANALYSIS
+
+Implementation:
+h: S -> {0,1,2,....,m-1}
+O,O' belongs to S
+v,v' belongs to V
+A <- array of m lists (chains) of pairs (O,v)
+
+HasKey(O):
+L <- A[h(O)]
+for (O',v') in L:
+    if O' == O:
+        return true
+return false
+
+
+Get(O):
+L <- A[h(O)]
+for (O', v') in L:
+    if O'==O:
+        return v'
+return n/a
+
+Set(O,v):
+L <- A[h(O)]
+for p in L:
+    if p.O == O:
+        p.v <- v
+        return
+L.Append(O,v)
+
+
+Lemma:
+Let c be the length of the logest chain in A.
+Then the running time of HasKey, Get, Set is O(c+1)
+
+Proof:
+if L=A[h(O)], len(L) = c, O does not belong to L, ned to scan all c items
+if c = 0, we still need O(1) time.
+
+Lemma:
+Let n be the number of different keys O currently in the map and m be the cardinality of the hash function.
+Then the memory consumption for chaining is O(n+m)
+
+Proof:
+O(n) to store n pairs (O,v)
+O(m) to store array A of size m
+

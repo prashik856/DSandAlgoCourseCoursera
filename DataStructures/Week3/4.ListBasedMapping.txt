@@ -1,0 +1,25 @@
+LIST-BASED MAPPING:
+-> Direct addressing requires too much memory
+-> Let's just store active IPs
+-> Store them in a list soretd by time of access
+
+UpdateAccessList(log,i,L):
+while log[i].time <= Now():
+    L.append(log[i]) // Storing ip address and time of access
+    i <- i + 1
+while L.Top().time <= Now() - 3600:
+    L.Pop()
+
+AccessedHastHour(IP,L)
+return L.FindByIP(IP) != Null
+
+AccessCountLastHour(IP, L)
+return L.CountIP(IP)
+
+Asymptotics:
+n is number of active IPs
+Memory usage is O(n)
+L.Append, L.Top, L.Pop are O(1)
+UpdateAccessList is O(1) per log line
+L.FindByIP and L.CountIP are O(n)
+AccessedLastHour and AccessCountLastHour are O(n)
