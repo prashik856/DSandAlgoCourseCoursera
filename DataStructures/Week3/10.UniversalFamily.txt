@@ -1,0 +1,70 @@
+Universal Family
+
+Idea:
+Remember QuickSort?
+Choosing random pivot helped.
+We want to use the same randomization!
+Define a family(set) of hash functions
+Choose random function from the family.
+
+
+Definition:
+Let U be the universe - the set of all possible keys.
+A set of hash functions
+H = {h: U -> {0, 1, 2, ..., m-1}}
+is called a universal family if for any two keys x,y belongs to Y, x!=y,
+the probablity of collision 
+Pr[h(x)=h(y)] <= 1/m
+
+Now, this probability Pr[h(x)=h(y)] <= 1/m, means that a collision h(x)=h(y) on 
+selected keys x and y, x!=y happens for no more than 1/m of all hash functions h belongs to H.
+
+How Randomoization Works:
+h(x) = random({0,1,2,....,m-1})
+gives probability of collision exactly 1/m.
+: But it is not deterministic: can't use it.
+All hash functions in H are deterministic.
+Select a random function h from H, Fixed h is used throughout the algorithm.
+
+Running Time.
+Lemma: 
+If h is chosen randomly from a universal family, the average length of the largest chain c
+is O(1+alpha) where alpha=n/m is the load factor of the hash table
+
+Corollary:
+If h is the universal family, operations with hash table run on average in time O(1+alpha)
+
+
+Choosing Hash Table Size:
+Control amount of memory used with m.
+Ideally, load factor 0.5 < alpha < 1.
+Use O(m) = O(n/alpha) = O(n) memory to store n keys
+: Operations run in time:
+O(1+ alpha) = O(1) on average.
+
+
+What if number of keys n is unknown in advance?
+Start with very big has table.
+We will waste a lot of memory.
+Copy the idea of dynamic arrays!
+Resize the hash table when alpha becomes too large.
+Choose new hash function and rehash all the objects
+
+Keep load factor below 0.9:
+We can select any number here(between 0.5 and 1)
+Rehash(T):
+loadFactor <- T.umberOfKeys/T.size
+if loadFactor > 0.9:
+    Create Tnew of size 2 * T.size
+    Choose hnew with cardinality Tnew.size
+    For each Object O in T:
+        Insert O in Tnew using hnew
+    T <- Tnew
+    h <- hnew
+
+
+Rehash Runnint Time:
+We should call Rehash after each operation with the hash table
+Similarly to dynamic arrays, single rehashing takes O(n) time, but amortized
+running time of each operation with hash tables is still O(1) on average, because rehashing will be rare.
+
