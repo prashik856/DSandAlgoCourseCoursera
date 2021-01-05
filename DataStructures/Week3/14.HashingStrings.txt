@@ -1,0 +1,73 @@
+Hashing Strings
+We want to solve the reverse problem.
+
+Lookup Phone numbers by name:
+-> Now we need to implement the map from names to phone numbers
+Can also use chaining
+Need a hash function defined on names
+Hash arbitrary strings of characters
+We will learn how string hashing is implemented in Java.
+
+
+String Length Notation.
+Definition:
+Denote by |S| the length of string S.
+
+Examples:
+|"a"| = 1
+|"ab"| = 2
+|"abcde"| = 3
+
+
+Hash strings
+Given a string S, compute its hash value.
+S=S[0]S[1]....S[|S|-1], where S[i] : Individual Characters
+We should use all characters in hash functions
+Otherwise there will be many collisions:
+For example, if S[0] is not used.
+h("aa") = h("ba") = ... = h("za")
+
+
+Preperation:
+Convert each character S[i] to integer code.
+ASCII code, Unicode, etc
+Choose big prime number p.
+
+
+Polynomial Hashing
+Family of hash functions
+Pp = {h(p,x)(S) = sum(i=0 to |S| -1) S[i]*(x^i) mod p}
+with a fixed prime p and all 1 <=x<=p-1 is called polynomial.
+
+
+PolyHash(S,p,x):
+hash = 0
+for i from |S| - 1 down to 0:
+    hash = (hash*x + S[i])modp
+return hash
+
+Example:
+len(S) = 3
+hash = 0
+hash = S[2] mod p
+hash = S[1] + S[2]*x mod p
+hash = S[0] + S[1]*x + S[2]*x^2 mod p
+
+Whatever formula we have, the for loop is doing exactly the same.
+
+
+Java Implementation:
+the method hashCode of the built-in Java class String is very similar to our PolyHash,
+it just uses x = 31 and for technical reasons avoids the (mod p) operator.
+
+You now know how a function that is used trillions of times a day in many thousands of programs is implemented.
+
+
+
+Lemma:
+For any two different strings s1 and s2 of length at most L + 1, if we choose h from Pp at random (by selecting a random
+x = [1,p-1]) the probablity of collision Pr[h(s1)=h(s2)] is at most L/p.
+
+Proof idea:
+This follows from the fact that the equation a0 + a1x + a2x^2 + .... + aLx^L = 0(mod p) for prime p
+has at most L different solutions x.

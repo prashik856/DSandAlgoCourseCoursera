@@ -1,0 +1,85 @@
+Proof:
+Universal Family for Integers
+
+Math Used:
+Properties of prime numbers
+Properties of modulo arithmetics
+One to one correspondence
+Upper integral par cealing(a) properties
+Probabilities
+
+
+Theorem:
+Set of functions
+Hp = {h(p)(a,b)(x) = ((ax + b) mod p) mod m)} with parameters
+a,b:1<=a<=p-1, 0<=b<=p-1
+and prime p is a universal family for U={0,1,...,p-1}
+
+
+Lemma:
+For a fixed hash function h = h(p)(a,b) from Hp and keys x,y belongs to U, x!=y, the values
+r = (ax + b) mod p
+and s = (ay + b) mod p
+are different
+
+Proof by Contradiction:
+r = s => (ax + b) === (ay + b) mod p => 
+a(x-y) === 0 mod p => p divides a(x-y)
+Since P is a prime number, p either divides a or either p divides x-y
+1 <= a <= p-1 => p divides (x-y)
+p cannot divide a.
+but, 0<=x,y<p, p divides (x-y) => x = y
+Only value for x-y possible is 0.
+But this contradicts that x != y.
+
+Corollary
+There are no collisions for
+h(x) = (ax + b) mod p, before taking the value mod m.
+
+
+Lemma:
+For fixed keys x!=y, there is one to one correspondence between pairs.
+(a,b), 1<=a<=p-1, 0<=b<=p-1 and 
+(r,s), 0<=r,s<=p-1, r!=s
+
+Proof:
+Different (a,b) generate different (r,s)
+this is because
+a = ((r-s)((x-y)^(-1) mod p)mod p),
+b = (r-ax) mod p
+r = r', s = s' => a = a', b = b'.
+
+Now, we know
+Different (a,b) generates different (r,s)
+p(p-1) total pairs (a,b)
+p(p-1) total pairs (r,s)
+Thus one to one correspondence
+
+
+Corollary:
+if x and y, x!=y, are some keys, any h belongs to Hp is chosen at random with equal probablitly
+1/p(p-1), then each pairs of values
+(r,s) = ((ax + b) mod p, (ay + b) mod p)
+happen with equal probability 1/p(p-1)
+
+There is one to one correspondence between (a,b) and (r,s)
+Probability of any pair (a,b) is 1/p(p-1)
+So probability of any (r,s) is 1/p(p-1)
+
+Proof of the Theorem:
+Pr[h(x)=h(y)] = Pr[r mod m = s mod m]
+Each pair (r,s) has probabllity 1/p(p-1)
+For each r=[0,p-1], there are at most ceil(p/m)-1 such s that s != r, and r mod m = s mod m.
+0,1,...m,...,2m,....(ceil(p/m)-1)m,....
+
+Now, 
+Pr[r mod m = s mod m] <= sum(r=0 to p-1) (ceil(p/m)-1)/p(p-1) 
+= (ceil(p/m)-1)/p-1 <= ((p+m-1)/m -1)/(p-1) = (p-1)/m(p-1) = 1/m
+So, Pr[h(x)=h(y)] <= 1/m
+
+
+Conclusion:
+Proven universal family for integers
+Proven 1 + alpha bound for expected chain length
+proven O(1) amortized expected running time of hash table operations
+

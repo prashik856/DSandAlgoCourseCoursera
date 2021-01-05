@@ -1,0 +1,58 @@
+Rabin-Karp's Algorithm.
+
+Need to compare P with all substrings S of T of length |P|
+Idea: Use hashing to quickly compare P with substrins of T
+
+Some hash function h,
+If h(P) != h(S), then definitely P != S,
+if h(P) = h(S), call AreEqual(P,S)
+Use polynomial hash family Pp with prime p.
+
+If P!=S, the probability Pr[h(P) = h(S)] is at most |P|/p for polynomial hashing.
+
+
+RabinKarp(T,P):
+p = big prime
+x = random(1,p-1)
+result = empty list
+pHash = PolyHash(P,p,x)
+for i from 0 to |T| - |P|:
+    tHash = PolyHash(T[i..i + |P| - 1], p , x)
+    if pHash != tHash:
+        continue
+    if AreEqual(T[i..i + |P| -1], P):
+        result.Append(i)
+return result
+
+// More or less same as naive algo
+
+
+False Alarms:
+"False alarm" is the event when P is compared with T[i..i + |P| -1], but P != T[i..i + |P| -1].
+
+The probability of "false alarm" is at most |P|/p.
+
+On average, the total number of "false alarms" will be (T - P + 1)*P/p, which can be made small by selecting p >> TP
+
+
+Running time without AreEqual
+h(P) is computed in O(P)
+h(T[i..i + P -1]) is computed in O(P), T - P + 1 times
+: O(P) + O((T - P + 1)*P) = O(TP)
+
+
+AreEqual Running Time:
+AreEqual is computed in O(P)
+AreEqual is called only when, h(P) = h(T[i..i + P -1]), meaning that either an occurrence of P is found
+or a "false alarm" happened.
+By selecting p >> TP, we can make the number of "false alarms" negligible.
+
+
+Total Running Time:
+If P is found q times in T, then total time spent in AreEqual is
+O((q + (T - P +1)*P/p)*P) = O(qP) for p >> TP
+
+
+Total Running time is : O(TP) + O(qP) = O(TP) as q <= T
+Same as naive algorithm, but can be improved.
+

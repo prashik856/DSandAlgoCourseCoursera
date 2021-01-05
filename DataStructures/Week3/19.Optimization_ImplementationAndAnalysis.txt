@@ -1,0 +1,30 @@
+new PseudoCode:
+
+p = big prime
+x = random(1,p-1)
+pHash = PolyHash(P,p,x)
+H = Precomputehashes(T,P,p,x)
+for i from 0 to T - P:
+    if pHash != H[i]:
+        continue
+    if AreEqual(T[i..i + P -1], P):
+        result.append(i)
+return result
+
+
+Improved Running Time:
+h(P) is computed in O(P)
+PrecomputeHashes runs in O(T + P)
+Total time spend in AreEqual is O(qP) on average where q is te number of occurences of P in T
+Average running time : O(T + (q+1)P)
+Much much better
+Usually q is very small, so this is much less than O(TP)
+
+
+
+Conclusion:
+hash tables are useful for storing Sets and Maps
+Possible to search and modify hash tables in O(1) on average.
+Must use good hash families and randomization
+hashes are also useful while working with strings and texts
+There are many more applications in distributed systems and data science

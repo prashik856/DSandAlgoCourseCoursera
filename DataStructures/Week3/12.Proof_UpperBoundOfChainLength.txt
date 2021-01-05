@@ -1,0 +1,77 @@
+Chain Length for Universal Family:
+
+
+Math Used:
+Probabilities
+Expectation and Linearity
+
+
+Reminder: Universal Family
+Definition:
+Let U be the universe - the set of all possible keys. 
+A set of hash functions H : U -> {0, 1, ...., m - 1} with cardinality m is called a universal family
+if for any two keys x,y belongs to U, x != y, the probablity
+Pr[h(x)=h(y)] <= 1/m
+
+The probablity:
+Pr[h(x)=h(y)]
+is taken over the random choice of a hash function h from the set H.
+
+Equivalent Definition:
+for any two keys x, y belongs to U, x!=y at most 1/m of all hash functions h belongs to H,
+produce a collision h(x)=h(y)
+
+
+Definition:
+Let T be a hash table of size m which stores n keys. alpha = n/m is called the load factor of this hash table.
+
+Linearity of Expectation:
+Lemma:
+For any finite list of random variables
+X1, X2, ..., Xk and Y = X1 + X2 + ... + Xk,
+E(Y) = E(X1) + E(X2) + ... + E(Xk)
+
+Theorem:
+Suppose h is selected at random from a universal family H and is used to has n keys into hash table
+T of size m giving load factor alpha. Then for any key k the expected length E[n(h(k))] of the chain in T 
+to which k is hashed is at most 1 + alpha
+
+Proof:
+Fix key k,
+for any other key l, define a random variable
+
+X(k,l) = {
+    1, if h(k) = h(l)
+    0, otherwise
+}
+
+E(X(k,l)) = 0 + 1.Pr[h(k)=h(l)] <= 1/m
+
+Proof:
+Number of collisoins 
+Y(k) = sum(l!=k, l belongs to T) X(k,l)
+
+Chain length n(h(k)) = 1 + Y(k)
+
+so, E(Y(k)) = sum(l!=k, l belongs to T) E(X(k,l)) =< sum(l!=k, l belongs to T) 1/m <= n/m <=alpha
+So 
+, 
+E(n(h(k))) = 1 + E(Y(k)) <= 1 + alpha
+
+
+Corollary:
+Using universal hashing and chaining scheme in a hash table of size m, it takes expected time O(n) to 
+perform n operations of insertion, deletion, and search if there are O(m) insertion operations.
+Thus, operations with the hash table run in amortized O(1) time on average.
+
+
+Corollary Proof:
+O(m) insertions, so
+n = O(m), alpha = O(1)
+1 + alpha  = O(1)
+Expected running time of each operation is O(1)
+So, expected running time of n operations is O(n)
+
+Conclusion:
+Proven upper bound 1 + alpha on the expected chain length.
+Proven O(1) amortized expected running time for operations with a hash table using universal family and chaining.

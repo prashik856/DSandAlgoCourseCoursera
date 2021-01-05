@@ -1,0 +1,99 @@
+Instant Uploads and Storage Optimization in Dropbox
+
+Online Storage Systems (Services)
+
+Have you ever wondered, how large files are sometimes uploaded instantly to dropbox?
+
+Want to know how dropbox, google drive and yandex disk pave petabytes of storage using the ideas from this module?
+
+Interested in distributed storage?
+
+
+They use Storage Optimization.
+
+E.g. users upload same file:
+Cat.avi
+Another user also uploads the same file
+Kitty.avi
+Mew.avi
+Many people upload the same thing.
+So, instead of using different physical stored files, have links to these stored files.
+We can see, we just saved 66% of our space.
+
+
+How to do this?
+New File Upload.
+need to determine whether there is already the same file in the system.
+
+
+Naive Comparison:
+Upload a new file
+Go through all stored files
+Compare each stored file with new file byte-by-byte
+If there's the same file, store a link to it instead of the new a file
+
+
+Drawbacks of naive Comparison
+Have to upload the file first anyway
+O(NS) to compute file of size S with N other files
+N grows, so total running time of uploads grows as O(N^2)
+
+
+Idea: Compare hashes
+As in Rabin-karp's algorithm, compare hashes of files first.
+If hashes are different, files are different.
+If there's a file with the same has, upload and compare directly
+
+
+Drawbacks of hash Comparison
+There can be collisions
+Still have to upload the file to compare directly
+Still have to compare will already stored N files
+
+Idea: Several hashes
+h1(file) = 129876
+h2(file) = 198764
+h3(file) = 123087
+
+Idea: Several Hashes
+Choose several different hash functions
+polynomial hashing with different p or x
+Compute all hashes for each file
+If there's a file with all the same hashes, files are probably equal.
+Don't upload the new file in this case!
+Compute hashes locally before upload.
+
+
+
+Problem: Collisions
+Collisions can happen even for several hashes simultaneously
+There are algorithms to find collisions for known hash functions
+however, even for one hash function collisions are extremely rare.
+using 3 or 5 hashes, we probably won't see a collision in a lifetime.
+
+
+Problem: O(N) comparison
+Still have to compare with N already stored files
+
+Idea: Precompute hashes
+When a file is submitted for upload, hashes are computed anyway.
+Store file addresses in a hash table.
+Also store all the hashes there
+Only need the hashes to search in the table.
+
+
+Final Solution:
+Choose 3-5 hash functions
+Store file addresses and hashes in a hash table
+Compute the hashes of new file locally before upload
+Search new file in the hash table
+Search is successful if all the hashes coincide.
+Don't upload the file, store a link to the existing one.
+
+
+More Problems:
+Billions of files are uploaded daily.
+Trillions stored already
+Too big for a simple hash table
+Millions of users upload simulotaneously
+Too many requests for single table

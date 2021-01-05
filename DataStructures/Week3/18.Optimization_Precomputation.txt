@@ -1,0 +1,67 @@
+Improving Running Time
+
+Looking closer in our polynomial function.
+
+h(S) = sum(i=0 to S-1) S[i]*x^i mod p
+
+To compute polynomial of substring, we have
+
+h(T[i..i + P -1]) = sum(j=i to i+P-1) T[j]*x^(j-i) mod p
+
+
+Idea:
+polynomial hashes of two consecutive substrings of T are very similar
+
+For each i denote h(T[i..i + P -1]) by H[i]
+
+
+
+Consecutive substrings
+T =  a b c b d
+T' = 0 1 2 1 3
+P = 3
+Assume length of pattern is 3.
+
+h("cbd") = 2 + x + 3x^2
+Assume previous substring value
+h("bcb") = 1 + 2x + x^2
+
+H[2] = h("cbd") = 2 + x + 3x^2
+H[1] = h("bcb") = 1 + 2x + x^2 
+                = 1 + x(2 + x) 
+                = 1 + x(2 + x + 3x^2) - 3x^3
+                = xH[2] + 1 - 3x^3
+
+
+In general:
+Recurrences of Hashes
+H[i + 1] = sum(j=i+1 to i + P) T[j]*x^(j - i - 1) mod p
+H[i] = sum(j=i to i + P -1) T[j]*x^(j-i) mod p
+    = sum(j=i+1 to i + P) T[j]*x^(j-i) + T[i] - T[i + P]*x^P mod p
+    = x * sum(j=i+1 to i + P) T[j]*x^(j-i-1) + (T[i] - T[i + P]*x^P) mod p
+
+so, 
+H[i] = xH[i+1] + (T[i] - T[i + P]*x^P)mod p
+
+
+PrecomputeHashes(T,|P|,p,x):
+H = array of length T + P - 1,
+// Last substring
+S = T[T-P..T-1]
+H[T-P] = PolyHash(S,p,x)
+y = 1
+for i from 1 to P:
+    y = (y*x) mod p
+for i from T - P - 1 down to 0:
+    H[i] = (xH[i + 1] + T[i] - yT[i + P])mod p
+return H
+
+Running time:
+O(P + P + T - P) = O(T + P)
+
+Precomputing H:
+PolyHash is called once - O(P)
+First for loop runs in O(P)
+Second for loop runs in O(T - P)
+Total precomputation time O(T + P)
+

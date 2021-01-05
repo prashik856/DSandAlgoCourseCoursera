@@ -1,0 +1,58 @@
+Distributed Hash Tables
+
+Big Data:
+need to store trillions or more objects
+File addresses, user profiles, emails
+Need fast search/access
+Hash tables provide O(1) search/access on average, but for n=10^12, O(n+m) memory becomes too big.
+
+Solution: Distributed hash tables
+
+
+Distributed hash tables
+Get 1000 computers.
+Create a hash table on each of them.
+Determine which computer "owns" object O: number h(O) mod 1000
+Send request to that computer, search/modify in the local hash table.
+
+
+Problems:
+Computers sometimes break
+Computer breaks once in 2 years => Once of 1000 computers break everyday
+Store several copies of the data
+Need to relocate the data from the broken computer
+Service grows, and new computers are added to the cluster.
+h(O) mod 1000 no longer works
+
+
+Consistent Hashing:
+Choose hash function h with cardinality m and put numbers from 0 to m-1 on a circle clockwise
+Each object O is then mapped to a point on the circle with number h(O)
+Map Computer IDs to the same cirsle:
+compID = point number h(compID)
+Each object is stored on the "closest" computer
+Each computer stores all objects falling on some arc of the circle.
+
+
+Computers In and Out
+When a computer goes off, "neighbors" take its data.
+When a new computer is added, it takes data from the "neighbors"
+
+
+Overlay Network:
+Need to copy/relocate data
+How will a node know where to send the data?
+Each node will know a few neighbors
+For each key, each node will either store it or know some node "closer" to this key
+
+E.g. each node knows neighbors, +-1, +-2, +-4, +-8, ..., - O(log n) nodesm and
+can get/send any key in O(log n)
+
+
+
+Conclusion:
+: Distributed hash Tables (DHT) store Big Data on many computers
+Consistent hashing(CH) is one way to determine which computer stores which data
+CH uses mapping of keys and computer IDs on a circle
+Each computer stores a range of keys
+Overlay Network is used to route the data to/from the right computer

@@ -1,0 +1,37 @@
+Hashing Strings Cardinality Fix
+
+Cardinality Fixz:
+For use in a hash table of size m, we need a hash function of cardinality m.
+
+First apply random h from Pp and then hash the resulting value again using integer hashing.
+Denote the resulting fuction by hm.
+
+
+Lemma:
+For any tow different strings s1 and s2 of length at most L + 1, and cardinality m, the probability
+of collision Pr[hm(s1) = hm(s2)] is at most 1/m + L/p
+
+
+Polynomial Hashing:
+Corollary
+If p>mL, for any two different strings s1 and s2 of length at most L + 1, the probablity of collision
+Pr[hm(s1) = hm(s2)] is O(1/m)
+
+Proof:
+1/m + L/p < 1/m + L/mL = 1/m + 1/m = 2/m = O(1/m)
+
+
+Running Time:
+For big enough p, again have
+c = O(1 + alpha)
+
+Computing PolyHash(S) runs in Time O(|S|)
+If lengths of the names in the phone book are bounded by constant L, computing h(S) takes O(L) = O(1) time.
+
+
+Conclusion:
+You learned how to hash integers and strings
+Phone book can be implemented as two hash tables
+Mapping phone numbers to names and back
+Search and modification run on average in O(1)
+
