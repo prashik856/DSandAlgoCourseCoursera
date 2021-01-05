@@ -1,0 +1,43 @@
+Search Trees
+
+Learning Objectives:
+Describe how a bst data structure is constructed
+Determine whether a tree is properly sorted.
+
+
+
+Last time:
+Want a ds for local search
+None of the existing data structures work
+Sorted arrays can search but not update
+
+
+Binary Search:
+Search an array:
+
+
+Search Tree:
+Consider questions asked.
+The search tree is much easier to insert into.
+
+
+
+The search tree structure:
+
+Parts of the tree:
+Root node
+Left subtree smaller keys
+Right subtree bigger keys
+
+
+Tree Node Data Type:
+Key,
+Parent,
+left Child,
+Right Child
+
+
+Search Tree Property
+X's key is larger than the key of any descendent of its left child, and smaller than the key of any descendant of its
+right child.
+

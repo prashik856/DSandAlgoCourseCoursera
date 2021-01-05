@@ -1,0 +1,84 @@
+AVL Tree Implementation
+
+Learning Objectives:
+Implement AVL Trees
+Understand the cases required for rebalancing algorithms
+
+AVL Trees
+Need to ensure that children have nearly the same height.
+
+
+Problem:
+Updates tto the tree can destroy this property.
+We need to correct this.
+
+
+Errors:
+heights stat the same except on the insertion path.
+Only need to worry about this path.
+
+
+
+Insert:
+We need a new insertion algorithm that involves rebalancing the tree to maintain AVL property
+
+
+Idea:
+AVLInsert(k,R)
+Insert(k,R)
+N = Find(k,R)
+Rebalance(N)
+
+
+Rebalancing:
+If 
+|N.Left.Height - N.Right.Height| <= 1,
+Fine.
+
+Difficulty if heights differ by more
+Never more than 2.
+
+Code:
+Rebalance(N)
+P = N.Parent
+if N.Left.Height> N.Right.Height + 1:
+    RebalanceRight(N)
+    // Rebalance things rightwards
+if N.Right.height > N.left.height + 1:
+    RebalanceLeft(N)
+    // Rebalance things leftwards
+AdjustHeight(N)
+if P!=null:
+    Rebalance(P)
+
+
+AdjustHeight(N):
+N.height = 1 + max(N.left.height, n.right.height)
+
+
+Rebalancing:
+If left subtree too heavy, rotate right
+
+
+RebalanceRight(N)
+M = N.Left
+if M.Right.height > M.left.height:
+    rotateLeft(M)
+RotateRight(N)
+AdjustHeight on affected nodes
+
+
+Delete:
+Deletions can also change balance
+
+
+New Delete
+AVLDelete(N)
+Delete(N)
+M = parent of node replacing N
+Rebalance(M)
+
+
+
+AVL trees can implement all of the basic operations in O(log(n)) time per operation.
+

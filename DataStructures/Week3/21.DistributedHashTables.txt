@@ -56,3 +56,4 @@ Consistent hashing(CH) is one way to determine which computer stores which data
 CH uses mapping of keys and computer IDs on a circle
 Each computer stores a range of keys
 Overlay Network is used to route the data to/from the right computer
+

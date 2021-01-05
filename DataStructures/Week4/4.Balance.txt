@@ -1,0 +1,46 @@
+Learning Objectives:
+Think about the runtime of basic binary tree operations
+Understand the motivation behind binary search tree balance
+Implement a rotation
+
+
+Runtime:
+How long do bst operations take?
+
+find: Number of operations : O(Depth)
+
+So, runtime is actually the depth of the nodes
+Depth can be as bad as n.
+
+
+Balanced Trees?
+Depth can be much smaller as well by rearranging our tree.
+
+Want left and right subtrees to ave approximately the same size
+Soppose perfectly balanced.
+    Each subtress half the size of its parent.
+    After log(n)/log2 levels, subtree of size 1.
+    Operations run in O(log(n)) time.
+
+Problem:
+Insertions and deletions can destroy balance!
+
+
+Rotations?
+Rebalancing?
+Rearragne tree to maintain balance.
+
+how do we rearrange tree while maintaining order?
+
+
+Rotations:
+RotateRight(X):
+P = X.Parent
+Y = X.left
+B = Y.Right
+Y.Parent = P
+P.AppropriateChild = Y
+X.Parent = Y
+Y.Right = X
+B.Parent = X
+X.Left = B

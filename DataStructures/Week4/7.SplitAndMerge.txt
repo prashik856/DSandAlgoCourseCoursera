@@ -1,0 +1,112 @@
+Split and Merge
+
+Learning Objectives:
+Implement merging and splitting of AVL trees.
+Analyze the runtime of these operations
+
+
+New Operations:
+Another useful feature of bst is the ability to recombine them in interesting ways
+Merge: Combines two binary search trees into a single one.
+Split: Breaks one bst into two
+
+
+Merge:
+In general, to merge two sorted lists takes O(n) time. however, when they are separated it is faster.
+Input: Roots R1 and R2 of trees with all keys in R1's tree smaller thatn those in R2's
+Output: The root of a new tree with all the elements of both trees.
+
+
+Extra Root:
+Easy if we have an extra node to add as root
+
+
+Implementation
+MergeWithRoot(R1,R2,T)
+T.Left = R1
+T.Right = R2
+R1.parent = T
+R2.Parent = T
+return T
+
+Time O(1)
+
+
+Get Root:
+Get new root by removing largest element of left subtree
+
+Merge(R1,R2):
+T = Find(INF, R1)
+Delete(T)
+MergeWithRoot(R1,R2,T)
+return T
+
+Time O(h)
+
+
+Balance:
+Unfortunately, this merge does not preserve balance properties.
+
+
+Idea:
+Go down side of tree until merge with subtree of same height
+
+
+AVLTreeMergeWithRoot(R1,R2,T):
+if |R1.height - R2.height| <= 1:
+    MergeWithRoot(R1,R2,T)
+    T.height = max(R1.height, R2.height) + 1
+    return T
+else if R1.height > R2.height:
+    R' = AVLTreeMergeWithRoot(R1.Right, R2, T)
+    R1.Right = R'
+    R'.Parent = R1
+    Rebalance(R1)
+    return root
+else if R1.Height < R2.height:
+    ...
+    We do the same operation but on the opposite side.
+
+
+Analysis:
+Each step changes height difference by 1 or 2.
+Eventually within 1
+Time O(|R1.height - R2.height| + 1)
+
+
+
+Split:
+Break tree into two trees.
+
+Formal Definition:
+input: Root R of a tree, key x
+Output: Two trees, one with elements < x, one with elements > x.
+
+Idea:
+Search for x, merge subtrees
+
+
+Implementation:
+Split(R,x)
+if R = null:
+    return (null, null)
+if x < R.Key:
+    (R1, R2) = Split(R.Left, x)
+    R3 = MergeWithRoot(R2, R.Right, R)
+    return (R1, R3)
+if x > R.Key:
+    ...
+    Same thing in opposite side
+
+
+AVL Trees"
+using AVLMergeWithRoot maintains balance.
+Time = sum(i) O(|h(i) - h(i+1)| + 1) 
+O(hmax) = O(log(n))
+
+
+
+Summary:
+merge combines trees
+Split turns one tree into two
+Both can be implemented in O(long(n)) time for AVL trees

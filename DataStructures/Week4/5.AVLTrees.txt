@@ -1,0 +1,75 @@
+AVL Trees
+
+Learning Objectives:
+Understand what the height of a node is
+State the AVL properties
+Show that trees satisfying the AVL property have low depth.
+
+
+Basic Idea:
+Balance:
+Want to maintain balance
+Need a way to measure the balance
+
+
+Height:
+Definition
+The height of a node is the maximum depth of its subtree
+
+
+Recursive Definition:
+N.height equals
+1 if N is a leaf
+1 + max(N.Left.height, N.Right.Height) otherwise
+
+
+Field:
+Add height field to nodes
+
+
+Balance:
+height is a rough measure of subtree size
+Want size of subtree roughly the same.
+Force heights to be roughly the same
+
+
+AVL Property
+AVL trees maintain the following property:
+For all nodes N,
+|N.Left.Height - N.Right.Height| <= 1
+We claim that this ensure balance
+
+
+Analysis:
+Idea: Need to show that AVL property implies 
+Height = O(log(n))
+Alternatively, show that large height implies many nodes
+
+
+Theorem:
+Let N be a node of a binary tree satisfying the AVL property. Let h = N.Height. Then the
+subtree of N has size at least the Fibonacci Number Fh.
+
+Recall:
+Fn = {
+    0, n=0
+    1, n=1
+    F(n-1) + F(n-2), n>1
+}
+
+
+Proof:
+By induction on h
+if h=1, have one node
+Otherewise, have one subtree of height h-1, and another of height at least h-2.
+By inductive hypothesis, total number of nodes is at least F(h-1) + F(h-2) = F(h)
+
+
+Large Subtrees:
+So node of height h has subtree of size at least 2^(h/2).
+In other words, if n nodes in the tree, have height h <= 2log(n)/log(2) = O(log(n))
+
+
+Conclusion:
+If we can maintain the AVL Property, we can perform operations in O(log(n)) time.
+

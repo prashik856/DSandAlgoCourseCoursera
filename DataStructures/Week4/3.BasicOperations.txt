@@ -1,0 +1,102 @@
+Basic Operations:
+
+Learning Objectives:
+Implement basic operations on Binary Search Trees.
+Understand some of the difficulties with making updates
+
+1) Find
+Input: Key k, Root R
+Output: The node in the tree of R with key k
+
+Idea: 
+Find(6)
+
+Algorithm:
+Find(k,R)
+if R.key = k:
+    return R
+else if R.key > k:
+    return Find(k, R.Left)
+else if R.key < k:
+    return Find(k, R.Right)
+
+What if Missing key??
+If you stop before reaching a null pointer, you find the place in the tree where k would fit.
+
+modification:
+Find(modified)
+else if R.key > k:
+    if R.Left != null:
+        return Find(k, R.Left)
+    return R
+
+
+Adjacent Elements:
+Given a node N in a BST, would like to find adjacent elements
+
+Next
+Input: Node N
+Output: The node in the tree with the next largest key
+
+Case 1:
+If we have right Child
+
+No right child?
+
+Next(N):
+if N.Right != null:
+    return LeftDescendant(N.Right)
+else:
+    return RightAncestor(N)
+
+
+LeftDescendant(N):
+if N.Left = null:
+    return N
+else:
+    return leftDescendant(N.Left)
+
+RightAncestor(N)
+if N.Key < N.Parent.Key
+    return N.Parent
+else:
+    return RightAncestor(N.Parent)
+
+
+RangeSearch:
+Input: Numbers x, y, root R
+Output: A list of nodes with key between x and y
+
+RangeSearch(x,y,R):
+L = null
+N = Find(x,R)
+while N.Key <= y:
+    if N.Key >=x:
+        L.append(N)
+    N = Next(N)
+return L
+
+
+Insert:
+Input: Key k and root R
+Output: Adds node with key k to the tree
+
+Insert(k,R):
+P = Find(k,R)
+Add new node with key k as child of P
+
+
+Delete:
+Input: Node N
+Output: Removes node N from the tree
+We simply just cannot remove
+
+
+Delete(N):
+if N.Right = null:
+    Remove N, promote N.left
+else:
+    X = Next(N)
+    \\ X.Left = null
+    Replace N by X, promote X.Right
+
