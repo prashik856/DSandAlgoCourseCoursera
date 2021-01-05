@@ -1,0 +1,91 @@
+Learning Objectives:
+Implement a splay tree.
+Understand the ideas behind runtime analysis.
+Know some other properties of splay tree runtimes.
+
+
+Non-Uniform Input Sequences
+Search for random elements O(long(n)) best possible
+If some items more frequently than others, can do better putting frequent queries near root.
+
+
+Idea:
+Bring query node to the root.
+
+Simple Idea:
+Just rotate to top.
+Doesn't work.
+
+
+Modification:
+Zig-Zig case
+Zig Zag case
+If just below root:
+
+Splay(N):
+Determine proper case
+Apply, Zig-Zig, Zig-Zag or Zig as appropriate
+if N.Parent != null:
+    Splay(N)
+
+When
+Zig-Zig
+GP, P and Child are all on the left or right side.
+Then:
+Child becomes Grand parent, Parent remains the same, Grand Parent Becomes the child, 
+and we flip side (left to right, or right to left)
+
+Zig Zag case
+Grand Parent and Parent are on the same side (either left or right), and Child is on other side.
+Then:
+Parent's side remains the same. Child becomes the root. Parent and Grand Parent becomes the children of Child.
+
+Zig case:
+If parent and child are on the same size.
+Then:
+Child becomes the parent and they flip sides
+
+
+Analysis:
+Sometimes Slow:
+Splay Operation is sometimes slow.
+
+Amortized Analysis:
+Need to amortize. Pick correct potential function.
+
+
+Rank
+R(N) = log2(Size of subtree of N)
+Potential Function
+phy = sum(N)R(N)
+
+
+Zig  Analysis
+delta phy = R'(N) + R'(P) - R(N) - R(P)
+            = R'(P) - R(N)
+            <= R'(N) - R(N)
+
+
+Amortized cost of Find + Splay is O(log(n))
+
+
+Find:
+STFind(k,R)
+N = Find(k,R)
+Splay(N)
+return N
+
+
+Insert, then splay
+STInsert(k,R)
+Insert(k,R)
+STFind(k,R)
+
+
+Delete
+Bring N and successor to top. Deletes easily
+STDelete(N):
+Splay(Next(N))
+Splay(N)
+Delete(N)
+

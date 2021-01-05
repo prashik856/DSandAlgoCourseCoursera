@@ -1,0 +1,105 @@
+Learning Objectives:
+Compute order statistics in binary search trees
+use trees to store and manipulate sequential lists of elements
+
+Problem:
+Things we might want to do:
+Return the 7th largest element
+Return the median element
+Return the 25% percentile element
+
+
+Order Statistics:
+Input: The root of a tree T and a number k
+Output: the kth smallest element in T
+
+Need to know which subtree to look in.
+Need to know how many elements are in left subtree
+
+
+
+New Field:
+N.Size returns the number of elements in the subtree of N. Should Satisfy
+N.Size = N.left.Size + N.Right.Size + 1
+where null nodes have size zero
+
+
+Maintaining Value
+When you rotate, we need to recompute sizes
+
+
+
+RecomputeSize(N)
+N.Size = N.left.Size + N.Right.Size + 1
+
+Rotate
+As Before
+RecomputeSize(Old Root)
+RecomputeSize(New Root)
+
+OrderStatistic(R,k):
+s = R.left.Size
+if k = s + 1:
+    return R
+else if k < s + 1:
+    return OrderStatistics(R.left, k)
+else if k > s + 1:
+    return OrderStatistic(R.right, k - s - 1)
+
+Runtime: O(h)
+
+
+
+
+Colour Flips?
+Problem:
+Array of squares
+Each black or white
+Want to be able to flip colors of all squares after index x.
+
+
+Operations:
+NewArray(n): Creates an array with n white squares
+Color(m): returns color of mth square
+Flip(x)- Flips the color of all squares of index > x
+
+
+New Use for Trees
+Store elements in sorted order.
+
+
+Idea: 
+Store tree with nodes corresponding to list colors:
+
+
+Idea 2:
+Two trees: one with opposite colors:
+
+
+Idea:
+Flip using Merge and split.
+
+Create
+NewArray(n)
+Create two trees T1 and T2, with keys 1...n
+Give nodes extra color field.
+All in T1 have color white
+all in T2 have color black
+
+
+Find:
+Color(m)
+N = Find(m, T1)
+return N.color
+
+
+Flip(x):
+(L1,R1) = Split(T1, x)
+(L2, R2) = Split(T2, x)
+Merge(L1, R2) = T1
+Merge(L2, R1) = T2
+
+
+Moral:
+Trees can be used for more than searching. 
+Can be used to store lists.
