@@ -24,6 +24,7 @@ void printAllInfo(vector<int> &arr, int startOfArray, int mid, int endOfArray, i
 }
 
 void sortSubArray(vector<int> &arr, int startOfArrary, int mid, int endOfArray){
+    cout << "Sorting subarray" << endl;
     // now, we have two sub arrays
     vector<int> sortedArray;
     int i,j;
@@ -59,19 +60,19 @@ void sortSubArray(vector<int> &arr, int startOfArrary, int mid, int endOfArray){
         arr[i] = sortedArray[index];
         index++;
     }
+
+    cout << "Sorted subarrays" << endl;
 }
 
 void mergeSubarray(vector<int> &arr, int startOfArray, int endOfArray){
     int mid = (endOfArray - startOfArray)/2;
     int subArray1Size = mid - startOfArray + 1;
     int subArray2Size = endOfArray - mid;
-
-    if(subArray1Size > 1){
-        mergeSubarray(arr, startOfArray, mid);
+    if(endOfArray <= startOfArray){
+        return;
     }
-    if(subArray2Size > 1){
-        mergeSubarray(arr, mid + 1, endOfArray);
-    }
+    mergeSubarray(arr, startOfArray, mid);
+    mergeSubarray(arr, mid + 1, endOfArray);
 
     cout << "Printing All Information" << endl;
     printAllInfo(arr, startOfArray, mid, endOfArray, subArray1Size, subArray2Size);
@@ -105,3 +106,5 @@ int main(){
 
     return 0;
 }
+
+
