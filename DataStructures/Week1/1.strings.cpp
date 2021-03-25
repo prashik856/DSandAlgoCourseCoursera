@@ -46,8 +46,6 @@ int main(){
     getline(cin, str);
     // pushback to enter a character
     str.push_back('a');
-    // pop the last element
-    str.pop_back();
     // Get size of string
     str.size();
     // Get a substring from a position of given size.

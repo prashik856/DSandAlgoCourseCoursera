@@ -1,95 +1,67 @@
 #include<bits/stdc++.h>
 using namespace std;
+/*
+MergeSort(arr[], l,  r)
+If r > l
+     1. Find the middle point to divide the array into two halves:  
+             middle m = (l+r)/2
+     2. Call mergeSort for first half:   
+             Call mergeSort(arr, l, m)
+     3. Call mergeSort for second half:
+             Call mergeSort(arr, m+1, r)
+     4. Merge the two halves sorted in step 2 and 3:
+             Call merge(arr, l, m, r)
+*/
 
 void printArray(vector<int> &arr, int begin, int end){
     for(int i=begin; i<=end; i++){
         cout << arr[i] << " ";
     }
-
     cout << endl;
 }
 
-void printAllInfo(vector<int> &arr, int startOfArray, int mid, int endOfArray, int subArray1Size, int subArray2Size){
-    cout << "Start: " << startOfArray << endl;
-    cout << "Mid: " << mid << endl;
-    cout << "End: " << endOfArray << endl;
-
-    cout << "Sub array 1 size: " << subArray1Size << endl;
-    cout << "Sub array 1: " << endl;
-    printArray(arr, startOfArray, mid);
-    
-    cout << "Sub array 2 size: " << subArray2Size << endl;
-    cout << "Sub array 2: " << endl;
-    printArray(arr, mid+1, endOfArray);
-}
-
-void sortSubArray(vector<int> &arr, int startOfArrary, int mid, int endOfArray){
-    cout << "Sorting subarray" << endl;
-    // now, we have two sub arrays
+void mergeArray(vector<int> &arr, int start, int mid, int end){
     vector<int> sortedArray;
     int i,j;
-    for(i=startOfArrary, j=mid+1; i<=mid && j<=endOfArray;){
-        if(arr[i] >= arr[j]){
-            sortedArray.push_back(arr[j]);
-            j++;
-        } else {
+    for(i=start, j=mid+1; i<=mid && j<=end; ){
+        if(arr[i] < arr[j]){
+            // push arr[i]
+            // increase i
             sortedArray.push_back(arr[i]);
             i++;
+        } else {
+            sortedArray.push_back(arr[j]);
+            j++;
         }
     }
-    cout << "Value of i: " << i << endl;
-    cout << "Value of j: " << j << endl;
 
     while(i<=mid){
         sortedArray.push_back(arr[i]);
         i++;
     }
 
-    while(j<=endOfArray){
+    while(j<=end){
         sortedArray.push_back(arr[j]);
         j++;
     }
 
-    // Print sorted array before merge
-    cout << "Value of sorted array before merge is: " << endl;
-    printArray(sortedArray, 0, sortedArray.size() - 1);
-
-    // Now, assign sorted array to original array
+    // Push sorted array into a
     int index = 0;
-    for(int i=startOfArrary; i<=endOfArray; i++){
+    for(i=start; i<=end; i++){
         arr[i] = sortedArray[index];
         index++;
     }
-
-    cout << "Sorted subarrays" << endl;
 }
 
-void mergeSubarray(vector<int> &arr, int startOfArray, int endOfArray){
-    int mid = (endOfArray - startOfArray)/2;
-    int subArray1Size = mid - startOfArray + 1;
-    int subArray2Size = endOfArray - mid;
-    if(endOfArray <= startOfArray){
+void mergeSort(vector<int> &arr, int start, int end){
+    if(end > start){
+        int mid = (end + start)/2;
+        mergeSort(arr, start, mid);
+        mergeSort(arr, mid + 1, end);
+        mergeArray(arr, start, mid, end);
+    } else {
         return;
     }
-    mergeSubarray(arr, startOfArray, mid);
-    mergeSubarray(arr, mid + 1, endOfArray);
-
-    cout << "Printing All Information" << endl;
-    printAllInfo(arr, startOfArray, mid, endOfArray, subArray1Size, subArray2Size);
-
-    // Call merge function
-    cout << "Sorting subarrays" << endl;
-    sortSubArray(arr, startOfArray, mid, endOfArray);
-
-    cout << "Merged sorted subarrays: " << endl;
-    printArray(arr, startOfArray, endOfArray);
-    cout << endl;
-}
-
-void mergeSort(vector<int> &arr){
-    int endOfArray = arr.size() - 1;
-    int startOfArray = 0;
-    mergeSubarray(arr, startOfArray, endOfArray);
 }
 
 int main(){
@@ -102,7 +74,10 @@ int main(){
     cout << "Value of whole Array: " << endl;
     printArray(arr, 0, arr.size() - 1);
 
-    mergeSort(arr);
+    mergeSort(arr, 0, arr.size() - 1);
+
+    cout << "Sorted Array: " << endl;
+    printArray(arr, 0, arr.size() - 1);
 
     return 0;
 }
