@@ -1,0 +1,77 @@
+REPRESENTING GRAPHS
+
+Learning Objectives:
+- Provide ways in which a graph can be represented on a computer
+- Understand the distinctino between dense and sparse graphs and how it affects algorithm efficiency
+
+
+Graph Representations:
+From Last time, Graph consists of:
+- Vertices (or nodes).
+- Edges connecting pairs of vertices
+
+To compute things about graphs, we first need to represent them. There are many ways to do this.
+
+One of the ways of doing this:
+Edge List:
+Store List of all edges
+
+Other ways of doing this:
+
+1. Adjacency Matrix
+Matrix. Entries 1 if there is an edge, 0 if there is not.
+
+For the example in the last lecture.
+0 1 1 1
+1 0 0 0
+1 0 0 1
+1 0 1 0 
+
+
+2. Adjacenty List
+For each vertex, a list of adjacent vertices.
+A adjacent to B, C, D
+B adjacent to A
+C adjacent to A, D
+D adjacent to A, C
+
+
+Problem solution:
+A, B, F, D, H, I
+
+
+Summary:
+Different operations are faster in different representations
+
+Operation 		= is Edge? :	List Edge? :	List Neighbours
+Adjacent Matrix = O(1)	: O(|V|^2)	: O(|V|)
+Edge List = O(|E|)	:	O(|E|)	:	O(|E|)
+Adjacent List = O(deg) : O(|E|)	: O(deg)
+For many problems, we want adjacency list.
+
+
+Algorithm Runtimes:
+Graph algorithm runtimes depend on |V| and |E|
+For example, O(V + E)(linear time), O(V*E), O(V^(3/2)), 
+O(V* log(V+E)), etc
+
+
+Density:
+Which is faster? O(V^(3/2)) or O(E)?
+Depends on graph! Depends on the density, namely how many edges we have in terms of the number of vertices.
+
+
+Dense Graphs:
+In dense graphs, E = V^2, A large fractino of paris of vertices connected by edges.
+Map (cities connected)
+
+
+Sparse Graphs:
+In sparse graphs, E == V.
+Each vertex has only few edges.
+Internet web pages
+
+
+Next Time:
+Algorithms for exploring graphs.
+

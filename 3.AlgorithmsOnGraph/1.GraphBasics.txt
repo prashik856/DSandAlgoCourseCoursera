@@ -1,0 +1,49 @@
+GRAPH ALGORITHMS
+
+Learning Objectives:
+- Provide examples of the types of objects modelled by graphs
+- Understand the formal definition of a graph
+- Draw and read pictures of graphs
+
+
+Graphs:
+- Represents connection between objects
+- Describe many important phenomena
+
+
+E.g  The Internet
+The Webpages conencted by links:
+This is important for Google's page rank.
+
+Another Example: Maps
+Intersections connected by roads.
+
+Social Networks: People connected by friendships
+
+Configured Spaces: Possible configurations connected by motions.
+
+Formal Definition:
+An (undiredted) Graph is a collection V of vertices, and a collection E of edges each of which connects a pair of vertices.
+
+
+Drawing Graphs:
+Vertices: Points
+Edges: Lines
+
+B -- A -- C -- D -- A (This represents A is connected to D)
+
+Vertices: A, B, C ,D
+Edges: (A, B), (A, C), (A, D), (C, D)
+
+
+Loops and Multiple Edges: Loops connect a vertex to itself.
+
+Multiple edges between same vertices.
+
+If a graph has neither, it is simple.
+
+
+Next Time:
+Computer representation of graphs
+Runtimes for graph algorithms
+
