@@ -1,0 +1,6 @@
+Connectivity:
+
+Learning Objectives:
+- Understand the importance of connected components of a graph
+- Compute the connected components of a graph
+

@@ -1,0 +1,121 @@
+Exploring Graphs
+
+Learning Objectives:
+- Implement the explore algorithm
+- Figure out whether or not one vertex of a graph is reachable from another.
+
+Problem Discussion:
+Motivation: We're playing a video game and want to make sure that we've found everything in a level before moving on.
+How do we ensure that we accomplish this?
+
+Examples:
+This notion of exploring a graph has many applications:
+- Finding routes
+- Ensuring connectivity
+- Solving puzzles and mazes
+
+
+Paths:
+We want to know what is reachable from a given vertex:
+Definition:
+a path in a graph G is a sequence of vertices v0, v1, ..., vn so that for all i, (vi, vi+1) is an edge of G.
+
+
+Formal Description:
+Reachability
+Input: Graph G and vertex s
+Output: The Collectino of vertices v of G so that there is a path from s to v.
+
+
+Problem Solution:
+A, C, D, F, H, I
+
+
+Basic Idea:
+We want to make sure that we have explored every edge leaving every vertex we have found.
+
+Pseudocode:
+Component(s)
+DiscoveredNodes <- {s}
+while there is an edge e leaving DiscoveredNodes that has not been explored:
+	add vertex at other end of e to DiscoveredNodes
+return DiscoveredNodes.
+
+
+Formal Specificatino:
+We need to do some work to handle the bookkeeping from this algorithm
+How do we keep track of which edges/vertices we have dealt with?
+What order do we explore new edges in?
+
+
+Visit Markers:
+To keep track of vertices found:
+Give each vertex boolean visited(v)
+
+
+Unprocessed Vertices:
+Keep a list of vertices with edges left to check.
+This will end up getting hidden in the program stack.
+
+
+Depth First Ordering:
+We will explore new edges in Depth First order. We will follow a long path forward, only backtracking when we hit a dead end.
+
+
+Explore function:
+Explore(v):
+visited(v) <- true
+for (v,w) in E:
+	if not visited(w):
+		Explore(w)
+
+For this to work efficiently, we need adjacency list representation.
+
+Example:
+
+
+Correctness:
+Result:
+If all vertices start unvisited, Explore(v) marks as visited exactly the vertices reachable from v.
+
+
+Proof:
+- Only explore things reachable from v.
+- w not marked as visited unless explored
+- if w explored, all neighbours explored.
+u reachable from v y path.
+Assume w furthest along path explored.
+Must explore next item.
+
+
+Reach all Vertices
+Sometimes we want to find all vertices of G, not just those reachable from v.
+
+
+DFS (Depth First Search):
+DFS(G)
+for all v in V: mark v unvisited
+for v in V:
+	if not visited(v):
+		Explore(v)
+
+
+Runtime:
+Number of calls to explore:
+- Each explored vertex is marked visited
+- No vertex is explored after visited once
+- Each vertex is explored exactly once.
+
+Checking for neighbors:
+- Each vertex checks each neighbour
+- Total number of neighbours over all vertics is O(E)
+
+Total runtime:
+O(1) work per vertex.
+O(1) work per edge
+Total O(V + E)
+
+
+Next Time:
+More on reachability in graphs
+Applications of DFS.
