@@ -1,0 +1,28 @@
+PREVISIT AND POST VISIT ORDERS
+
+Learning Objectives:
+- Compute the preorder and postorder number for a dfs
+- Understand why these numbers might be important
+
+
+Previsit and Postvisit Functions
+Explore(v):
+visited(v) <- true
+previsit(v)
+for(v, w) in E:
+	if not visited(w):
+		explore(w)
+postvisit(v)
+
+- Clock
+
+- Computing Pre- and Post- Numbers
+Initialize clock to 1.
+previsit(v):
+pre(v) <- clock
+clock = clock + 1
+
+postvisit(v):
+post(v) = clock
+clock = clock + 1;
+

@@ -4,3 +4,59 @@ Learning Objectives:
 - Understand the importance of connected components of a graph
 - Compute the connected components of a graph
 
+Reachability:
+Want to understand which vertices in G are reachable from which others.
+
+Connected Components:
+Theorem:
+The vertices of a graph G can be partitioned into Connected Components so that v is reachable from w if and only if thery are in the same connected component.
+
+Problem:
+Solution:
+4
+
+Proof:
+Need to show reachability is an equivalence relation.
+Namely
+- v is reachable from v.
+- if v reachable from w, w reachable from v
+- if v reachable from u, and w reachable from v, w reachable from u.
+We have path from u to v, and we also have path from v to w. So if we glue this path together, there must be a path from u to w.
+
+
+Connected Components:
+Input Graph G:
+Output: The connected components of G.
+
+
+Idea:
+Explore(v) finds the connected component of v. Just need to repeat to find other components.
+
+Modify DFS to do this:
+Modify goal to label connected components.
+
+Modification of Explore:
+Explore(v):
+visited(v) <- true
+CCnum(v) <- cc
+for(v, w) in E:
+	if not visited(w):
+		Explore(w)
+
+Modificatino of DFS:
+DFS(G)
+for all v in V, mark v unvisited
+cc <- 1
+for v in V
+	if not visited(v):
+		Explore(v)
+		cc <- cc + 1
+
+Correctness:
+Each new explore finds new connected component.
+Eventually find every vertex.
+Runtime still O(V + E)
+
+
+Next: 
+Other applications of DFS
