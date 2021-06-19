@@ -1,0 +1,27 @@
+STRONGLY CONNECTED COMPONENTS
+
+- Learning Objectives
+
+- Connectivity in Digraphs
+
+- Examples:
+
+- Possible Notions
+
+- Result - Theorem
+
+- Strongly connected components: One vertex is reachable from another
+
+- Problem Solution: A, B, E, F, G, H
+
+- Result: 
+
+- MetaGraph: How the strongly connected components connects to one another
+
+- MetaGraph is a DAG
+
+- Metagraph of any graph is a DAG
+
+- Summary
+
+- Next
