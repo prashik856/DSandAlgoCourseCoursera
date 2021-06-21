@@ -1,0 +1,56 @@
+PROOF OF CORRECTNESS
+
+- Reachability:
+	Definition
+	Lemma	
+
+- Proof
+	u - reachable undiscovered closest to S
+	S - v1-v2....vk-u -> Shortest Path
+	u is discovered while processing vk
+	Thus, reachable nodes have estimation of distance
+
+	About unreachable
+	u - first unreachable discovered
+	u was discovered while processing v
+	u is reachable through v
+	Contradiction
+	thus, unreachable nodes are not discovered
+
+- Order Lemma
+	By the time node u at distance d from S is dequeued, all the nodes at distance at most d have already been discovered
+
+- Order Lemma Prood
+	Consider the first time the order was broken
+	v' was discovered before u' was dequeued
+
+- Correct distances
+	lemma
+	when node u is discovered, dist[u] is assigned exactly d(S, u)
+
+	Base: when s is discoverd, dist[s] is assigned 0 = d(S, S)
+
+	Inductive step: suppose proved for all nodes at distance <= k from S -> prove for k + 1
+
+	Take a node v at distance k + 1 from S
+	v was discovered while processing u
+
+	d(S, v) <= D(S, u) + 1 => d(S,u) >= k
+	v is discovered after u is dequeued, so 
+	d(S, u) < d(S, v) = k + 1
+
+	So d(S, u) = k 
+	and dist[v] = dist[u] + 1 = k + 1
+
+- Queue Property
+	Lemma
+	At any moment, if the first node in the queue is at distance d from S, then all the node in the queue are either from distance d from S or at distance d + 1 from S. All the nodes in the queue at distance d go before all the nodes at distance d + 1.
+
+	Proof:
+	All nodes at distance d were enqueued before first such node is dequeued, so they go before nodes at distance d + 1
+	Nodes at distance d - 1 were enqueued before nodes at d, so thery are not in the queue anymore
+	nodes at distance > d + 2, will be discovered when all d are gone
+	Proved
+	Structure of Queue at any moment of time
+
+

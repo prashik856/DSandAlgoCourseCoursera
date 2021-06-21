@@ -1,0 +1,25 @@
+MOST DIRECT ROUTE
+
+- Applications
+	Navigation
+	Network package data 
+	Currency Exchange
+
+- Most Direct Route Problem?
+	Minimum nuber of flight segments to get from humburg ro moscow
+
+- We can consider it to to be a graph problem
+
+- Paths and Legths
+	L(P) is the number of edges in the path
+
+- Distances
+	Distance between two vertices is the length of shortest path between them
+	distance(directed) >= distance(undirected)	
+- Finding distance between a node to all other nodes
+
+- We use distance Layers for this
+	Distance between layers
+
+- Directed Case will have different distance layers depending on the directions
+	 Here layers can be added from any node to the root but we need to take care of the direction.

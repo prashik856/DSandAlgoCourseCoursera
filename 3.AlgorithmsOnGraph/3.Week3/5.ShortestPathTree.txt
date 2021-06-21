@@ -1,0 +1,34 @@
+SHORTEST PATH TREE
+
+Shortest path tree? :
+	We set the root.
+
+Lemma:
+	Shortest path tree is indeed a tree
+	i.e. it doesn't contain cycles(it is a conneced component by construction)
+
+Proof:
+	Suppose there is a cycle
+	Only one outgoing edge from each node(tree)
+	Directed look for a cycle
+	Distance to S decreases after going by edge
+	We Prove by contradiction
+
+Construction shortest - path tree
+for all u in V:
+	dist[u] = INF;
+	prev[u] = nil; // Storing parent 
+dist[s] = 0;
+Q = {S} {Queue containing just S}
+while Q is not empty:
+	u = Dequeue(Q)
+	for all (u,v) in E:
+		if dist[v] = INF:
+			Enqueue(Q, v)
+			dist[v] = dist[u] + 1;
+			prev[v] = u // Assigning the value of prent of v as u
+
+So for every node, now we know it's parent for shortest path tree
+
+
+
