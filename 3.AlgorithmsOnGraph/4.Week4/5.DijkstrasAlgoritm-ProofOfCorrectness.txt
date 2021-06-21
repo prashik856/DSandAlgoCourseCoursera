@@ -1,0 +1,6 @@
+DIJKSTRA'S ALGORITHM - PROOF OF CORRECTNESS
+
+- Correct distances
+
+- Lemma
+

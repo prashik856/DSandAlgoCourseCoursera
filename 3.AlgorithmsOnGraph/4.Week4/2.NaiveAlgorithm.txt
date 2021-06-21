@@ -1,0 +1,37 @@
+NAIVE ALGORITHM
+
+Optimal Substructure:
+	Any subpath of an optimal path is also optimal
+
+- Proof:
+	Proof by contradiction
+
+- Corollary
+	for shortest path from S to t, where us is between them
+	d(S,t) = d(S, u) + w(u,t)
+
+Edge Relaxation:
+	- dist[v] will be upper bound on the actual distance from S to v
+	The edge relaxation procedure for an edge (u,v) just checks whether going from S to v through u improves the current value of dist[v]
+
+Relax((u,v) in E):
+if dist[v] > dist[u] + w[u,v]:
+	dist[v] = dist[u] + w(u,v)
+	prev[v] = u // parent
+
+
+Naive approach:
+Naive(G, S):
+for all u in V:
+	dist[u] = INF
+	prev[u] = nil
+dist[s] = 0;
+do:
+	relax all the edges
+while at lest one dist changes
+
+- Correct distances
+	It works
+
+- Proof
+	

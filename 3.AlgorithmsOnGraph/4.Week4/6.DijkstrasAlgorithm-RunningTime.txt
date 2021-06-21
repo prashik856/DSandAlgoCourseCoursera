@@ -1,0 +1,29 @@
+DIJKSTRA'S ALGORITHM : RUNNING TIME
+
+Running Time:
+
+total running time:
+T(MakeQueue) + |V|.T(ExtractMin) + E.T(ChangePriority)
+
+Depends on our implementation of data structure to store the distance values, get the min value from it, change priority of the values and delete the node from it.
+
+Priority queue implementations:
+
+Using array:
+	O(V + V^2 + E) = O(V^2)
+
+Change Priority is very easy in array:
+	
+Binary Heap:
+	O(V + VlogV + ElogV) = O((V + E) logV)
+	Much better than array
+	If number of edges are much much larger, this implementation is really bad when compared to array
+
+E <= V^2 always
+
+- Conclusion
+	Can find the minimum time to get from work to home
+	Can find the fastest route from work to home
+	Works for any graph with non-negative edge weights
+	Works in O(v^2) or O((v + e) log (v)) depending on the implementation
+

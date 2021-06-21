@@ -1,0 +1,14 @@
+DIJKSTRA'S ALGORITHM: INTUITION AND EXAMPLE
+
+Find shortest path from one vertex to all other nodes in the graph
+
+- Intuition
+	S is vertex
+	relax all the edges from S
+	Let's relax all the edges of the children now
+
+- Main ideas of Dikstra's Algorithm
+	- We maintain a set R of vertices for which dist is already set correctl
+
+- Example:
+	
