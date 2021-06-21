@@ -97,5 +97,15 @@ int main(){
     mystack.empty();
 
 
+    // Stack using stack stl
+    stack<int> stlStack;
+    stlStack.empty(); // Returns if stack is empty (bool value)
+    stlStack.push(10); // Push into stack
+    stlStack.push(20); 
+    stlStack.top(); // Returns the top element of the stack
+    stlStack.pop(); // pops the top element
+    stlStack.size(); // Returns the current size of the stack
+
+
     return 0;
 }
