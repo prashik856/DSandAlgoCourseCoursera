@@ -49,7 +49,7 @@ int main(){
     // Queue using module
     queue<int> q;
     // Empty
-    q.empty();
+    bool emptyVariable = q.empty();
     // enqueue
     q.push(10);
     q.push(20);
@@ -59,7 +59,8 @@ int main(){
     // dequeue
     q.pop();
     q.pop();
-
+    int temp = q.front();
+    temp = q.back();
 
     // Queue using array
     // head, tail, size, push, pop, empty
