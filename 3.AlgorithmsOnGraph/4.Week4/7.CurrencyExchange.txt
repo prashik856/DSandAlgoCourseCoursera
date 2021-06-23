@@ -1,0 +1,20 @@
+CURRENCY EXCHANGE:
+
+Currency Exchange:
+	
+- Triangular Arbitrage:
+	The edges is rate of conversion of currency
+
+- How does this conversion works?
+	usd -> EUR -> GBP -> NOK -> RUR
+	Determined by the product of the conversion rate
+
+- What are the possibilities of exchanges
+	- We can use graphs to represent this
+
+
+Maximum product over paths:
+Input: Current exchange graph with weighted directed edges ei, between some pairs of currencies with weights rei, corresponding to the exchange rate
+
+Output: Maximize the product over paths e1,e2...ek from USD to RUR in graph
+
