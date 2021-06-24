@@ -1,0 +1,28 @@
+BELLMAN-FORD ALGORITHM
+
+Naive Algorithm:
+- Remember naive algo
+- Relax adges while dist changes
+- Turns our it works even for negative edge weights
+
+
+Bellman-ford algorithm
+BellmanFord(G,S):
+{no negative weight cycles in G}:
+for all u in V:
+	dist[u] = INF
+	prev[u] = nil
+dist[S] = 0
+repeat V - 1 times:
+	for all (u,v) in E:
+		Relax(u,v)
+
+- Running
+	Running time is O(VE)
+
+- Proof:
+	Initialize dist - O(V)
+	V - 1 iterations each O(E) - O(VE)
+
+- Example:
+	

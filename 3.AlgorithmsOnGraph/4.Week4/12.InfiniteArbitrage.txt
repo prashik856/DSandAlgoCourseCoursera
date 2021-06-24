@@ -1,0 +1,40 @@
+INFINITE ARBITRAGE
+
+Defect Infinite Arbitrage
+Lemma
+	It is possible to get any amount of currency u from currency S iff u is reachable from some node w for which dist[w] decreased on iteration V of Bellman-Ford
+
+Proof
+	dist[w] decreased on iteration V => w is reachable from a negative weight cycle
+	w is reachable -> u is also reachable -> infinite arbitrage
+
+- Let L be the length of the shortest path to u with at most V - 1 edges
+
+- After V - 1 iterations, dist[u] is equal to L
+- Infinite arbitrage to u -> there exists a path shorter than L
+- Thus dist[u] will be decreased no some iteration k >= V
+- If edge(x,y) was not relaxed and dist[x] did not decrease on i-th iteration, then edge(x,y) will not be relaxed on i+1st iteration
+- Only nodes reachable from those relaxed on previous iterations can be relaxed
+- dist[u] is decreased on iteration k>=v = u is reachable from some node relaxed on Vth iteration
+
+
+Defect Infinite Arbitrage:
+Do |V| iterations of Bellman-ford, save all nodes relaxed on Vth iteration - set A
+Put all nodes from A in queue Q
+Do breadth first search with queue Q and find all nodes reachable from A
+All those nodes and only those can have infinite arbitrage
+
+
+Reconstruct Infinite Arbitrage
+- During Breadth-first search, remember the parent of each visited node
+- Reconstruct the path to u from some node w relaxed on iteration V
+- Go back from w to find negative cycle from which w is reachable
+- Use this negative cycle to achieve infinite arbitrage from S to u
+
+
+Conclusion:
+- Can implement best possible exchange rate
+- Can determine whether infinite arbitrage is possible
+- Can implement infinite arbitrage
+- Can find shortest paths in graphs with negative edge weights
+

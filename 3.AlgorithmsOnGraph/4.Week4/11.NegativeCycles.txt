@@ -1,0 +1,25 @@
+NEGATIVE CYCLE
+
+Negative weight cycles:
+	A graph G contains a negative weight cycle iff Vth (additional) iteration of BellmanFord(G,S) updates some distance value
+
+- Proof
+	
+- Proof2
+	If there's a negative weight cycle, say a-b-c-a, but no relaxations on Vth iteration
+	dist[b] <= dist[a] + w(a,b)
+	dist[c] <= dist[b] + w(b,c)
+	dist[a] <= dist[c] + w(c,a)
+	add all
+	w(a,b) + w(b,c) + w(c,a) >= 0 = contradiction, since negative cycle
+
+- Finding Negative Cycle
+Algorithm:
+	Run V iterations of Bellmanford algorithm, save node v relaxed on the last iteration
+
+	v is reachable from a negative cycle
+	Start from x <- x, follow the link x<-prev[x] for V times - will be definitely on the cycle
+
+	Save y<-x and go x<-prev[x] until x = u again
+
+Is is possible to get as many rubles as we want from 1000USD?
