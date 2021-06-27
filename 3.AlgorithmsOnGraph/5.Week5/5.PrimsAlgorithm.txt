@@ -1,0 +1,33 @@
+Prims Algorithm 
+
+- X is always a subtree, grows by one edge at each iteration 
+    we add a lightest edge between a vertex of the tree and a vertex not in the tree 
+    very similar to dijkstra's algorithm 
+
+- We need to use priority queue algorithm 
+
+Prim(G):
+for all u in V:
+    cost[u] = INF 
+    parent[u] = nill
+pick any initial vertex u0 
+cost[u0] = 0
+PrioQ = MakeQueue(V) {priority is cost}
+while PrioQ is not empty:
+    v = ExtractMinimum(PrioQ)
+    for all {v,z} in E:
+        if z in PrioQ and cost[z] > w(v,z)
+            cost[z] = w(v,z)
+            parent[z] = v;
+            ChangePriority(PrioQ, z, cost[z])
+
+
+Running Time:
+    - for array based: Running time is O(V^2)
+    - Binary heap based Implementation
+    O(E*log(V))
+
+Summary:
+    - Kruskal Algorithm
+    - Primz algorithm
+
