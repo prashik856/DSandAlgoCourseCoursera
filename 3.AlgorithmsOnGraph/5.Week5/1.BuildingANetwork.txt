@@ -1,0 +1,15 @@
+BUILDING A NETWORK
+
+- Connecting computers by wires
+
+- Minimum Spanning Tree (MST)
+Input: A connected, undirected graph G = (V,E) with positive edge weights
+Output: A subset of edges E' i E of minimum total weight such that the graph (V,E')  is connected.
+
+- Properteis of Trees 
+    - A tree is an undirected graph that is connected and acyclic
+    - A tree of n vertices has n-1 edges.
+    - Any connected undirected graph 
+    G(V,E) with E = V - 1 is a tree.
+    - An undirected graph is a tree iff there is a unique path between any pair of its vertices.
+    
