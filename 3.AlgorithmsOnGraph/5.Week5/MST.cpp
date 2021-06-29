@@ -59,16 +59,18 @@ class Graph{
         vector<int> parent;
         vector< vector<int> > sortedWeights;
         int edges;
+        vector<bool> visited;
     
     public:
         Graph(int nodesValue) {
             nodes = nodesValue;
             neighbours = vector< vector<int> >(nodes, vector<int>());
             weights = vector< vector<int> >(nodes,vector<int>(nodes, 99999999));
-            distance = vector<int>(nodes, 99999999);
-            parent = vector<int>(nodes, -1);
             edges = 0;
             sortedWeights = vector< vector<int> >();
+            visited = vector<bool>(nodes, false);
+            distance = vector<int>(nodes, 99999999);
+            parent = vector<int>(nodes, -1);
         }
 
         void addEdge(int from, int to, int weight){
@@ -94,6 +96,12 @@ class Graph{
             }
         }
 
+        void resetGraph(){
+        	distance = vector<int>(nodes, 99999999);
+            parent = vector<int>(nodes, -1);
+            visited = vector<bool>(nodes, false);
+        }
+
         vector< vector<int> > Kruskal(){
             DisjointSet disjointSet(nodes);
             vector< vector<int> > X;
@@ -114,6 +122,65 @@ class Graph{
                 }
             }
             return X;
+        }
+
+        int getMinimum(){
+        	int minimumValue = 99999999;
+        	int minimumIndex = -1;
+        	for(int i=0; i<nodes; i++){
+        		if(distance[i] < minimumValue && !visited[i]){
+        			minimumIndex = i;
+        			minimumValue = distance[i];
+        		}
+        	}
+        	return minimumIndex;
+        }
+
+        void Prims(){
+        	resetGraph();
+        	cout << "Using Prims Algorithm" << endl;
+        	// pick any vertex - we select 0
+        	distance[0] = 0;
+        	
+        	// Get minimum distance
+        	int minimumIndex = 0;
+        	int minimumDistance = distance[minimumIndex];
+
+        	// Set parent of minimumindex as itself
+        	parent[minimumIndex] = minimumIndex;
+
+        	// While we keep getting minimum value
+        	while(minimumIndex != -1){
+        		// visited index
+        		visited[minimumIndex] = true;
+        		int node = minimumIndex;
+
+        		// visited all edges and rest them
+        		for(int i=0; i<neighbours[node].size(); i++){
+        			int neighbour = neighbours[node][i];
+        			if(distance[neighbour] > weights[node][neighbour] && !visited[neighbour]) {
+        				distance[neighbour] = weights[node][neighbour];
+        				parent[neighbour] = node;
+        			}
+        		}
+
+        		// Get the next minimum index
+        		minimumIndex = getMinimum();
+
+        		// To get edge, we need this: weights[node][parent[node]]// this is the edge which is inside mst
+        	}
+        }
+
+        void printDistance(){
+        	cout << "Nodes in mst: " << endl;
+        	for(int i=0; i<nodes; i++){
+        		if(distance[i] == 0){
+        			cout << "Root: " << i << endl;
+        		} else {
+        			cout << "Node: " << i << " | Parent: " << parent[i] << " | EdgeWeight: " << distance[i] << endl; 	
+        		}        		
+        	}
+        	cout << endl;
         }
 };
 
@@ -157,6 +224,10 @@ int main(){
         cout << MST[i][1] << " -> " << MST[i][2] << "| " << MST[i][0] << endl;
     }
     cout << endl;
+
+
+    graph.Prims();
+    graph.printDistance();
 
     return 0;
 }
