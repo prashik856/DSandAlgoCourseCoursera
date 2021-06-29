@@ -1,0 +1,34 @@
+BI-DIRECTIONAL SEARCH
+
+- Bi Directional Search
+
+Shortest Path:
+Input : A Graph G with non-negative edge weights, a source vertex s and a target vertex t.
+Output: The shortest path between s and t
+
+- Why not just Dijkstra?
+	O((E + V) log|V|) is pretty past.
+
+- for a graph of USA with 20M vertices and 50M edges, it will work for several seconds on average
+- Millions of users of Google Maps want the result in a blink of an eye, all at the same time.
+- Needs something faster.
+
+
+- Dijkstra Progression
+	
+- Lemma:
+	When a vertex u is selected via ExtractMin, dist[u] = dist(s,u)
+
+- Idea: Growing Circle
+	early stop when we reach the target vertex
+
+- Idea: Bidirectional Search
+	Use Dijkstras from both s and t
+
+
+- Used in Road networks
+	- Roughly 2x speedup
+	- Good, but no great
+	- This is true for road networks
+	- look at social networks
+

@@ -1,0 +1,8 @@
+PERFORMANCE OF A*
+
+Performance in A*
+If p(v) gives lower bound on d(v,t)
+	Worst case: p(v) = 0 for all v - the same as dijkstra
+	Best case: p(v) = d(v,t) for all v - then lp(u,v) = 0 iff (u,v) is on a shortest path to t, so search visits only the edges of shortest s - t paths
+	It can be shown that the tighter are the lower bounds - the fewer vertices will be scanned
+
