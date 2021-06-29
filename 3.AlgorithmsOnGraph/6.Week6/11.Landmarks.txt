@@ -1,0 +1,26 @@
+LANDMARKS
+
+Lemma:
+    Fix some vertex A in V, we will call it a landmark.
+    Then the potential p(v) = d(A, t) - d(A,v) is feasible and p(t) = 0.
+
+Landmarks 
+- Select several landmarks and precompute their distances 
+to all other vertices.
+- For any landmark A,
+d(v,t) >= d(A,t) - d(A,v)
+d(v,t) >= d(v,A) - d(t, A)
+
+
+- Landmark selection
+    Choosing landmarks on the border seems reasonable.
+
+Conclusion:
+    Directed search can scan fewer vertices.
+    A* is a directed search algorithm baased on 
+    dijktra and potential functions 
+    A* can also be Bidirectional
+    Euclidean distance is a potential for a plane(road networks)
+    Landmarks can be used foir good potential function, 
+    but we need preprocessing to use them.
+

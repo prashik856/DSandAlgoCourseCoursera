@@ -1,2 +1,19 @@
 BIDIRECTIONAL ASTAR
 
+Bidirectional A*
+    Same as Bidirectional Dijkstra, but with poetntials
+    Needs two potential functions: pf(v) estimates d(v,t) 
+    pr(v) estimates d(s,v)
+    Problem: different edge weights
+    lpf(u,v) = l(u,v)  - pf(u) + pf(v)
+    lpr(u,v) = l(u,v) - pr(v) + pr(u)
+
+We ned lpf(u,v) = lpr(u,v) = pf(u) + pr(u) = 
+Need constant value of pf(u) + pr(u) for any u.
+Use pf(u) = (pf(u) - pr(u))/2, pr(u) = -pf(u)
+Then pf(u) + pr(u) = 0 for any u 
+
+Lemma:
+
+
+- Proof 
