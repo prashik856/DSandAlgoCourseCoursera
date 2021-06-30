@@ -1,0 +1,20 @@
+PROOF OF CORRECTNESS:
+
+Augmented Graph:
+
+Lemma:
+
+Proof:
+
+The rank(v) of vertex v is the position of v in the node order returned by the preprocessing time.
+
+Definition:
+
+Justification of Bidirectional search.
+
+Proof Idea:
+
+Conclusion:
+    Preprocessing via node contraction 
+    Still not done.
+

@@ -1,2 +1,16 @@
 PREPROCESSING.
 
+- Preprocessing 
+    Eliminate nodes one by one in some order
+    Add shortcuts to preserve distances
+    Output: augmented graph + node order 
+
+- Node Contraction
+
+- Witness Paths
+    Contraction of node v
+    For every pair of edges (u,v), (v,w) 
+    add a new edge (u,w)
+    l(u,w) = l(u,v) + l(v,w)
+    But only if there is no witness path Puw shorter thatn l(u,v) + l(v,w) and bypassing v.
+
