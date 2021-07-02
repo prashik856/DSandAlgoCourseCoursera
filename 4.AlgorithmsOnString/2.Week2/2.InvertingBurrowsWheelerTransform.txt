@@ -1,0 +1,33 @@
+Inverting Burros Wheeler Transform
+
+Reconstruction banana from annb$aa
+We also know first column:
+Sorting all elements of "annb$aa" gives first column of BWT matrix
+
+- Thus we know 2-mer composition of circular string banana$
+-> Sorting this 2-mer gives us the first 2 columns of the matrix
+
+-> Now, since we got first 2 columns, by looking by BWM, we will get the last column as well.
+
+-> We now know 3-mer composition of circular string banana$.
+-> Sorting gives us the first 3 columns of the matrix
+
+We continue with 4-mer to 5-mer to n-mer.
+
+Thus, we now know the entire matrix.
+
+
+-> More Memory Issues
+	Reconstruction Text from BWT(Text) required us to store |Text| cyclic rotations of Text.
+
+-> A Strange Observation
+Where is first "a" hiding inside the circle?
+Where is first "a" hindig inside the circle?
+Is it True in General?
+
+First-Last Property:
+- The kth occurance of symbol in First Column and the kth occurence of symbol in lastColumn correspond to appearance of symbol at the same position in Text.
+
+- Inverting BWT Again
+Memory: 2*Text
+Time: O(Text)

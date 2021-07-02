@@ -1,0 +1,14 @@
+Back to Pattern Matching:
+	Suffix Tree Pattern matching:
+		Runtime: O(Text + Patterns)
+		Memory: 2 * Text
+
+Can we use BTW?
+
+Finding Pattern Mathces Using BWT?
+
+Start from the last symbol
+- Matching the last two words:
+
+
+Searching for ana using top and bottom pointers:

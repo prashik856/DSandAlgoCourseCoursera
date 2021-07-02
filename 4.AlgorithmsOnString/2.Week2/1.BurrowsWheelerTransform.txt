@@ -1,0 +1,25 @@
+BURROWS WHEELER TRANSFORM
+
+
+- Text Compression by Run-Length Encoding
+- Run Length encoding compresses a run of n identical symbols:
+
+Idea: Converting Repeats to Runs
+
+How do we do it?
+
+
+Forming all cyclic rotations of example:
+
+Sorting Cyclic Rotations:
+BWT(panamabananas$) = smnpbnnaaaaa$a
+The last column is Burrows-Wheeler Transform 
+
+Apply BWT To the Double Helix Paper.
+
+"and" is frequent repeat in English texts
+
+
+Genome -> Convert repeats to runs -> BWT (Genome) -> run length encoding -> Compression(BWT(Genome))
+
+Is it even possible to go back from BWT to original String?
