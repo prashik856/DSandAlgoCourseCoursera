@@ -1,2 +1,61 @@
 NODE ORDERING.
 
+- Optimal Node Ordering
+	So far, our algorithm works for any node ordering
+	However, preprocessing and query time depend heavily on it
+	Minimize the number of added shortcuts
+	Spread the important nodes across the graph
+	Minimize the number of edges in the shortest paths in the augmented graph
+
+
+- Order by importance
+	Introduce a measure of importance
+	Constract the least important node
+
+- Algorithm
+	Keep all nodes in a priority queue by decreasing importance
+	On each iteration, extract the least important node
+	Recompute its importance
+	If it's still minimal (compare with the top of the priority queue), contract the node
+	Otherwise, put it back into priority queue with new priority
+
+- Eventual Stopping
+	If we don't contract a node, we update its importance
+	After at most V attempts, all the nodes will have updated importance
+	The node with minimum updated importance will be constracted after that
+
+- Importance Criteria
+	Edge Difference
+	Number of contracted neighbours
+	Shortcut cover
+	Node level
+
+Edge Difference:
+	Want to minimize the number of edges in the augmented graph
+	Number of added shortcuts s(v), incoming degree in(v), outgoing degree out(v)
+	Edge difference:
+		ed(v) = s(v) - in(v) - out(v)
+
+Contracted Neighbours:
+cn
+	
+Shortcut Cover:
+sc
+
+Node level:
+L
+
+Importance:
+	User Importance:
+	l(v) = ed(v) + cn(v) + sc(v) + L(v)
+	We can play with weights of these 4 quantities in l(v) and see how preprocessing time and query time change
+
+Comparison with Dijkstra:
+	On a graph of Europe with 18M nodes, on random pairs of vertices, Dijkstra works for 4.365 on average
+	On the same graph and some random pairs, with the best set of heuristics Contraction hierarchies work for 0.18ms on average - almost 25000 times faster.
+
+Conclusion:
+	Preprocess by contracting nodes ordered approximately by importance
+	Query by Bidirectional Dijkstra on the augmented graph
+	Importance function is heuristic, but works well on raod network graphs
+	1000s of times faster than Dijkstra
