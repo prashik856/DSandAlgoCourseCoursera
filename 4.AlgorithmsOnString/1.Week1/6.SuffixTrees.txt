@@ -1,0 +1,33 @@
+SUFFIX TREES
+
+From Suffix Tries to Suffix Trees?
+
+SuffixTree(Text):
+Since each suffix adds one leaf and at most one internal vertex to the suffix tree:
+vertices < 2*T
+Memory footprint of the suffix tree: O(|Text|)
+
+Cheating: How do we store all edge labels?
+
+Storing edge Labels?
+
+We did we bother to add $ to panamabananas?
+
+	- To make sure that each suffix corresponds to a leaf
+
+Constructing Suffix Tree: Naive Approach?
+
+- Quadratic runtime:
+	O(|Text|^2)
+
+Linear runtime (for a constant -size alphabet)
+	- O(|Text|)
+
+Big Secret of the Big O Notation:
+	- Suffix trees enable fast Exact Multiple Pattern Matching:
+		Runtime : O(|Text| + |Patterns|)
+		Memory: O(|Text|)
+	However, big O notations hides constants
+		suffix tree algorithms has large memory footprint 20*T for long text like human genome
+	We want to find mutations?
+
