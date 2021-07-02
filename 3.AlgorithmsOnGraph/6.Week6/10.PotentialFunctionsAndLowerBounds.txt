@@ -1,0 +1,22 @@
+POTENTIAL FUNCTIONS AND LOWER BOUNDS
+
+Lemma:
+If p is feasible and p(t) <= 0, then p(v) <= d(v,t) for any v 
+
+Proof:
+    lp(x,y) >= 0 for any x,y, so lp(P) >= 0 for any path P 
+    Take a v-t shortest path, P = (v,w1,w2,w3,...,wk,t)
+    
+Euclidean Potential:
+    p(v) = dE(v,t) = sq.root((v.x - t.x)^2 + (v.y - t.y)^2)
+    and p(t) = 0;
+    distance funtion is a good potential function.
+
+Proof that it is a good potential:
+
+
+A* on a Plane map:
+Need to find the shortest path from s to t.
+For each v, compute p(v) = de(v,t)
+launch Dijkstra with potentials p(v)
+

@@ -1,0 +1,52 @@
+TOTOLOGICAL SORT:
+
+- Learning Objecties
+
+- Last Time
+
+- Last Vertex 
+
+- Sources(Goes) and Sinks(Comes)
+
+- Problem
+
+- Idea (Find sink, put at the end of order, remove from graph, repeat)
+
+- Finding Sink
+
+- Follow Path
+	Cannot extend (found sink), or repeat vertex (have a cycle)
+
+- Algorithm
+	LinearOrder(G)
+	while G is non-empty:
+		Follow a path until cannot extend
+		Find sink v
+		Put v at the end of order
+		Remove v from G
+
+- Runtimes
+	O(V) paths
+	Each take O(V) time
+	O(V^2) time 
+
+- Speed up
+	- Retrace same path every time
+
+- It is just DFS!
+	
+
+- Better Algorothm
+	TopologicalSort(G)
+	DFS(G)
+	sort vertices by reverse post-order
+
+- Theorem:
+	post(u) > post(v)
+
+- Proof
+	- explore v before u
+	- expolore v while exploring u
+	- explore v after exploring u
+
+- Considering all Cases

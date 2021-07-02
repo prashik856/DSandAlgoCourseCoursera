@@ -1,0 +1,30 @@
+IMPLEMENTATION AND ANAYLISIS OF BREADTH FIRST SEARCH
+
+- Breadth-first search
+BFS(G, S):
+for all u in V:
+	dist[u]= INF
+dist[S] = 0;
+Q = {S} // Queue containing just S
+while Q is not empty:
+	u = dequeue(Q)
+	for all (u,v) in Edges: // All neighbours
+		if dist[v] = INF:
+			Enqueue(Q, v)
+			dist[v] = dist[u] + 1
+
+We can either use array of a map to store our destimation (depending on the graph)
+
+- Root gets estimation of 0.
+
+- Queue datastructure is used (first in first out)
+
+- dist[v] = INF, this is used to check if this node is discovered or not
+
+- Running Time:
+	O(V + E)
+
+- Proof
+	Each vertex is enqueued at most once
+	Each edge is examined either once (for directed) or twice (for undirected graph)
+

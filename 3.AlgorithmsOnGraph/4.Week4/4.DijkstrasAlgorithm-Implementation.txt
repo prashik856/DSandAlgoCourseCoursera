@@ -1,0 +1,21 @@
+DIJKSTRA'S ALGORITHM - IMPLEMENTATION
+
+Psuedocode:
+Dijkstra(G, S):
+for all u in V:
+	dist[u] = INF;
+	prev[u] = null;
+dist[s] = 0;
+H = MakeQueue(V) {dist-values as keys} // priority queue
+// Extract minimum value from it
+// To change the dist value in H
+// Once minimum value is extracted, we need to remove the extracted node from the priority queue
+while H is not empty:
+	u = extractMin(H)
+	for all (u,v) in E: // for all neighbours of u
+		if dist[v] > dist[u] + w(u,v):
+			dist[v] = dist[u] + w(u,v)
+			prev[v] = u
+			ChangePriority(H, v, dist[v])
+			// change value of v in our datastructure
+

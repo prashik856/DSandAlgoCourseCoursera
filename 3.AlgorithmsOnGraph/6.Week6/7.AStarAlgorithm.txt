@@ -1,0 +1,36 @@
+A-star Algorithm
+
+Directed Search
+
+- Potential Function
+	Take any potential function pi(v)
+	mapping vertices to real numbers
+	It defines new edges weights
+	lp(u,v) = l(u,v) - p(u) + p(v)
+	Replacing l by lp does not change the shortest paths
+
+- Lemma
+	For any potential function p : V -> R, for any two vertices s and t in the graph and any path P between them
+	lp(P) = l(P) - p(s) + p(t)
+
+- Proof:
+	
+- Dijkstra with Potentials
+	Take some potential function p
+	launch dijkstra algorithm with edge weights lp
+	The resulting shortest path is also shortest path initially
+	Does any p fit us?: NO
+	For any edge(u,v), the new length lp(u,v) must be non negative, such p is called feasible
+
+- Intuition
+	p(v) is an estimation of d(v,t) : how far is it from here to t?
+	If we have such estimation, we can often avoid going wrong direction - directed search
+	Typically p(v) is a lower bound on d(v,t)
+
+A*=== Dijkstra
+	for each vertex, minizing dist[v] - p(s) + p(v)
+	p(s) is the same for all v, so v minimizes dist[v] + p(v) - the most promising index
+	p(v) is an estimate of d(v,t)
+	pick vertex v witht the minimum current estimate of d(s,v) + d(v,t)
+	Thus the search is directed
+

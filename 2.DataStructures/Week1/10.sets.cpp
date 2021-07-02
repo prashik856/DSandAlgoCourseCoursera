@@ -1,11 +1,27 @@
 #include<bits/stdc++.h>
-
 using namespace std;
+
+class DisjointSet {
+    private:
+        vector<int> parent;
+        vector<int> rank;
+        int nodes;
+    public:
+        DisjointSet(int nodesValue){
+            nodes = nodesValue;
+            parent = vector<int>(nodes, -1);
+            rank = vector<int>(nodes, 0);
+            for(int i=0; i<nodes; i++){
+                parent[i] = i;
+            }
+        }
+};
 
 int main(){
     // Define set
     set<int, greater<int> > s;
-    s.insert(10);
+    set<int> s2; // Will store values in ascending order
+    s.insert(10); // puts data into set
     s.insert(10);
     s.insert(20);
 
@@ -24,6 +40,20 @@ int main(){
     // Remove element with value 50 in s1
     int num = s1.erase(50);
 
+    int size_of_set = s.size();
+
+    bool isEmpty = s.empty();
+
+    s2.clear(); // removes everything
+
+    set<int, greater<int> >:: iterator findIterator;
+    findIterator = s.find(5);
+    if(findIterator == s.end()){
+        cout << "Not found" << endl;
+    }
+    else {
+        cout << "Found" << endl;
+    }
     // Methods in set 
     /*
     begin() – Returns an iterator to the first element in the set.

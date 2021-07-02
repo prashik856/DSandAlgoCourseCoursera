@@ -1,0 +1,25 @@
+BI-DIRECTIONAL DIJKSTRA
+
+- Dijkstra Reminder
+	To find the shortest path from s to t
+	Initialize dist[s] to 0, all other distances to INF
+	ExtractMIN- choose unprocessed u with the smallest distance[u]
+	Process u - Relax the edges outgoing from u
+	Repeat until t is processed
+
+
+- Reversed Graph
+	Reverse graph GR for a graph G is the graph with the same set of vertices V and the set of reversed edges ER, such that any edge(u,v) in E there is an edge(v,u) in ER and vice versa.
+
+- Bidirectional Dijkstra
+	- Build GR
+	- Start Dijkstra from s in G and from t in GR
+	- Alternate between Dijkstra steps in G and in GR
+	- Stop when some vertex v is processed both in G and in GR
+	- Compute the shortest path between s and t
+
+
+Computing Distance
+	- let v be the first vertex which is processed both in G and in GR. Does it follow there is a shortest path from s to t going through v?
+	- This is not the case
+	- 

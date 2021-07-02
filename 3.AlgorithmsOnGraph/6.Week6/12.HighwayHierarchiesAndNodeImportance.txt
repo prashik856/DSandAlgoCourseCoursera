@@ -1,0 +1,30 @@
+HIGHWAY HIERARCHIES AND NODE IMPORTANCE
+
+Highway Hierarchies :
+- Long distance trips go through highways
+- To get from A to B, first merge into highway, then into 
+a bigger highway, etc. Then exit to a highway, then exit to a street, then go to B.
+- less important roads merge into more important roads.
+- Hierarchy of roads.
+- There are algorithms based on this idea.
+- Highway Hierarchies and Transit Node Routing.
+- Millions of times faster than Dijkstras 
+Pretty Complex.
+
+
+Node Ordering:
+- Nodes can be ordered by some importance.
+- Importance first increases, then decreases back along any shortest path.
+- E.g. points where highway merges into another highway
+- Can use Bidirectional search.
+
+Importance Ideas:
+Many shortest paths involve important nodes.
+Important nodes are spread around.
+Important nodes are sometimes unavoidable.
+
+Shortest Paths with Preprocessing.
+- Preprocess the graph.
+- Find distance and shortest path in preprocessed graph.
+- Reconstruct the shortest path in the initial graph.
+

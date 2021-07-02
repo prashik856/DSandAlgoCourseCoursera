@@ -1,0 +1,38 @@
+Witness Search
+
+Witness Search
+    When contracting node v, for any pair of edges (u,v) and (v,w) we want to check whether there is a witness path from u to w bypassing v with length at most.
+
+
+Definition:
+
+- For each predecessor ui of v, run dijktra from ui ignoring v.
+Essential for good query performance
+Otherwise the augmented graph will be very dense.
+
+Witness Seach Optimizations
+    Stop Dijkstra when distance from the source becomes too big.
+    Limit the number of hops
+
+Stop Dijkstra 
+If d(ui,x) > max(u,w)(l(u,v) + l(v,w))
+there is no witness path going through x
+
+Limit distance by:
+max(u,w)(l(u,v) + l(v,w))
+
+Stop Dijktra 
+    Consider any predecessor w' of any sucessor w of v 
+    If d(u,w') + l(w', w) <= l(u,v) + l(v,w),
+    there's a witness path.
+
+    Limit the distance by
+    max(u,w) max(w',w) (l(u,v) + l(v,w) - l(w',w))
+
+Limit the Hops:
+    Limit the number of hops in Dijktra 
+    Consider only shortest paths from sources with at most k edges.
+    if witness path not found, add a shortcut.
+    Tradeoff between preprocessing time and augmented graph time.
+    e.g. start with k = 1, increase gradually k = 5 in the end.
+    

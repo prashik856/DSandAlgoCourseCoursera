@@ -1,0 +1,12 @@
+CUT PROPERTY 
+
+- Cut property 
+  - G(V, E)  we have subset of edges X belongs to E,
+  it is part of some MST,
+  S belongs to V such that no edge of X crosses between S and V - S,
+  And e be a lightest edge across this partition.
+  then X + {e} is a part of some MST.
+
+
+- Proof 
+    

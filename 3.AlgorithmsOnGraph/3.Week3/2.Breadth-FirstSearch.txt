@@ -1,0 +1,21 @@
+BREADTH-FIRST SEARCH
+
+Efficient algo to get distances
+
+- Initially we set the distances to INF
+
+- If nodes are not reachable from a node, the distance to that node will be INF
+
+- Directed and Undirected graph will always have different outcomes
+
+- We will use a queue
+
+- When we discover a node, we put it in the queue, when we take it out from the queue, we process it.
+
+- Distance to root is always 0.
+
+- Process - get all the neighbours of the current vertex
+
+- When we discover the neighbours, we set their distance at that time too.
+
+- 

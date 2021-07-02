@@ -1,0 +1,36 @@
+CURRENCY EXCHANGE : REDUCTION TO SHORTEST PATHS
+
+
+Recution to shortest paths:
+	Use two standard approaches
+	Replace product with sum by taking logatithms of weights
+	Negate weights to solve minimization instead of maximization
+
+Taking Logarithm:
+	x*y = log(x) + log(y)
+	max -> log2(x) + log2(y)
+	logs can be both positive and negative
+	In general, in order to maximize the product of k numbers is the same as maximizing the sum of logs of those k numbers
+	Need to take care of zero when taking log
+
+Negation:
+	maximize sum is the same as minimum of negative values
+	Minimize the sum of negative log
+
+- Reduction:
+	Replace each weights rei by -log(rei)
+
+- Solved?
+	Use Dijkstra's algorithm now
+
+- Where does dijkstra's algorithm goes wrong?
+	Does not take care of negative values
+	Same goes for currency exchange values
+	We cannot just apply Dijkstra's algo to solve this problem
+
+- Negative Weight cycles?
+	d(S,A) = d(S,B) = d(S,C) = d(S,D) = -INF
+	Negative weight cycles
+	just go round and round to decrease the weights till infinity
+	A negative cycle can make us a billionaire.
+

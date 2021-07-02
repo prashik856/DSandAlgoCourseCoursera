@@ -1,0 +1,7 @@
+FINDING SHORTEST PATH AFTER MEETING IN THE MIDDLE
+
+- Lemma:
+	Let dist[u] be the distance estimate in the forward dijskstra from s in G and distR[u] in the same in the backward Dijkstra from t in GR. After some node v is processed both in G and GR, some shortest path from s to t passes throught some node u which is processed either in G, in GR, or both and dist(s,t) = dist[u] + distR[u]
+
+- Proof:
+	

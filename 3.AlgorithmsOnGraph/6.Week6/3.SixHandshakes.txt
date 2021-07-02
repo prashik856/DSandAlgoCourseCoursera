@@ -1,0 +1,37 @@
+SIX HANDSHAKES
+
+- Small World Conjecture
+- Can pass a message from any person to any person in at most 6 handshakes
+- This is close to truth according to experiments and is called a six handshakes
+
+- Facebook
+	- Suppose an average person has around 100 Facebook friends
+	- then 10000 friedns of friends
+	- 1000000 friends of friends of friends
+	- 100000000 friends of friends of friends of friends
+	- 10000000000 friends of friends of friends of friends of friends
+	- 1,000,000,000,000 friends of friends of friends of friends of friends of friends
+	- 1 Trillion people at six handshakes
+	- not possible, as there are only 7 billions on earth
+
+Facebook:
+	Find the shortest path from Michael to Bob via friends connections
+	- for the two farthest people, dijkstra has to look through 2 billion people
+	- if we only consider friends of friends of friends for both michael and bob, we will find a connection.
+	- Rough 1M friends of friends of friends
+	- 1M + 1M = 2M people - 1000 times less
+	
+
+- Meet in the middle
+	- More general idea, not just the graphs
+	- Instead of searching for all possible objects, search for first halves and for second halves separately
+	- Then find "compatible" halves
+	- Typically roughly O(sqroot(N)) instead of O(N), including the previous Facebook
+
+
+Conclusion:
+	- Dijkstra goes in circle
+	- Bidirectional search idea can reduce the search space
+	- Roughly 2x speedup for road networks
+	- meet in the middle - sqroot(N) instead of N
+	- 1000 times faster for social networks

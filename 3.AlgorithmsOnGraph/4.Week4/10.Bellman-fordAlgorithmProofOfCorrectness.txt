@@ -1,0 +1,8 @@
+Bellman-ford algorithm : Proof of Correctness
+
+- Lemma:
+	After k itertions of relaxations, for nay node u, dist[u] is the smallest lenght of a path from S to u that contains at most k edges
+
+- Proof:
+	Use mathematical induction
+	

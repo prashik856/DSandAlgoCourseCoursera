@@ -1,0 +1,69 @@
+Computing Strongly Connected Components
+
+- Learning
+
+- Last Time
+
+- Given Graph G, find all strongly connected Components
+
+- Easy Algorithm
+	EasySCC(G)
+	for each vertex v:
+		run explore(v) to determine
+			vertices reachable from v
+	for each vertex v:
+		find the u reachable from v that 
+		can also reach v
+	these are the SCCs
+
+
+Runtime: O(V^2 + V*E). Want Faster.
+
+
+- Sink Components
+
+- Finding Sink components
+	 Need a way to find sink
+
+- Theorem
+	Cases: Visit C before visit C'
+	or opposite
+
+- Visit C first
+	- since C to C', post of C has largest
+
+- Visit C' fist
+	- cannot reach C from C'
+	- must finish exploring C' before exploring C
+	- C has largest post
+
+- Conclusion
+	vertex with largest postorder number is in a source component
+	We wanted sink component
+
+- Reverse Graph
+	By reversing all the edges
+	GR and G have same SCCs
+	Source components of GR are sink components of G.
+
+- Algorithm
+	SCCs(G):
+	run DFS(GR)
+	let v have largest post number
+	run Explore(v)
+	vertices found are first SCC
+	Remove from G and repeat
+
+- Improvement
+	Don't need to rerun DFS on GR
+	Largest remaining post number comes from sink component
+
+- New Algorithm
+	for v in V in reverse postorder:
+		if not visited(v):
+			Explore(v)
+			mark visited vertices as new SCC
+
+- Runtime:
+	Essentially DFS on GR and then on G
+	Runtime O(V + E)

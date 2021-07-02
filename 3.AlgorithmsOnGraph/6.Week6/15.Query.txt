@@ -1,0 +1,28 @@
+QUERY 
+
+Bidirectional Dijkstras 
+- Bidirectional dijkstra using only upwards edges.
+- Don't stop when some node was processed by both by forward and backward searches.
+- Stop dijkstra when the extractred node is already farther than the target.
+
+ComputeDistance(s,t,...):
+estimate = +INF
+Fill dist, distr with INF for each node.
+dist[s]=0, distr[t]=0
+proc = empty, procR = empty 
+while there are nodes to process:
+    v = ExtractMin(dist)
+    if dist[v] <= estimate:
+        Process(v,...)
+    if v in procR and dist[v] + distr[v] < estimate
+        estimate = dist[v] + distr[v]
+    vr = ExtractMin(distr)
+    Repeat symmetrically for vr 
+return estimate
+
+
+Conclusion:
+    Preprocessing via nodes Contraction
+    Query via Bidirectional Dijkstra 
+
+Why is algorithm for query correct?

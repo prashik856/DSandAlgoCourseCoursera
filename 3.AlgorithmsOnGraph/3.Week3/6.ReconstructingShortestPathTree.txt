@@ -1,0 +1,15 @@
+RECONSTRUCTION SHORTEST PATH:
+
+ReconstructPath(S,u,prev):
+result = empty
+while u != S:
+	result.append(u)
+	u = prev[u]
+return Reverse(result)
+
+- Conclusion
+	Can find the minimum nuber of flight segments to get from one city to another
+	Can reconstruct the optimal path
+	Can build the tree of shortest paths from one origin
+	Works in O(E + V)
+

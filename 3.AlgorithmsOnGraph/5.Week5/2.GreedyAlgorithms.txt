@@ -1,0 +1,11 @@
+GREEDY ALGORITHMS
+
+This lesson:
+Two efficient greedy algorithm
+
+- Kruskal's algorithm 
+    repeatedly add the next lightest edge if this doesn't produce a cycle
+- Prim's algorithm
+    repeatedly attach a new vertex to the current tree by a lightest edge 
+
+

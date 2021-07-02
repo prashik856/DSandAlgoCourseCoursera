@@ -1,0 +1,31 @@
+DIRECTED ACYCLIC GRAPHS
+
+Learning Graphs:
+
+- Directed Graphs
+
+- Examples
+
+- Directed DFS
+	Only follow directed edges
+
+- Another example: Morning Routine
+
+- Linear Ordering
+
+- Chicken And Eggs problem
+Cannot put order
+
+
+- Cycles
+
+- If cycle is present, it cannot be linearly Ordered
+
+- Proof that cycle cannot be linearly ordered.
+
+- To be linearly Orderable, a directed graph G needs to be a Directed Acyclic Graph.
+
+Is it sufficient?
+
+- Theorem : Any DAG can be linearly ordered
+

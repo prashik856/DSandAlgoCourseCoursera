@@ -1,0 +1,16 @@
+FASTEST ROUTE
+
+Used in Navigation
+Goods delivery
+
+- Fastest route to get from point A to point B
+	Represent map as a graph
+	edges are roads
+	edges have a weight(time here)
+	Shortest path in terms of sum of weights of those edges
+
+- Example
+	Going directly might not always be helpful
+
+- Intuition?
+	
