@@ -22,6 +22,7 @@ int FastGCD(int a, int b){
     }
 
     else{
+        // Very imp, if 
         remainder = a % b;
         cout << a << " " << b << " " << remainder << "\n";
         if(remainder == 0){

@@ -14,7 +14,8 @@ Now, Total distance = 950km,
 We have given array
 0 200 375 550 750 950. (0 is start 950 is end).
 Input: 
-A car which can travel at most L kilometers with full tank, a source point A, a destination poin B and n gas stations at distances
+A car which can travel at most L kilometers with full tank, 
+a source point A, a destination poin B and n gas stations at distances
 x1 <= x2 <=x3 <= ... <= xn in kilometers from A along the path from A to B.
 
 Output:

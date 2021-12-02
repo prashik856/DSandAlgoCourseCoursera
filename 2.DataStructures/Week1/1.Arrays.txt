@@ -6,7 +6,7 @@ arr = [None]*5
 
 Definition:
 Array: Contiguous area of memory consisting of equal size elements indexed by contiguous integers.
-Usually 0 based indexing (1 in Matlab)
+Usually 0 based indexing (1 in Matlab, bleh)
 
 [ |  |  |  ]
  1  2  3  4
@@ -15,7 +15,8 @@ Usually 0 based indexing (1 in Matlab)
 What's so Special about Arrays?
 Constant-time access:
 We can figure out the address of the array.
-array_addr + elem_size x (index - first_index) [If we are doing 0 based indexing, first_index is not necessary.]
+array_addr + elem_size x (index - first_index) 
+[If we are doing 0 based indexing, first_index is not necessary.]
 
 
 Multi-Dimensional Arrays:
@@ -52,5 +53,5 @@ Middle      O(n)    O(n)
 Summary:
 -> Array: Contiguous area of memory consisting of equal-size elements indexed by contiguous integers.
 -> Constant-time access to any element.
--> Constant time to add/remove at the end
+-> Constant time to add/remove at the end.
 -> Linear time to add/remove at an arbitrary location.

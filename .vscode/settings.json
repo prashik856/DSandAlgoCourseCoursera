@@ -1,0 +1,7 @@
+{
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.quickSuggestions": null,
+    "javascript.nameSuggestions": false,
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.suggest.showWords": false
+}

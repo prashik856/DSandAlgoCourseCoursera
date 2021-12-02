@@ -17,7 +17,8 @@ If input is 100000 90000, we will get some random number
 
 //Fixing it by using (long long) for result.
 This is using naive method with two for loops.
-Out input is of size 10^5, there are two for loops, so, it is running for 10^10 iterations. And 10^10 need more than a second to compute. 
+Out input is of size 10^5, there are two for loops, so, 
+it is running for 10^10 iterations. And 10^10 need more than a second to compute. 
 
 //Rather than using naive input, we using improved method.
 What we actually need is to get two maximum numbers.
@@ -30,7 +31,7 @@ We need to import time.
 
 STRESS TESTING:
 What is stress testing?
-Generates two solutions using random tests. Test our two inputs and check which of the test is giving a wrong answer, and another is giving a correct answer.
+Generates two solutions using random tests. 
+Test our two inputs and check which of the test is giving a wrong answer, and another is giving a correct answer.
 Very important to consider this when we are getting wrong answers.
-
 

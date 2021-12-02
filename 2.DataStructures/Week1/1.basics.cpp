@@ -9,7 +9,7 @@ int main(){
     int maximumValue = numeric_limits<int>::max();
 
     // Set precision point in cpp
-    double pi = 3.14159, npi = -3.14159; 
+    double pi = 3.14159, npi = -3.14159;
     cout << fixed << setprecision(0) << pi <<" "<<npi<<endl; 
     cout << fixed << setprecision(1) << pi <<" "<<npi<<endl; 
     cout << fixed << setprecision(2) << pi <<" "<<npi<<endl; 
