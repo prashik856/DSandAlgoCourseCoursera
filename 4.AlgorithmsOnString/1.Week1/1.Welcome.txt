@@ -1,0 +1,17 @@
+Why study String algorithms at all?
+
+- Used in Bioinformatics
+
+- Used in Search Engines
+
+- Text Editors
+
+- Antivirus and network Intrusion Detection
+
+- Version Control and Diff
+
+This Course:
+	Application in Bioinformatics
+	Basic Algorithms
+	Algorithmic Challenges
+

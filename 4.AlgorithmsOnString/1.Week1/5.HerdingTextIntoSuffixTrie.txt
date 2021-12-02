@@ -1,0 +1,36 @@
+Herding Text into Suffix Trie:
+
+New Idea: Packing Text into a Bus
+	Generate all suffixes of Text
+	Form a trie out of these suffixes (suffix trie)
+	For each pattern, check if it can be spelled out from the root downward in the suffix trie
+
+Example
+Panamabananas
+
+We Create a SuffixTrie()
+	Add dollar at the end of Text
+	Start from the first index, and create a Trie for the text.
+	go to second index, repeat.
+	Repeat till we reach the end of Text.
+	We will have a SuffixTrie
+
+Where Are the Matches?
+	Idea: to find the positions of matches, add some information to leaves
+	We can add the value of dollar as the position of all the leaves
+
+Walking Down to the leaves to find Matches?
+	Once we find a match, we "walk down" to the leaf (or leaves) in order to find starting position of the match.
+	How many times did this pattern appear?
+	This can be solved by walking down to all trees
+
+
+Memory Footprint of Suffix Trie
+the suffix trie is formed from |Text| suffixes with total length:
+|Text|*(|Text| - 1)/2
+
+For human genome:
+Text = 10^12!
+Impossible for human genomes
+
+

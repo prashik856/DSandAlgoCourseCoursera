@@ -57,7 +57,8 @@ We can now just ignore complicated details.
 
 Warning:
 Using Big-O loses important information about constant multiples.
-Big-O is only asymptotic (really really really (more than you can store in our pc) big inputs in our algo. Doesn't really tell you how long it will take. Problem comes when we want to improve the algorithm.)
+Big-O is only asymptotic (really really really (more than you can store in our pc) big inputs in our algo. 
+Doesn't really tell you how long it will take. Problem comes when we want to improve the algorithm.)
 
 4) Using Big-O
 Manipulate expression involving Big-O

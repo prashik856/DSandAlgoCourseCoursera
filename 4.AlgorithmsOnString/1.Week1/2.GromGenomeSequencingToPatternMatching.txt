@@ -1,0 +1,37 @@
+FROM GENOME SEQUENCING TO PATTERN MATCHING
+
+Suffix Trees:
+
+The Newspaper Problem?
+	The newspaper Problem as an overlapping puzzle
+	Million of Copies of a Genome
+	Breaking the Genomes at Random Positions
+	Generate Short Substring (Reads)
+	Burning Some Reads
+	Assembling Genome
+
+Why do we sequence 1000s of species?
+	Applications in 
+		- medicine (mouse genome)
+		- agriculture 
+		- biotechnology 
+
+- Few Mutations can make a Big Difference
+
+- Emergence of Personalized Medicine
+	
+- From Reference Genome to personal Genomes
+	Reference human genome assembled in 2000
+
+Exact Pattern Matching:
+	Where does a read match the reference genome exactly?
+	Approximate Pattern Matching Problem:
+	Input: A string pattern, a string Text, and integer d
+	Output: All positions in Text where Patterns appears as a substring with at most d mismatches.
+
+Multiple Pattern Matching?
+	Where do billions of reads match the reference genome?
+Multiple Pattern matching problem:
+	Input: A set of strings patterns and a string text
+	Output: All positions in Text where a string from patterns appears as a substring
+

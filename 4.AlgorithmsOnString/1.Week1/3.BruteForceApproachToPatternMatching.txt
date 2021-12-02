@@ -1,0 +1,18 @@
+Brute Force Approach to Pattern Matching
+
+Genome:
+
+Pattern drives along Text
+
+panamabananas : Text
+nana : Pattern
+Pattern Found!
+
+Brute Force Approach is Fast!
+single Pattern: O(Text * Pattern)
+The runtime of knuth-morris-pratt algorithm in O("Text") time
+
+Brute force approach is slow for billions of patterns
+
+For human Genome, it will be impossible
+

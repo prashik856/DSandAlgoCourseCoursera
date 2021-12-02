@@ -1,8 +1,8 @@
 Fibonacci Numbers 1:
 
-F(n) = {  0, if n=0
-	1, if n=1,
-	F(n-1) + F(n-2), if n>1.
+F(n) = {    0, 				if n=0
+			1, 				if n=1,
+			F(n-1) + F(n-2), if n>1.
       }
 
 
@@ -40,10 +40,11 @@ Let T(n) denote  the number of lines of code executed by Algo on input n.
 if n=1, T(n)=2
 if n=2, T(n)=3 + T(n-1) + T(n-2)
 Here, 
-T(n) = { 2 if n<=1
-	T(n-1) + T(n-2) + 3 else
+T(n) = { 2 							if n<=1
+		T(n-1) + T(n-2) + 3 		else
 	}
-Therefore, T(n) >= F(n)
+Therefore, 
+T(n) >= F(n)
 T(100) == 1.77.10^(21)
 Still it would take 56000 years at 1GHz.
 
@@ -71,4 +72,3 @@ Very easy to compute.
 This improved algorithm is incredibly fast.
 
 The right algo makes all the difference.
-

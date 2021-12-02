@@ -1,0 +1,76 @@
+HERDING PATTERNS INOT TRIE
+
+Herding patterns into a Bus:
+
+Patterns:
+	banana
+	pan
+	nab
+	antenna
+	bandana
+	ananas
+	nana
+
+We create a Tree from a root
+	We use BST for this:
+
+Trie (Patterns)
+
+TrieMatching(Text, Patterns):
+drive Trie(Patterns) along Text at each position of Text
+	Walk down Trie(Patterns) by spelling symbols of Text
+	a pattern from patterns matches Text each time we reach a leaf!
+
+In a single run, we find all matches of patterns
+
+Our Bus is Fast!
+Runtime of brute forsce approach:
+	O(Text * |Patterns|)
+Runtime of TrieMatching:
+	O(Text * |LongestPattern|)
+
+
+Memory Footprint of TrieMatching:
+Our trie has 30 edges
+edges = O(|Patterns|)
+
+For human genome:
+Patterns = 10^12 .
+So impossible for our pattern
+
+
+
+Trie Construction Pseudocode:
+TrieConstruction(Patterns):
+	Trie: a graph consisting of a single node root
+	for each string pattern in patterns:
+		currentNode = root
+		for i in len(pattern):
+			currentSymbol = i-th symbol of pattern
+			if there is an outgoing edge from currentNode with label currentSymbol
+				currentNode = ending node of this edge
+			else 
+				add a new node newNode to Trie
+				add a new edge from currentNode to newNode with label currentSymbol
+				currentNode = newNode
+	return Trie
+
+
+PrefixTrieMatching(Text, Trie):
+	symbol = first Letter of text
+	v = root of Trie
+	while forever:
+		if v is a leaf in Trie:
+			return the pattern spelled by path from the root to v
+		else if there is an edge (v,w) in Trie labelled by symbol
+			symbol = next letter of Text
+			v = w
+		else :
+			output "no matchnes found"
+			return
+
+TrieMatching(Text, Trie)
+	while Text is nonempty
+		PREFIXTRIEMATCHING(Text, Trie):
+			remove first symbol from Text
+
