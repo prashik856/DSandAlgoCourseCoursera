@@ -30,7 +30,7 @@ So, Enqueue: use List.PushBack
 
 
 Queue Implementation with Array:
-Enqueing is easy, but dequesing will be difficult.
+Enqueing is easy, but dequeing will be difficult.
 We try to do this using cricular array:
 
 [  a|  |  |  |  ]

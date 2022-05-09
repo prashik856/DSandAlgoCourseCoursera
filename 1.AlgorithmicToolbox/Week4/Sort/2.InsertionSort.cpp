@@ -12,6 +12,7 @@ void printArray(vector<int> &arr, int begin, int end){
 void insertionSort(vector<int> &arr){
     int sizeOfArray = arr.size();
     for(int i=1; i<sizeOfArray; i++){
+
         for(int j=i; j>0; j--){
             if(arr[j] < arr[j-1]){
                 int temp = arr[j];
@@ -19,6 +20,7 @@ void insertionSort(vector<int> &arr){
                 arr[j-1] = temp;
             }
         }
+        
     }
 }
 

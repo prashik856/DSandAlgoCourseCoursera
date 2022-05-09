@@ -52,9 +52,11 @@ int main(){
     st.push(20);
     st.push(30);
     st.push(40);
+
     //Pop
     st.pop();
     st.pop();
+    
     // top
     st.top();
     if(st.empty()){
@@ -62,6 +64,7 @@ int main(){
     } else {
         cout << "Stack is not empty";
     }
+    
     //Size
     cout << "Size of stack is: " << st.size();
 

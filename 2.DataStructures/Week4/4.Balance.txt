@@ -12,7 +12,6 @@ find: Number of operations : O(Depth)
 So, runtime is actually the depth of the nodes
 Depth can be as bad as n.
 
-
 Balanced Trees?
 Depth can be much smaller as well by rearranging our tree.
 

@@ -9,7 +9,7 @@ Need to ensure that children have nearly the same height.
 
 
 Problem:
-Updates tto the tree can destroy this property.
+Updates to the tree can destroy this property.
 We need to correct this.
 
 
@@ -64,7 +64,7 @@ RebalanceRight(N)
 M = N.Left
 if M.Right.height > M.left.height:
     rotateLeft(M)
-RotateRight(N)
+rotateRight(N)
 AdjustHeight on affected nodes
 
 

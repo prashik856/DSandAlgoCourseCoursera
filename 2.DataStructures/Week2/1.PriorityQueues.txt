@@ -40,7 +40,7 @@ Algorithms that Use Priority Queues:
 1. Dijsktra's Algorithm: finding a shorted path in a graph
 2. Prim's Algorithm: constructing a minimum spanning tree of a graph
 3. Huffman's algorithm: constructing an optimum prefix-free encoding of a string.
-4. Heap sort: sorint a given sequence.
+4. Heap sort: sort a given sequence.
 
 
 
